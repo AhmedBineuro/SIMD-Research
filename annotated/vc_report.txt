@@ -1,0 +1,3244 @@
+ Percent |	Source code & Disassembly of tests for L1-dcache-load-misses (212225 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          0000000000003300 <multVec(int*, int*, int, int, int)>:
+         :          _Z7multVecPiS_iii():
+         :          }
+         :          }
+         :          return output;
+         :          }
+         :          int *multVec(int *matrix1, int *matrix2, int row, int innerDimension, int column)
+         :          {
+    0.00 :   3300:       endbr64
+    0.00 :   3304:       push   %rbp
+    0.00 :   3305:       mov    %rsp,%rbp
+    0.00 :   3308:       push   %r15
+    0.00 :   330a:       mov    %r8d,%r15d
+    0.00 :   330d:       push   %r14
+    0.00 :   330f:       mov    %rdi,%r14
+         :          int *output = (int *)calloc((row * column), sizeof(int));
+    0.00 :   3312:       mov    %edx,%edi
+         :          {
+    0.00 :   3314:       push   %r13
+         :          int *output = (int *)calloc((row * column), sizeof(int));
+    0.00 :   3316:       imul   %r8d,%edi
+         :          {
+    0.00 :   331a:       mov    %edx,%r13d
+    0.00 :   331d:       push   %r12
+    0.00 :   331f:       mov    %ecx,%r12d
+    0.00 :   3322:       push   %rbx
+    0.00 :   3323:       mov    %rsi,%rbx
+         :          int *output = (int *)calloc((row * column), sizeof(int));
+    0.00 :   3326:       mov    $0x4,%esi
+    0.00 :   332b:       movslq %edi,%rdi
+         :          {
+    0.00 :   332e:       and    $0xffffffffffffffe0,%rsp
+    0.00 :   3332:       sub    $0xe0,%rsp
+    0.00 :   3339:       mov    %edx,0x48(%rsp)
+    0.00 :   333d:       mov    %r8d,0x4c(%rsp)
+    0.00 :   3342:       vmovdqa %ymm3,(%rsp)
+    0.00 :   3347:       vmovdqa %ymm2,0x60(%rsp)
+    0.00 :   334d:       mov    %fs:0x28,%rax
+    0.00 :   3356:       mov    %rax,0xd8(%rsp)
+    0.00 :   335e:       xor    %eax,%eax
+         :          int *output = (int *)calloc((row * column), sizeof(int));
+    0.00 :   3360:       vzeroupper
+    0.00 :   3363:       callq  2350 <calloc@plt>
+    0.00 :   3368:       mov    %rax,0x50(%rsp)
+         :          for (int i = 0; i < row; i++)
+    0.00 :   336d:       test   %r13d,%r13d
+    0.00 :   3370:       jle    3580 <multVec(int*, int*, int, int, int)+0x280>
+    0.00 :   3376:       movslq %r12d,%rax
+    0.00 :   3379:       mov    %r15d,%edi
+    0.00 :   337c:       movq   $0x0,0x58(%rsp)
+    0.00 :   3385:       shl    $0x4,%r15d
+    0.00 :   3389:       mov    %rax,0x38(%rsp)
+    0.00 :   338e:       shl    $0x2,%rax
+    0.00 :   3392:       movslq %r15d,%r10
+         :          _Z18_mm256_loadu_si256PKDv4_x():
+         :          }
+         :
+         :          extern __inline __m256i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_loadu_si256 (__m256i_u const *__P)
+         :          {
+         :          return *__P;
+    0.00 :   3395:       vmovdqa (%rsp),%ymm3
+    0.00 :   339a:       mov    %rax,0x40(%rsp)
+    0.00 :   339f:       lea    -0x1(%r12),%eax
+    0.00 :   33a4:       vmovdqa 0x60(%rsp),%ymm2
+    0.00 :   33aa:       shl    $0x2,%r10
+    0.00 :   33ae:       shr    $0x4,%eax
+    0.00 :   33b1:       lea    0xb0(%rsp),%rsi
+         :          _Z7multVecPiS_iii():
+    0.00 :   33b9:       movl   $0x0,0x80(%rsp)
+    0.00 :   33c4:       movl   $0x0,0x84(%rsp)
+    0.00 :   33cf:       shl    $0x4,%rax
+    0.00 :   33d3:       mov    %rax,0x30(%rsp)
+    0.00 :   33d8:       lea    -0x1(%rdi),%eax
+         :          _ZN5Vec8i6insertEii():
+         :          #if INSTRSET >= 10
+         :          ymm = _mm256_mask_set1_epi32(ymm, __mmask8(1u << index), value);
+         :          #else
+         :          __m256i broad = _mm256_set1_epi32(value);  // broadcast value into all elements
+         :          const int32_t maskl[16] = {0,0,0,0,0,0,0,0, -1,0,0,0,0,0,0,0};
+         :          __m256i mask  = Vec256b().load(maskl + 8 - (index & 7)); // mask with FFFFFFFF at index position
+    0.00 :   33db:       mov    $0x8,%edi
+    0.00 :   33e0:       mov    %rax,0x88(%rsp)
+    0.00 :   33e8:       lea    0x40(%r14),%rax
+    0.00 :   33ec:       mov    %rax,0x28(%rsp)
+         :          _Z7multVecPiS_iii():
+         :          {
+         :          Vec16i rowVec, colVec;
+         :          rowVec.load(matrix1 + (i * innerDimension));
+         :          for (int j = 0; j < column; j++)
+    0.00 :   33f1:       mov    0x4c(%rsp),%eax
+    0.00 :   33f5:       test   %eax,%eax
+    0.00 :   33f7:       jle    354b <multVec(int*, int*, int, int, int)+0x24b>
+    0.00 :   33fd:       mov    0x28(%rsp),%rcx
+    0.00 :   3402:       mov    0x30(%rsp),%rax
+    0.00 :   3407:       xor    %r13d,%r13d
+         :          {
+         :          int product=0;
+         :          for (int k = 0; k < innerDimension; k += 16)
+    0.00 :   340a:       add    0x58(%rsp),%rax
+    0.00 :   340f:       lea    (%rcx,%rax,4),%r11
+    0.00 :   3413:       movslq 0x80(%rsp),%rax
+    0.00 :   341b:       mov    0x50(%rsp),%rcx
+    0.00 :   3420:       lea    (%rcx,%rax,4),%r15
+    0.00 :   3424:       test   %r12d,%r12d
+    0.00 :   3427:       jle    3546 <multVec(int*, int*, int, int, int)+0x246>
+    0.00 :   342d:       lea    (%rbx,%r13,4),%rcx
+    0.00 :   3431:       mov    %r14,%r8
+         :          int product=0;
+    0.00 :   3434:       xor    %r9d,%r9d
+    0.00 :   3437:       nopw   0x0(%rax,%rax,1)
+         :          _Z18_mm256_loadu_si256PKDv4_x():
+    0.00 :   3440:       mov    %r8,0x60(%rsp)
+    0.03 :   3445:       vmovdqu (%r8),%ymm6
+    0.00 :   344a:       xor    %eax,%eax
+    0.01 :   344c:       vmovdqu 0x20(%r8),%ymm5
+         :          _Z7multVecPiS_iii():
+         :          {
+         :          rowVec.load(matrix1 + (i * innerDimension) + k);
+         :          for (int n = 0; n < 16; n++)
+    0.00 :   3452:       jmp    3475 <multVec(int*, int*, int, int, int)+0x175>
+    0.00 :   3454:       nopl   0x0(%rax)
+         :          _Z18_mm256_blendv_epi8Dv4_xS_S_():
+         :
+         :          extern __inline __m256i
+         :          __attribute__ ((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_blendv_epi8 (__m256i __X, __m256i __Y, __m256i __M)
+         :          {
+         :          return (__m256i) __builtin_ia32_pblendvb256 ((__v32qi)__X,
+    0.03 :   3458:       vmovd  %edx,%xmm1
+         :          _Z18_mm256_loadu_si256PKDv4_x():
+    0.00 :   345c:       mov    %rax,%rdx
+    0.13 :   345f:       neg    %rdx
+         :          _Z18_mm256_blendv_epi8Dv4_xS_S_():
+    1.05 :   3462:       vpbroadcastd %xmm1,%ymm1
+    0.02 :   3467:       vmovdqu (%rsi,%rdx,4),%ymm4
+         :          (__v32qi)__Y,
+         :          (__v32qi)__M);
+    6.00 :   346c:       vpblendvb %ymm4,%ymm1,%ymm2,%ymm2
+         :          _Z7multVecPiS_iii():
+    5.07 :   3472:       inc    %rax
+         :          _ZN5Vec8i6insertEii():
+         :          const int32_t maskl[16] = {0,0,0,0,0,0,0,0, -1,0,0,0,0,0,0,0};
+    0.06 :   3475:       vpxor  %xmm1,%xmm1,%xmm1
+         :          _Z7multVecPiS_iii():
+         :          colVec.insert(n, matrix2[j + (k * column) + n]);
+    2.04 :   3479:       mov    (%rcx,%rax,4),%edx
+         :          _ZN5Vec8i6insertEii():
+    0.05 :   347c:       vmovaps %xmm1,0xb0(%rsp)
+    0.75 :   3485:       vmovaps %xmm1,0x90(%rsp)
+    0.06 :   348e:       movl   $0xffffffff,0xb0(%rsp)
+    4.09 :   3499:       vmovaps %xmm1,0xa0(%rsp)
+    0.35 :   34a2:       vmovaps %xmm1,0xc0(%rsp)
+         :          _ZN6Vec16i6insertEii():
+         :          }
+         :          return *this;
+         :          }
+         :          // Member function to change a single element in vector
+         :          Vec16i const insert(int index, int32_t value) {
+         :          if ((uint32_t)index < 8) {
+    0.54 :   34ab:       cmp    $0x7,%rax
+    0.00 :   34af:       jbe    3458 <multVec(int*, int*, int, int, int)+0x158>
+         :          _Z18_mm256_blendv_epi8Dv4_xS_S_():
+         :          return (__m256i) __builtin_ia32_pblendvb256 ((__v32qi)__X,
+    0.07 :   34b1:       vmovd  %edx,%xmm0
+         :          _ZN5Vec8i6insertEii():
+         :          __m256i mask  = Vec256b().load(maskl + 8 - (index & 7)); // mask with FFFFFFFF at index position
+    2.80 :   34b5:       mov    %rax,%rdx
+    0.01 :   34b8:       mov    %rdi,%r8
+    0.18 :   34bb:       and    $0x7,%edx
+         :          _Z18_mm256_blendv_epi8Dv4_xS_S_():
+    0.05 :   34be:       vpbroadcastd %xmm0,%ymm0
+         :          _ZN5Vec8i6insertEii():
+    3.79 :   34c3:       sub    %rdx,%r8
+         :          _Z18_mm256_blendv_epi8Dv4_xS_S_():
+    0.00 :   34c6:       vmovdqu 0x90(%rsp,%r8,4),%ymm1
+   52.14 :   34d0:       vpblendvb %ymm1,%ymm0,%ymm3,%ymm0
+         :          (__v32qi)__M);
+   18.49 :   34d6:       vmovdqa %ymm0,%ymm3
+         :          _Z7multVecPiS_iii():
+         :          for (int n = 0; n < 16; n++)
+    0.00 :   34da:       cmp    $0xf,%eax
+    0.00 :   34dd:       jne    3472 <multVec(int*, int*, int, int, int)+0x172>
+         :          _Z18_mm256_mullo_epi32Dv4_xS_():
+         :
+         :          extern __inline __m256i
+         :          __attribute__ ((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_mullo_epi32 (__m256i __A, __m256i __B)
+         :          {
+         :          return (__m256i) ((__v8su)__A * (__v8su)__B);
+    0.00 :   34df:       vpmulld %ymm0,%ymm5,%ymm0
+    0.31 :   34e4:       vpmulld %ymm2,%ymm6,%ymm1
+    0.00 :   34e9:       mov    0x60(%rsp),%r8
+         :          _Z16_mm256_add_epi32Dv4_xS_():
+         :          return (__m256i) ((__v8su)__A + (__v8su)__B);
+    0.00 :   34ee:       add    %r10,%rcx
+    0.03 :   34f1:       add    $0x40,%r8
+    0.00 :   34f5:       vpaddd %ymm1,%ymm0,%ymm1
+         :          _Z22_mm256_castsi256_si128Dv4_x():
+         :          }
+         :
+         :          extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_castsi256_si128 (__m256i __A)
+         :          {
+         :          return (__m128i) __builtin_ia32_si_si256 ((__v8si)__A);
+    0.13 :   34f9:       vmovdqa %xmm1,%xmm0
+         :          _Z24_mm256_extracti128_si256Dv4_xi():
+         :          #ifdef __OPTIMIZE__
+         :          extern __inline __m128i
+         :          __attribute__ ((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_extracti128_si256 (__m256i __X, const int __M)
+         :          {
+         :          return (__m128i) __builtin_ia32_extract128i256 ((__v4di)__X, __M);
+    0.00 :   34fd:       vextracti128 $0x1,%ymm1,%xmm1
+         :          _Z13_mm_add_epi32Dv2_xS_():
+         :          }
+         :
+         :          extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm_add_epi32 (__m128i __A, __m128i __B)
+         :          {
+         :          return (__m128i) ((__v4su)__A + (__v4su)__B);
+    0.03 :   3503:       vpaddd %xmm1,%xmm0,%xmm0
+         :          _Z18_mm_unpackhi_epi64Dv2_xS_():
+         :          return (__m128i)__builtin_ia32_punpckhqdq128 ((__v2di)__A, (__v2di)__B);
+    0.05 :   3507:       vpunpckhqdq %xmm0,%xmm0,%xmm1
+         :          _Z13_mm_add_epi32Dv2_xS_():
+         :          return (__m128i) ((__v4su)__A + (__v4su)__B);
+    0.05 :   350b:       vpaddd %xmm1,%xmm0,%xmm0
+         :          _Z17_mm_shuffle_epi32Dv2_xi():
+         :          }
+         :
+         :          extern __inline __m128i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm_shuffle_epi32 (__m128i __A, const int __mask)
+         :          {
+         :          return (__m128i)__builtin_ia32_pshufd ((__v4si)__A, __mask);
+    1.15 :   350f:       vpshufd $0x1,%xmm0,%xmm1
+         :          _Z13_mm_add_epi32Dv2_xS_():
+         :          return (__m128i) ((__v4su)__A + (__v4su)__B);
+    0.01 :   3514:       vpaddd %xmm0,%xmm1,%xmm0
+         :          _Z17_mm_cvtsi128_si32Dv2_x():
+         :          return __builtin_ia32_vec_ext_v4si ((__v4si)__A, 0);
+    0.38 :   3518:       vmovd  %xmm0,%eax
+         :          _Z7multVecPiS_iii():
+         :          product += horizontal_add(rowVec * colVec);
+    0.03 :   351c:       add    %eax,%r9d
+         :          for (int k = 0; k < innerDimension; k += 16)
+    0.01 :   351f:       cmp    %r8,%r11
+    0.00 :   3522:       jne    3440 <multVec(int*, int*, int, int, int)+0x140>
+         :          }
+         :          output[(i * column) + j]=product;
+    0.00 :   3528:       mov    %r9d,(%r15,%r13,4)
+         :          for (int j = 0; j < column; j++)
+    0.01 :   352c:       lea    0x1(%r13),%rax
+    0.00 :   3530:       cmp    %r13,0x88(%rsp)
+    0.00 :   3538:       je     354b <multVec(int*, int*, int, int, int)+0x24b>
+    0.00 :   353a:       mov    %rax,%r13
+         :          for (int k = 0; k < innerDimension; k += 16)
+    0.00 :   353d:       test   %r12d,%r12d
+    0.00 :   3540:       jg     342d <multVec(int*, int*, int, int, int)+0x12d>
+         :          int product=0;
+    0.00 :   3546:       xor    %r9d,%r9d
+    0.00 :   3549:       jmp    3528 <multVec(int*, int*, int, int, int)+0x228>
+         :          for (int i = 0; i < row; i++)
+    0.00 :   354b:       mov    0x4c(%rsp),%edx
+    0.00 :   354f:       incl   0x84(%rsp)
+    0.00 :   3556:       add    %edx,0x80(%rsp)
+    0.00 :   355d:       mov    0x84(%rsp),%eax
+    0.00 :   3564:       mov    0x38(%rsp),%rdx
+    0.00 :   3569:       add    0x40(%rsp),%r14
+    0.00 :   356e:       add    %rdx,0x58(%rsp)
+    0.00 :   3573:       cmp    %eax,0x48(%rsp)
+    0.00 :   3577:       jne    33f1 <multVec(int*, int*, int, int, int)+0xf1>
+    0.00 :   357d:       vzeroupper
+         :          }
+         :          }
+         :          return output;
+         :          }
+    0.00 :   3580:       mov    0xd8(%rsp),%rax
+    0.00 :   3588:       xor    %fs:0x28,%rax
+    0.00 :   3591:       jne    35a7 <multVec(int*, int*, int, int, int)+0x2a7>
+    0.00 :   3593:       mov    0x50(%rsp),%rax
+    0.00 :   3598:       lea    -0x28(%rbp),%rsp
+    0.00 :   359c:       pop    %rbx
+    0.00 :   359d:       pop    %r12
+    0.00 :   359f:       pop    %r13
+    0.00 :   35a1:       pop    %r14
+    0.00 :   35a3:       pop    %r15
+    0.00 :   35a5:       pop    %rbp
+    0.00 :   35a6:       retq
+    0.00 :   35a7:       callq  23e0 <__stack_chk_fail@plt>
+    0.00 :   35ac:       nopl   0x0(%rax)
+ Percent |	Source code & Disassembly of tests for L1-dcache-load-misses (53198 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          0000000000002fb0 <multVec(float*, float*, int, int, int)>:
+         :          _Z7multVecPfS_iii():
+         :          }
+         :          return output;
+         :          }
+         :
+         :          float *multVec(float *matrix1, float *matrix2, int row, int innerDimension, int column)
+         :          {
+    0.00 :   2fb0:       endbr64
+    0.00 :   2fb4:       push   %rbp
+    0.00 :   2fb5:       mov    %rsp,%rbp
+    0.00 :   2fb8:       push   %r15
+    0.00 :   2fba:       mov    %edx,%r15d
+    0.00 :   2fbd:       push   %r14
+    0.00 :   2fbf:       mov    %r8d,%r14d
+    0.00 :   2fc2:       push   %r13
+    0.00 :   2fc4:       mov    %rdi,%r13
+    0.00 :   2fc7:       push   %r12
+    0.00 :   2fc9:       mov    %ecx,%r12d
+    0.00 :   2fcc:       push   %rbx
+    0.00 :   2fcd:       mov    %rsi,%rbx
+         :          float *output = (float *)calloc((row * column), sizeof(float));
+    0.00 :   2fd0:       mov    $0x4,%esi
+         :          {
+    0.00 :   2fd5:       and    $0xffffffffffffffe0,%rsp
+    0.00 :   2fd9:       sub    $0xa0,%rsp
+    0.00 :   2fe0:       mov    %rdi,0x48(%rsp)
+    0.00 :   2fe5:       mov    %edx,0x80(%rsp)
+    0.00 :   2fec:       mov    %r8d,0x44(%rsp)
+    0.00 :   2ff1:       vmovaps %ymm2,(%rsp)
+    0.00 :   2ff6:       vmovaps %ymm1,0x60(%rsp)
+    0.00 :   2ffc:       mov    %fs:0x28,%rax
+    0.00 :   3005:       mov    %rax,0x98(%rsp)
+    0.00 :   300d:       xor    %eax,%eax
+         :          float *output = (float *)calloc((row * column), sizeof(float));
+    0.00 :   300f:       mov    %edx,%eax
+    0.00 :   3011:       imul   %r8d,%eax
+    0.00 :   3015:       movslq %eax,%rdi
+    0.00 :   3018:       vzeroupper
+    0.00 :   301b:       callq  2350 <calloc@plt>
+    0.00 :   3020:       mov    %rax,0x58(%rsp)
+         :          for (int i = 0; i < row; i++)
+    0.00 :   3025:       test   %r15d,%r15d
+    0.00 :   3028:       jle    32c1 <multVec(float*, float*, int, int, int)+0x311>
+    0.00 :   302e:       test   %r14d,%r14d
+    0.00 :   3031:       jle    32c1 <multVec(float*, float*, int, int, int)+0x311>
+    0.00 :   3037:       lea    -0x1(%r12),%eax
+    0.00 :   303c:       vxorps %xmm5,%xmm5,%xmm5
+    0.00 :   3040:       lea    -0x1(%r14),%r15d
+    0.00 :   3044:       mov    %r14d,%r10d
+    0.00 :   3047:       shr    $0x4,%eax
+    0.00 :   304a:       shl    $0x4,%r10d
+    0.00 :   304e:       movl   $0x0,0x84(%rsp)
+    0.00 :   3059:       vmovaps (%rsp),%ymm2
+    0.00 :   305e:       shl    $0x4,%rax
+    0.00 :   3062:       movslq %r10d,%r10
+    0.00 :   3065:       vmovaps 0x60(%rsp),%ymm1
+    0.00 :   306b:       movl   $0x0,0x88(%rsp)
+    0.00 :   3076:       mov    %rax,0x50(%rsp)
+    0.00 :   307b:       lea    0x40(%r13),%rax
+    0.00 :   307f:       shl    $0x2,%r10
+    0.00 :   3083:       lea    0xff96(%rip),%r8        # 13020 <_IO_stdin_used+0x20>
+    0.00 :   308a:       mov    %rax,0x38(%rsp)
+    0.00 :   308f:       lea    0xff6e(%rip),%rdi        # 13004 <_IO_stdin_used+0x4>
+    0.00 :   3096:       movl   $0x0,0x8c(%rsp)
+         :          {
+         :          Vec16f rowVec, colVec;
+         :          float product=0;
+         :          for (int k = 0; k < innerDimension; k += 16)
+         :          {
+         :          rowVec.load(matrix1 + (i * innerDimension) + k);
+    0.00 :   30a1:       movslq 0x88(%rsp),%rax
+    0.00 :   30a9:       mov    0x48(%rsp),%rsi
+    0.00 :   30ae:       xor    %r13d,%r13d
+         :          for (int k = 0; k < innerDimension; k += 16)
+    0.00 :   30b1:       lea    (%rsi,%rax,4),%rsi
+    0.00 :   30b5:       add    0x50(%rsp),%rax
+    0.00 :   30ba:       mov    %rsi,0x60(%rsp)
+    0.00 :   30bf:       mov    0x38(%rsp),%rsi
+    0.00 :   30c4:       lea    (%rsi,%rax,4),%r11
+    0.00 :   30c8:       movslq 0x84(%rsp),%rax
+    0.00 :   30d0:       mov    0x58(%rsp),%rsi
+    0.00 :   30d5:       lea    (%rsi,%rax,4),%r14
+    0.00 :   30d9:       test   %r12d,%r12d
+    0.00 :   30dc:       jle    327d <multVec(float*, float*, int, int, int)+0x2cd>
+    0.00 :   30e2:       mov    0x60(%rsp),%r9
+    0.00 :   30e7:       lea    (%rbx,%r13,4),%rsi
+         :          float product=0;
+    0.00 :   30eb:       vmovaps %xmm5,%xmm4
+    0.00 :   30ef:       nop
+         :          _Z15_mm256_loadu_psPKf():
+         :          }
+         :
+         :          extern __inline __m256 __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm256_loadu_ps (float const *__P)
+         :          {
+         :          return *(__m256_u *)__P;
+    0.00 :   30f0:       vmovups (%r9),%ymm6
+    0.02 :   30f5:       vmovups 0x20(%r9),%ymm3
+    0.20 :   30fb:       xor    %eax,%eax
+    0.11 :   30fd:       nopl   (%rax)
+         :          _Z7multVecPfS_iii():
+         :          for (int n = 0; n < 16; n++)
+         :          colVec.insert(n, matrix2[j + (k * column) + n]);
+   17.78 :   3100:       vmovss (%rsi,%rax,4),%xmm0
+    6.21 :   3105:       mov    %eax,%edx
+         :          _ZN6Vec16f6insertEif():
+         :          }
+         :          return *this;
+         :          }
+         :          // Member function to change a single element in vector
+         :          Vec16f const insert(int index, float value) {
+         :          if ((uint32_t)index < 8) {
+    0.01 :   3107:       vmovss %xmm0,0x94(%rsp)
+         :          _Z19_mm256_broadcast_ssPKf():
+         :          return (__m256) __builtin_ia32_vbroadcastss256 (__X);
+    2.41 :   3110:       vbroadcastss %xmm0,%ymm0
+         :          _ZN6Vec16f6insertEif():
+   21.28 :   3115:       cmp    $0x7,%rax
+    0.00 :   3119:       ja     31a0 <multVec(float*, float*, int, int, int)+0x1f0>
+         :          _ZN5Vec8f6insertEif():
+         :          Vec8f const insert(int index, float value) {
+         :          #if INSTRSET >= 10   // AVX512VL
+         :          ymm = _mm256_mask_broadcastss_ps (ymm, __mmask8(1u << index), _mm_set_ss(value));
+         :          #else
+         :          __m256 v0 = _mm256_broadcast_ss(&value);
+         :          switch (index) {
+    0.02 :   311f:       cmp    $0x6,%eax
+    0.00 :   3122:       ja     32e8 <multVec(float*, float*, int, int, int)+0x338>
+    0.01 :   3128:       movslq (%rdi,%rdx,4),%rdx
+    1.29 :   312c:       add    %rdi,%rdx
+   14.43 :   312f:       notrack jmpq *%rdx
+    0.00 :   3132:       nopw   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+         :          return (__m256) __builtin_ia32_blendps256 ((__v8sf)__X,
+    0.04 :   3138:       vblendps $0x20,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          case 3:
+         :          ymm = _mm256_blend_ps (ymm, v0, 8);  break;
+         :          case 4:
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x10);  break;
+         :          case 5:
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x20);  break;
+    0.05 :   313e:       xchg   %ax,%ax
+   14.88 :   3140:       inc    %rax
+    4.08 :   3143:       jmp    3100 <multVec(float*, float*, int, int, int)+0x150>
+    0.00 :   3145:       nopl   (%rax)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.18 :   3148:       vblendps $0x10,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x10);  break;
+    0.16 :   314e:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.05 :   3150:       vblendps $0x8,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 8);  break;
+    0.16 :   3156:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   3158:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.09 :   3160:       vblendps $0x4,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 4);  break;
+    0.12 :   3166:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   3168:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.00 :   3170:       vblendps $0x2,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 2);  break;
+    0.06 :   3176:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   3178:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.00 :   3180:       vblendps $0x1,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 1);  break;
+    0.36 :   3186:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   3188:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.03 :   3190:       vblendps $0x40,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          case 6:
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x40);  break;
+    0.04 :   3196:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   3198:       nopl   0x0(%rax,%rax,1)
+         :          switch (index) {
+    0.00 :   31a0:       lea    -0x8(%rax),%ecx
+    0.00 :   31a3:       cmp    $0x6,%ecx
+    0.00 :   31a6:       ja     321b <multVec(float*, float*, int, int, int)+0x26b>
+    0.01 :   31a8:       movslq (%r8,%rcx,4),%rdx
+   11.11 :   31ac:       add    %r8,%rdx
+    0.02 :   31af:       notrack jmpq *%rdx
+    0.00 :   31b2:       nopw   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.01 :   31b8:       vblendps $0x20,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x20);  break;
+    0.06 :   31be:       jmp    3140 <multVec(float*, float*, int, int, int)+0x190>
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.01 :   31c0:       vblendps $0x10,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x10);  break;
+    0.02 :   31c6:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   31cb:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.00 :   31d0:       vblendps $0x8,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 8);  break;
+    0.01 :   31d6:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   31db:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.01 :   31e0:       vblendps $0x4,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 4);  break;
+    0.03 :   31e6:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   31eb:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.01 :   31f0:       vblendps $0x2,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 2);  break;
+    0.01 :   31f6:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   31fb:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.00 :   3200:       vblendps $0x1,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 1);  break;
+    0.02 :   3206:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+    0.00 :   320b:       nopl   0x0(%rax,%rax,1)
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.00 :   3210:       vblendps $0x40,%ymm0,%ymm2,%ymm2
+         :          _ZN5Vec8f6insertEif():
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x40);  break;
+    0.06 :   3216:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+         :          _Z15_mm256_blend_psDv8_fS_i():
+    0.40 :   321b:       vblendps $0x80,%ymm0,%ymm2,%ymm2
+         :          _Z7multVecPfS_iii():
+         :          for (int n = 0; n < 16; n++)
+    0.02 :   3221:       cmp    $0xf,%edx
+    0.00 :   3224:       jne    3140 <multVec(float*, float*, int, int, int)+0x190>
+         :          _Z13_mm256_mul_psDv8_fS_():
+         :          return (__m256) ((__v8sf)__A * (__v8sf)__B);
+    0.00 :   322a:       vmulps %ymm6,%ymm1,%ymm0
+    0.00 :   322e:       add    $0x40,%r9
+    0.22 :   3232:       add    %r10,%rsi
+         :          _Z13_mm256_add_psDv8_fS_():
+         :          return (__m256) ((__v8sf)__A + (__v8sf)__B);
+    0.08 :   3235:       vfmadd132ps %ymm2,%ymm0,%ymm3
+         :          _Z21_mm256_extractf128_psDv8_fi():
+         :          return (__m128) __builtin_ia32_vextractf128_ps256 ((__v8sf)__X, __N);
+    0.00 :   323a:       vextractf128 $0x1,%ymm3,%xmm0
+         :          _Z10_mm_add_psDv4_fS_():
+         :          /* Perform the respective operation on the four SPFP values in A and B.  */
+         :
+         :          extern __inline __m128 __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm_add_ps (__m128 __A, __m128 __B)
+         :          {
+         :          return (__m128) ((__v4sf)__A + (__v4sf)__B);
+    0.01 :   3240:       vaddps %xmm3,%xmm0,%xmm0
+         :          _Z13_mm_movehl_psDv4_fS_():
+         :
+         :          /* Moves the upper two values of B into the lower two values of A.  */
+         :          extern __inline __m128 __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         :          _mm_movehl_ps (__m128 __A, __m128 __B)
+         :          {
+         :          return (__m128) __builtin_ia32_movhlps ((__v4sf)__A, (__v4sf)__B);
+    1.03 :   3244:       vmovhlps %xmm0,%xmm0,%xmm3
+         :          _Z10_mm_add_psDv4_fS_():
+         :          return (__m128) ((__v4sf)__A + (__v4sf)__B);
+    0.01 :   3248:       vaddps %xmm3,%xmm0,%xmm0
+         :          _Z14_mm_shuffle_psDv4_fS_i():
+         :          return (__m128) __builtin_ia32_shufps ((__v4sf)__A, (__v4sf)__B, __mask);
+    0.18 :   324c:       vshufps $0x1,%xmm0,%xmm0,%xmm3
+         :          _Z10_mm_add_ssDv4_fS_():
+         :          return (__m128) __builtin_ia32_addss ((__v4sf)__A, (__v4sf)__B);
+    0.12 :   3251:       vaddss %xmm3,%xmm0,%xmm0
+         :          _Z7multVecPfS_iii():
+         :          product += horizontal_add(rowVec * colVec);
+    1.01 :   3255:       vaddss %xmm0,%xmm4,%xmm4
+         :          for (int k = 0; k < innerDimension; k += 16)
+    1.42 :   3259:       cmp    %r9,%r11
+    0.00 :   325c:       jne    30f0 <multVec(float*, float*, int, int, int)+0x140>
+         :          }
+         :          output[(i * column) + j]=product;
+    0.00 :   3262:       vmovss %xmm4,(%r14,%r13,4)
+         :          for (int j = 0; j < column; j++)
+    0.00 :   3268:       lea    0x1(%r13),%rax
+    0.00 :   326c:       cmp    %r15,%r13
+    0.00 :   326f:       je     3290 <multVec(float*, float*, int, int, int)+0x2e0>
+    0.00 :   3271:       mov    %rax,%r13
+         :          for (int k = 0; k < innerDimension; k += 16)
+    0.00 :   3274:       test   %r12d,%r12d
+    0.00 :   3277:       jg     30e2 <multVec(float*, float*, int, int, int)+0x132>
+         :          float product=0;
+    0.00 :   327d:       vmovaps %xmm5,%xmm4
+         :          output[(i * column) + j]=product;
+    0.00 :   3281:       lea    0x1(%r13),%rax
+    0.00 :   3285:       vmovss %xmm4,(%r14,%r13,4)
+         :          for (int j = 0; j < column; j++)
+    0.00 :   328b:       cmp    %r15,%r13
+    0.00 :   328e:       jne    3271 <multVec(float*, float*, int, int, int)+0x2c1>
+         :          for (int i = 0; i < row; i++)
+    0.00 :   3290:       incl   0x8c(%rsp)
+    0.00 :   3297:       mov    0x44(%rsp),%ecx
+    0.00 :   329b:       add    %r12d,0x88(%rsp)
+    0.00 :   32a3:       mov    0x8c(%rsp),%eax
+    0.00 :   32aa:       add    %ecx,0x84(%rsp)
+    0.00 :   32b1:       cmp    %eax,0x80(%rsp)
+    0.00 :   32b8:       jne    30a1 <multVec(float*, float*, int, int, int)+0xf1>
+    0.00 :   32be:       vzeroupper
+         :          }
+         :          }
+         :          return output;
+         :          }
+    0.00 :   32c1:       mov    0x98(%rsp),%rax
+    0.00 :   32c9:       xor    %fs:0x28,%rax
+    0.00 :   32d2:       jne    32f3 <multVec(float*, float*, int, int, int)+0x343>
+    0.00 :   32d4:       mov    0x58(%rsp),%rax
+    0.00 :   32d9:       lea    -0x28(%rbp),%rsp
+    0.00 :   32dd:       pop    %rbx
+    0.00 :   32de:       pop    %r12
+    0.00 :   32e0:       pop    %r13
+    0.00 :   32e2:       pop    %r14
+    0.00 :   32e4:       pop    %r15
+    0.00 :   32e6:       pop    %rbp
+    0.00 :   32e7:       retq
+         :          _Z15_mm256_blend_psDv8_fS_i():
+         :          return (__m256) __builtin_ia32_blendps256 ((__v8sf)__X,
+    0.00 :   32e8:       vblendps $0x80,%ymm0,%ymm1,%ymm1
+         :          _ZN5Vec8f6insertEif():
+         :          default:
+         :          ymm = _mm256_blend_ps (ymm, v0, 0x80);  break;
+    0.02 :   32ee:       jmpq   3140 <multVec(float*, float*, int, int, int)+0x190>
+         :          _Z7multVecPfS_iii():
+    0.00 :   32f3:       callq  23e0 <__stack_chk_fail@plt>
+    0.00 :   32f8:       nopl   0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of ld-2.31.so for L1-dcache-load-misses (1 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          000000000000c0d0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1040>:
+    0.00 :   c0d0:       endbr64
+    0.00 :   c0d4:       push   %r15
+    0.00 :   c0d6:       push   %r14
+    0.00 :   c0d8:       push   %r13
+    0.00 :   c0da:       mov    %rdi,%r13
+    0.00 :   c0dd:       push   %r12
+    0.00 :   c0df:       mov    %rdx,%r12
+    0.00 :   c0e2:       push   %rbp
+    0.00 :   c0e3:       push   %rbx
+    0.00 :   c0e4:       sub    $0x98,%rsp
+    0.00 :   c0eb:       movzbl (%rdi),%edx
+    0.00 :   c0ee:       mov    %rsi,0x10(%rsp)
+    0.00 :   c0f3:       mov    %rcx,0x18(%rsp)
+    0.00 :   c0f8:       mov    %r8,0x8(%rsp)
+    0.00 :   c0fd:       mov    %r9d,0x38(%rsp)
+    0.00 :   c102:       test   %dl,%dl
+    0.00 :   c104:       je     c330 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12a0>
+    0.00 :   c10a:       mov    %rdi,%rcx
+    0.00 :   c10d:       mov    $0x1505,%eax
+    0.00 :   c112:       nopw   0x0(%rax,%rax,1)
+    0.00 :   c118:       mov    %rax,%rsi
+    0.00 :   c11b:       movzbl %dl,%edx
+    0.00 :   c11e:       add    $0x1,%rcx
+    0.00 :   c122:       shl    $0x5,%rsi
+    0.00 :   c126:       add    %rsi,%rax
+    0.00 :   c129:       add    %rdx,%rax
+  100.00 :   c12c:       movzbl (%rcx),%edx
+    0.00 :   c12f:       test   %dl,%dl
+    0.00 :   c131:       jne    c118 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1088>
+    0.00 :   c133:       mov    %eax,%ebx
+    0.00 :   c135:       addq   $0x1,0x22893(%rip)        # 2e9d0 <_rtld_global@@GLIBC_PRIVATE+0x970>
+    0.00 :   c13d:       mov    $0xffffffff,%eax
+    0.00 :   c142:       pxor   %xmm0,%xmm0
+    0.00 :   c146:       cmpq   $0x0,0x8(%rsp)
+    0.00 :   c14c:       mov    %rax,0x40(%rsp)
+    0.00 :   c151:       movaps %xmm0,0x50(%rsp)
+    0.00 :   c156:       je     c166 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x10d6>
+    0.00 :   c158:       testb  $0x2,0xd0(%rsp)
+    0.00 :   c160:       jne    ceb2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e22>
+    0.00 :   c166:       mov    0x18(%rsp),%rax
+    0.00 :   c16b:       mov    (%r12),%rcx
+    0.00 :   c16f:       cmpq   $0x0,0xd8(%rsp)
+    0.00 :   c178:       mov    (%rax),%r9
+    0.00 :   c17b:       jne    c3f0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1360>
+    0.00 :   c181:       test   %r9,%r9
+    0.00 :   c184:       je     c340 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12b0>
+    0.00 :   c18a:       movq   $0x0,0x20(%rsp)
+    0.00 :   c193:       mov    %rax,%rbp
+    0.00 :   c196:       mov    0x20(%rsp),%rax
+    0.00 :   c19b:       lea    0x50(%rsp),%r15
+    0.00 :   c1a0:       lea    0x40(%rsp),%r14
+    0.00 :   c1a5:       jmp    c1c3 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1133>
+    0.00 :   c1a7:       nopw   0x0(%rax,%rax,1)
+    0.00 :   c1b0:       mov    0x8(%rbp),%r9
+    0.00 :   c1b4:       add    $0x8,%rbp
+    0.00 :   c1b8:       mov    (%r12),%rcx
+    0.00 :   c1bc:       xor    %eax,%eax
+    0.00 :   c1be:       test   %r9,%r9
+    0.00 :   c1c1:       je     c1fd <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x116d>
+    0.00 :   c1c3:       pushq  0x10(%rsp)
+    0.00 :   c1c7:       mov    0x40(%rsp),%edi
+    0.00 :   c1cb:       mov    %r15,%r8
+    0.00 :   c1ce:       mov    %r14,%rdx
+    0.00 :   c1d1:       mov    %rbx,%rsi
+    0.00 :   c1d4:       push   %rdi
+    0.00 :   c1d5:       pushq  0xe8(%rsp)
+    0.00 :   c1dc:       mov    0xe8(%rsp),%edi
+    0.00 :   c1e3:       push   %rdi
+    0.00 :   c1e4:       mov    %r13,%rdi
+    0.00 :   c1e7:       pushq  0x28(%rsp)
+    0.00 :   c1eb:       push   %rax
+    0.00 :   c1ec:       callq  b4c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x430>
+    0.00 :   c1f1:       add    $0x30,%rsp
+    0.00 :   c1f5:       test   %eax,%eax
+    0.00 :   c1f7:       je     c1b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1120>
+    0.00 :   c1f9:       mov    (%r12),%rcx
+    0.00 :   c1fd:       cmpq   $0x0,0x50(%rsp)
+    0.00 :   c203:       je     c340 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12b0>
+    0.00 :   c209:       test   %rcx,%rcx
+    0.00 :   c20c:       je     c219 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1189>
+    0.00 :   c20e:       movzbl 0x5(%rcx),%eax
+    0.00 :   c212:       and    $0x3,%eax
+    0.00 :   c215:       cmp    $0x3,%al
+    0.00 :   c217:       je     c278 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11e8>
+    0.00 :   c219:       mov    0x58(%rsp),%r14
+    0.00 :   c21e:       xor    %ebx,%ebx
+    0.00 :   c220:       movzbl 0x31c(%r14),%eax
+    0.00 :   c228:       and    $0x3,%eax
+    0.00 :   c22b:       cmp    $0x2,%al
+    0.00 :   c22d:       je     c5fa <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x156a>
+    0.00 :   c233:       mov    0x3dc(%r14),%ecx
+    0.00 :   c23a:       test   %ecx,%ecx
+    0.00 :   c23c:       je     c5ea <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x155a>
+    0.00 :   c242:       mov    0x213d8(%rip),%eax        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   c248:       test   $0x804,%eax
+    0.00 :   c24d:       jne    c429 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1399>
+    0.00 :   c253:       mov    0x50(%rsp),%rax
+    0.00 :   c258:       mov    %rax,(%r12)
+    0.00 :   c25c:       add    $0x98,%rsp
+    0.00 :   c263:       mov    %r14,%rax
+    0.00 :   c266:       pop    %rbx
+    0.00 :   c267:       pop    %rbp
+    0.00 :   c268:       pop    %r12
+    0.00 :   c26a:       pop    %r13
+    0.00 :   c26c:       pop    %r14
+    0.00 :   c26e:       pop    %r15
+    0.00 :   c270:       retq
+    0.00 :   c271:       nopl   0x0(%rax)
+    0.00 :   c278:       cmpl   $0x1,0x38(%rsp)
+    0.00 :   c27d:       je     c6d1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1641>
+    0.00 :   c283:       mov    0x18(%rsp),%rax
+    0.00 :   c288:       pxor   %xmm0,%xmm0
+    0.00 :   c28c:       movaps %xmm0,0x70(%rsp)
+    0.00 :   c291:       mov    (%rax),%r9
+    0.00 :   c294:       test   %r9,%r9
+    0.00 :   c297:       je     c705 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1675>
+    0.00 :   c29d:       cmpl   $0x4,0x38(%rsp)
+    0.00 :   c2a2:       lea    0x70(%rsp),%r8
+    0.00 :   c2a7:       mov    0x20(%rsp),%rdx
+    0.00 :   c2ac:       mov    %rax,%r15
+    0.00 :   c2af:       sete   0x28(%rsp)
+    0.00 :   c2b4:       mov    %r8,%rbp
+    0.00 :   c2b7:       jmp    c317 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1287>
+    0.00 :   c2b9:       nopl   0x0(%rax)
+    0.00 :   c2c0:       cmpb   $0x0,0x28(%rsp)
+    0.00 :   c2c5:       mov    $0x4,%eax
+    0.00 :   c2ca:       je     c322 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1292>
+    0.00 :   c2cc:       pushq  $0x0
+    0.00 :   c2ce:       mov    %rbp,%r8
+    0.00 :   c2d1:       mov    %rbx,%rsi
+    0.00 :   c2d4:       mov    %r13,%rdi
+    0.00 :   c2d7:       push   %rax
+    0.00 :   c2d8:       pushq  0xe8(%rsp)
+    0.00 :   c2df:       mov    0xe8(%rsp),%eax
+    0.00 :   c2e6:       push   %rax
+    0.00 :   c2e7:       pushq  0x28(%rsp)
+    0.00 :   c2eb:       push   %rdx
+    0.00 :   c2ec:       mov    %r14,%rdx
+    0.00 :   c2ef:       callq  b4c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x430>
+    0.00 :   c2f4:       add    $0x30,%rsp
+    0.00 :   c2f8:       test   %eax,%eax
+    0.00 :   c2fa:       jne    c6a2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1612>
+    0.00 :   c300:       mov    0x8(%r15),%r9
+    0.00 :   c304:       add    $0x8,%r15
+    0.00 :   c308:       test   %r9,%r9
+    0.00 :   c30b:       je     c6a2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1612>
+    0.00 :   c311:       mov    (%r12),%rcx
+    0.00 :   c315:       xor    %edx,%edx
+    0.00 :   c317:       movzbl 0x4(%rcx),%eax
+    0.00 :   c31b:       and    $0xf,%eax
+    0.00 :   c31e:       cmp    $0x1,%al
+    0.00 :   c320:       je     c2c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   c322:       mov    $0x1,%eax
+    0.00 :   c327:       jmp    c2cc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x123c>
+    0.00 :   c329:       nopl   0x0(%rax)
+    0.00 :   c330:       mov    $0x1505,%ebx
+    0.00 :   c335:       jmpq   c135 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x10a5>
+    0.00 :   c33a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   c340:       test   %rcx,%rcx
+    0.00 :   c343:       je     c354 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12c4>
+    0.00 :   c345:       movzbl 0x4(%rcx),%eax
+    0.00 :   c349:       shr    $0x4,%al
+    0.00 :   c34c:       cmp    $0x2,%al
+    0.00 :   c34e:       je     c3d6 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1346>
+    0.00 :   c354:       testb  $0x1,0x212c6(%rip)        # 2d621 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :   c35b:       jne    c3d6 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1346>
+    0.00 :   c35d:       mov    0x10(%rsp),%rax
+    0.00 :   c362:       test   %rax,%rax
+    0.00 :   c365:       je     c7f8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1768>
+    0.00 :   c36b:       mov    0x8(%rax),%rsi
+    0.00 :   c36f:       lea    0x18fcc(%rip),%r8        # 25342 <_dl_catch_error@@GLIBC_PRIVATE+0x7602>
+    0.00 :   c376:       cmpq   $0x0,0x8(%rsp)
+    0.00 :   c37c:       mov    %r8,%r9
+    0.00 :   c37f:       movzbl (%rsi),%eax
+    0.00 :   c382:       je     c39c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x130c>
+    0.00 :   c384:       mov    0x8(%rsp),%rbx
+    0.00 :   c389:       lea    0x19349(%rip),%r8        # 256d9 <_dl_catch_error@@GLIBC_PRIVATE+0x7999>
+    0.00 :   c390:       mov    (%rbx),%r9
+    0.00 :   c393:       test   %r9,%r9
+    0.00 :   c396:       je     ca45 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x19b5>
+    0.00 :   c39c:       test   %al,%al
+    0.00 :   c39e:       je     c827 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1797>
+    0.00 :   c3a4:       lea    0x70(%rsp),%rbp
+    0.00 :   c3a9:       mov    %r13,%rcx
+    0.00 :   c3ac:       lea    0x19342(%rip),%rdx        # 256f5 <_dl_catch_error@@GLIBC_PRIVATE+0x79b5>
+    0.00 :   c3b3:       xor    %eax,%eax
+    0.00 :   c3b5:       mov    %rbp,%rdi
+    0.00 :   c3b8:       callq  18db0 <_dl_exception_create_format@@GLIBC_PRIVATE>
+    0.00 :   c3bd:       xor    %edi,%edi
+    0.00 :   c3bf:       lea    0x19348(%rip),%rdx        # 2570e <_dl_catch_error@@GLIBC_PRIVATE+0x79ce>
+    0.00 :   c3c6:       mov    %rbp,%rsi
+    0.00 :   c3c9:       callq  1db30 <_dl_signal_error@@GLIBC_PRIVATE+0x60>
+    0.00 :   c3ce:       mov    %rbp,%rdi
+    0.00 :   c3d1:       callq  19260 <_dl_exception_free@@GLIBC_PRIVATE>
+    0.00 :   c3d6:       movq   $0x0,(%r12)
+    0.00 :   c3de:       xor    %r14d,%r14d
+    0.00 :   c3e1:       jmpq   c25c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11cc>
+    0.00 :   c3e6:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :   c3f0:       mov    (%r9),%rax
+    0.00 :   c3f3:       mov    (%rax),%rdi
+    0.00 :   c3f6:       cmp    %rdi,0xd8(%rsp)
+    0.00 :   c3fe:       je     c8f9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1869>
+    0.00 :   c404:       mov    0xd8(%rsp),%rsi
+    0.00 :   c40c:       xor    %edx,%edx
+    0.00 :   c40e:       xchg   %ax,%ax
+    0.00 :   c410:       add    $0x1,%rdx
+    0.00 :   c414:       cmp    %rsi,(%rax,%rdx,8)
+    0.00 :   c418:       jne    c410 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1380>
+    0.00 :   c41a:       mov    %rdx,0x20(%rsp)
+    0.00 :   c41f:       mov    0x18(%rsp),%rbp
+    0.00 :   c424:       jmpq   c196 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1106>
+    0.00 :   c429:       test   $0x4,%al
+    0.00 :   c42b:       je     c4cf <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x143f>
+    0.00 :   c431:       mov    0x8(%r14),%rcx
+    0.00 :   c435:       test   %ebx,%ebx
+    0.00 :   c437:       mov    0x30(%r14),%r8
+    0.00 :   c43b:       lea    0x192a2(%rip),%r9        # 256e4 <_dl_catch_error@@GLIBC_PRIVATE+0x79a4>
+    0.00 :   c442:       lea    0x192a5(%rip),%rax        # 256ee <_dl_catch_error@@GLIBC_PRIVATE+0x79ae>
+    0.00 :   c449:       cmove  %rax,%r9
+    0.00 :   c44d:       cmpb   $0x0,(%rcx)
+    0.00 :   c450:       jne    c46a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13da>
+    0.00 :   c452:       mov    0x211a7(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   c459:       mov    (%rax),%rcx
+    0.00 :   c45c:       lea    0x18c2f(%rip),%rax        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   c463:       test   %rcx,%rcx
+    0.00 :   c466:       cmove  %rax,%rcx
+    0.00 :   c46a:       mov    0x10(%rsp),%rax
+    0.00 :   c46f:       mov    0x8(%rax),%rsi
+    0.00 :   c473:       mov    0x30(%rax),%rdx
+    0.00 :   c477:       cmpb   $0x0,(%rsi)
+    0.00 :   c47a:       jne    c494 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1404>
+    0.00 :   c47c:       mov    0x2117d(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   c483:       mov    (%rax),%rsi
+    0.00 :   c486:       lea    0x18c05(%rip),%rax        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   c48d:       test   %rsi,%rsi
+    0.00 :   c490:       cmove  %rax,%rsi
+    0.00 :   c494:       sub    $0x8,%rsp
+    0.00 :   c498:       lea    0x1b389(%rip),%rdi        # 27828 <_dl_catch_error@@GLIBC_PRIVATE+0x9ae8>
+    0.00 :   c49f:       xor    %eax,%eax
+    0.00 :   c4a1:       push   %r13
+    0.00 :   c4a3:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   c4a8:       pop    %rax
+    0.00 :   c4a9:       pop    %rdx
+    0.00 :   c4aa:       mov    0x8(%rsp),%rax
+    0.00 :   c4af:       test   %rax,%rax
+    0.00 :   c4b2:       je     c8e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1850>
+    0.00 :   c4b8:       mov    (%rax),%rsi
+    0.00 :   c4bb:       lea    0x19260(%rip),%rdi        # 25722 <_dl_catch_error@@GLIBC_PRIVATE+0x79e2>
+    0.00 :   c4c2:       xor    %eax,%eax
+    0.00 :   c4c4:       callq  12a40 <_dl_debug_state@@GLIBC_PRIVATE+0x860>
+    0.00 :   c4c9:       mov    0x21151(%rip),%eax        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   c4cf:       test   $0x8,%ah
+    0.00 :   c4d2:       je     c6fb <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x166b>
+    0.00 :   c4d8:       mov    0x212c1(%rip),%rdx        # 2d7a0 <_rtld_global_ro@@GLIBC_PRIVATE+0x180>
+    0.00 :   c4df:       pxor   %xmm0,%xmm0
+    0.00 :   c4e3:       mov    0x21b76(%rip),%rax        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   c4ea:       movaps %xmm0,0x60(%rsp)
+    0.00 :   c4ef:       test   %rdx,%rdx
+    0.00 :   c4f2:       je     c70c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x167c>
+    0.00 :   c4f8:       cmp    %rax,%rdx
+    0.00 :   c4fb:       je     c70c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x167c>
+    0.00 :   c501:       mov    0x50(%rsp),%rax
+    0.00 :   c506:       test   %rax,%rax
+    0.00 :   c509:       je     c93c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18ac>
+    0.00 :   c50f:       movzbl 0x4(%rax),%edx
+    0.00 :   c513:       andl   $0x3,0x38(%rsp)
+    0.00 :   c518:       and    $0xf,%edx
+    0.00 :   c51b:       cmp    $0x6,%dl
+    0.00 :   c51e:       je     cb78 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ae8>
+    0.00 :   c524:       xor    %esi,%esi
+    0.00 :   c526:       mov    0x38(%rsp),%ebx
+    0.00 :   c52a:       mov    %ebx,%ecx
+    0.00 :   c52c:       or     $0x8,%ecx
+    0.00 :   c52f:       cmp    $0xa,%dl
+    0.00 :   c532:       cmovne %ebx,%ecx
+    0.00 :   c535:       mov    %ecx,0x38(%rsp)
+    0.00 :   c539:       test   %esi,%esi
+    0.00 :   c53b:       jne    c844 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x17b4>
+    0.00 :   c541:       mov    0x21258(%rip),%rdx        # 2d7a0 <_rtld_global_ro@@GLIBC_PRIVATE+0x180>
+    0.00 :   c548:       test   %rdx,%rdx
+    0.00 :   c54b:       sete   %cl
+    0.00 :   c54e:       cmp    %rdx,0x10(%rsp)
+    0.00 :   c553:       sete   %dl
+    0.00 :   c556:       or     %dl,%cl
+    0.00 :   c558:       jne    c561 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14d1>
+    0.00 :   c55a:       cmpl   $0x3,0x38(%rsp)
+    0.00 :   c55f:       jle    c5e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   c561:       mov    0x10(%rsp),%rbx
+    0.00 :   c566:       mov    (%r12),%rdx
+    0.00 :   c56a:       mov    0x350(%rbx),%r8
+    0.00 :   c571:       sub    %r8,%rdx
+    0.00 :   c574:       test   %rax,%rax
+    0.00 :   c577:       je     cffd <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f6d>
+    0.00 :   c57d:       mov    0x8(%rax),%rcx
+    0.00 :   c581:       mov    0x58(%rsp),%rax
+    0.00 :   c586:       mov    0x350(%rax),%rax
+    0.00 :   c58d:       sub    $0x8,%rsp
+    0.00 :   c591:       mov    $0x10,%r9d
+    0.00 :   c597:       mov    $0x1,%edi
+    0.00 :   c59c:       push   %rcx
+    0.00 :   c59d:       lea    0x1b2bc(%rip),%rsi        # 27860 <_dl_catch_error@@GLIBC_PRIVATE+0x9b20>
+    0.00 :   c5a4:       mov    $0x10,%ecx
+    0.00 :   c5a9:       pushq  $0x10
+    0.00 :   c5ab:       push   %rax
+    0.00 :   c5ac:       xor    %eax,%eax
+    0.00 :   c5ae:       pushq  $0x10
+    0.00 :   c5b0:       push   %rdx
+    0.00 :   c5b1:       lea    0x1918c(%rip),%rdx        # 25744 <_dl_catch_error@@GLIBC_PRIVATE+0x7a04>
+    0.00 :   c5b8:       callq  12af0 <_dl_debug_state@@GLIBC_PRIVATE+0x910>
+    0.00 :   c5bd:       add    $0x30,%rsp
+    0.00 :   c5c1:       mov    0x38(%rsp),%edx
+    0.00 :   c5c5:       xor    %eax,%eax
+    0.00 :   c5c7:       mov    %r13,%rcx
+    0.00 :   c5ca:       lea    0x1916b(%rip),%rsi        # 2573c <_dl_catch_error@@GLIBC_PRIVATE+0x79fc>
+    0.00 :   c5d1:       mov    $0x1,%edi
+    0.00 :   c5d6:       callq  12af0 <_dl_debug_state@@GLIBC_PRIVATE+0x910>
+    0.00 :   c5db:       mov    0x50(%rsp),%rax
+    0.00 :   c5e0:       mov    0x58(%rsp),%r14
+    0.00 :   c5e5:       jmpq   c258 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11c8>
+    0.00 :   c5ea:       movl   $0x1,0x3dc(%r14)
+    0.00 :   c5f5:       jmpq   c242 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11b2>
+    0.00 :   c5fa:       cmp    %r14,0x10(%rsp)
+    0.00 :   c5ff:       je     c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c605:       testb  $0x1,0xd0(%rsp)
+    0.00 :   c60d:       je     c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c613:       cmpb   $0x0,0x31f(%r14)
+    0.00 :   c61b:       jne    c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c621:       mov    0xd0(%rsp),%eax
+    0.00 :   c628:       and    $0x8,%eax
+    0.00 :   c62b:       mov    %eax,0x28(%rsp)
+    0.00 :   c62f:       je     c63f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15af>
+    0.00 :   c631:       cmpb   $0x0,0x320(%r14)
+    0.00 :   c639:       jne    c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c63f:       mov    0x10(%rsp),%rax
+    0.00 :   c644:       mov    0x3d0(%rax),%rdi
+    0.00 :   c64b:       mov    %rdi,%rbp
+    0.00 :   c64e:       mov    %rdi,0x20(%rsp)
+    0.00 :   c653:       mov    0x3c8(%rax),%rax
+    0.00 :   c65a:       mov    %rax,%r15
+    0.00 :   c65d:       mov    %rax,0x20(%rsp)
+    0.00 :   c662:       test   %r15,%r15
+    0.00 :   c665:       je     c90c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x187c>
+    0.00 :   c66b:       mov    (%r15),%rax
+    0.00 :   c66e:       xor    %edx,%edx
+    0.00 :   c670:       test   %rax,%rax
+    0.00 :   c673:       jne    c693 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1603>
+    0.00 :   c675:       jmpq   c90c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x187c>
+    0.00 :   c67a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   c680:       lea    0x1(%rdx),%eax
+    0.00 :   c683:       mov    %rax,%rdx
+    0.00 :   c686:       mov    (%r15,%rax,8),%rax
+    0.00 :   c68a:       test   %rax,%rax
+    0.00 :   c68d:       je     c90c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x187c>
+    0.00 :   c693:       cmp    %r14,%rax
+    0.00 :   c696:       jne    c680 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15f0>
+    0.00 :   c698:       mov    0x58(%rsp),%r14
+    0.00 :   c69d:       jmpq   c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c6a2:       cmpq   $0x0,0x70(%rsp)
+    0.00 :   c6a8:       je     c705 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1675>
+    0.00 :   c6aa:       mov    0x10(%rsp),%rbx
+    0.00 :   c6af:       cmp    %rbx,0x78(%rsp)
+    0.00 :   c6b4:       je     c705 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1675>
+    0.00 :   c6b6:       mov    (%r12),%rax
+    0.00 :   c6ba:       mov    %rbx,0x58(%rsp)
+    0.00 :   c6bf:       mov    %rbx,%r14
+    0.00 :   c6c2:       mov    %rax,0x50(%rsp)
+    0.00 :   c6c7:       mov    $0x1,%ebx
+    0.00 :   c6cc:       jmpq   c220 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1190>
+    0.00 :   c6d1:       mov    0x10(%rsp),%rax
+    0.00 :   c6d6:       cmp    %rax,0x58(%rsp)
+    0.00 :   c6db:       je     c6ec <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x165c>
+    0.00 :   c6dd:       movq   %rcx,%xmm0
+    0.00 :   c6e2:       movhps 0x10(%rsp),%xmm0
+    0.00 :   c6e7:       movaps %xmm0,0x50(%rsp)
+    0.00 :   c6ec:       mov    0x10(%rsp),%r14
+    0.00 :   c6f1:       mov    $0x1,%ebx
+    0.00 :   c6f6:       jmpq   c233 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a3>
+    0.00 :   c6fb:       mov    0x58(%rsp),%r14
+    0.00 :   c700:       jmpq   c253 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11c3>
+    0.00 :   c705:       mov    0x58(%rsp),%r14
+    0.00 :   c70a:       jmp    c6c7 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1637>
+    0.00 :   c70c:       cmp    %rax,0x10(%rsp)
+    0.00 :   c711:       je     c501 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1471>
+    0.00 :   c717:       movzbl 0x0(%r13),%edx
+    0.00 :   c71c:       test   %dl,%dl
+    0.00 :   c71e:       je     cc60 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1bd0>
+    0.00 :   c724:       mov    %r13,%rcx
+    0.00 :   c727:       mov    $0x1505,%esi
+    0.00 :   c72c:       nopl   0x0(%rax)
+    0.00 :   c730:       mov    %rsi,%rax
+    0.00 :   c733:       movzbl %dl,%edx
+    0.00 :   c736:       add    $0x1,%rcx
+    0.00 :   c73a:       shl    $0x5,%rax
+    0.00 :   c73e:       add    %rax,%rsi
+    0.00 :   c741:       add    %rdx,%rsi
+    0.00 :   c744:       movzbl (%rcx),%edx
+    0.00 :   c747:       test   %dl,%dl
+    0.00 :   c749:       jne    c730 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16a0>
+    0.00 :   c74b:       mov    %esi,%esi
+    0.00 :   c74d:       mov    $0xffffffff,%eax
+    0.00 :   c752:       lea    0x48(%rsp),%rdx
+    0.00 :   c757:       mov    (%r12),%rcx
+    0.00 :   c75b:       mov    %r13,%rdi
+    0.00 :   c75e:       mov    %rax,0x48(%rsp)
+    0.00 :   c763:       mov    0x10(%rsp),%rax
+    0.00 :   c768:       mov    0x21939(%rip),%r14        # 2e0a8 <_rtld_global@@GLIBC_PRIVATE+0x48>
+    0.00 :   c76f:       movq   $0x0,0x2192e(%rip)        # 2e0a8 <_rtld_global@@GLIBC_PRIVATE+0x48>
+    0.00 :   c77a:       push   %rax
+    0.00 :   c77b:       mov    0x40(%rsp),%ebx
+    0.00 :   c77f:       mov    0x398(%rax),%r9
+    0.00 :   c786:       push   %rbx
+    0.00 :   c787:       pushq  $0x0
+    0.00 :   c789:       pushq  $0x0
+    0.00 :   c78b:       pushq  0x28(%rsp)
+    0.00 :   c78f:       pushq  $0x0
+    0.00 :   c791:       lea    0x90(%rsp),%r8
+    0.00 :   c799:       mov    %rdx,0x50(%rsp)
+    0.00 :   c79e:       mov    %rsi,0x48(%rsp)
+    0.00 :   c7a3:       callq  b4c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x430>
+    0.00 :   c7a8:       mov    0x80(%rsp),%rax
+    0.00 :   c7b0:       add    $0x30,%rsp
+    0.00 :   c7b4:       mov    0x18(%rsp),%rsi
+    0.00 :   c7b9:       cmp    %rax,0x60(%rsp)
+    0.00 :   c7be:       mov    0x20(%rsp),%rdx
+    0.00 :   c7c3:       je     ca6d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x19dd>
+    0.00 :   c7c9:       mov    %r14,0x218d8(%rip)        # 2e0a8 <_rtld_global@@GLIBC_PRIVATE+0x48>
+    0.00 :   c7d0:       test   %rax,%rax
+    0.00 :   c7d3:       je     ca51 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x19c1>
+    0.00 :   c7d9:       movzbl 0x4(%rax),%edx
+    0.00 :   c7dd:       andl   $0x3,0x38(%rsp)
+    0.00 :   c7e2:       and    $0xf,%edx
+    0.00 :   c7e5:       cmp    $0x6,%dl
+    0.00 :   c7e8:       je     ced1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e41>
+    0.00 :   c7ee:       mov    $0x1,%esi
+    0.00 :   c7f3:       jmpq   c526 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1496>
+    0.00 :   c7f8:       lea    0x18b43(%rip),%r8        # 25342 <_dl_catch_error@@GLIBC_PRIVATE+0x7602>
+    0.00 :   c7ff:       cmpq   $0x0,0x8(%rsp)
+    0.00 :   c805:       mov    %r8,%r9
+    0.00 :   c808:       je     c827 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1797>
+    0.00 :   c80a:       mov    0x8(%rsp),%rax
+    0.00 :   c80f:       lea    0x18ec3(%rip),%r8        # 256d9 <_dl_catch_error@@GLIBC_PRIVATE+0x7999>
+    0.00 :   c816:       mov    (%rax),%r9
+    0.00 :   c819:       lea    0x18b22(%rip),%rax        # 25342 <_dl_catch_error@@GLIBC_PRIVATE+0x7602>
+    0.00 :   c820:       test   %r9,%r9
+    0.00 :   c823:       cmove  %rax,%r9
+    0.00 :   c827:       mov    0x20dd2(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   c82e:       mov    (%rax),%rsi
+    0.00 :   c831:       lea    0x1885a(%rip),%rax        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   c838:       test   %rsi,%rsi
+    0.00 :   c83b:       cmove  %rax,%rsi
+    0.00 :   c83f:       jmpq   c3a4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1314>
+    0.00 :   c844:       mov    0x10(%rsp),%rbx
+    0.00 :   c849:       mov    0x8(%rax),%rcx
+    0.00 :   c84d:       mov    0x58(%rsp),%rax
+    0.00 :   c852:       mov    (%r12),%rdx
+    0.00 :   c856:       mov    0x350(%rbx),%r8
+    0.00 :   c85d:       mov    0x350(%rax),%rax
+    0.00 :   c864:       sub    %r8,%rdx
+    0.00 :   c867:       sub    $0x8,%rsp
+    0.00 :   c86b:       mov    $0x10,%r9d
+    0.00 :   c871:       mov    $0x1,%edi
+    0.00 :   c876:       push   %rcx
+    0.00 :   c877:       lea    0x1afe2(%rip),%rsi        # 27860 <_dl_catch_error@@GLIBC_PRIVATE+0x9b20>
+    0.00 :   c87e:       mov    $0x10,%ecx
+    0.00 :   c883:       pushq  $0x10
+    0.00 :   c885:       push   %rax
+    0.00 :   c886:       xor    %eax,%eax
+    0.00 :   c888:       pushq  $0x10
+    0.00 :   c88a:       push   %rdx
+    0.00 :   c88b:       lea    0x18eb9(%rip),%rdx        # 2574b <_dl_catch_error@@GLIBC_PRIVATE+0x7a0b>
+    0.00 :   c892:       callq  12af0 <_dl_debug_state@@GLIBC_PRIVATE+0x910>
+    0.00 :   c897:       mov    0x90(%rsp),%rax
+    0.00 :   c89f:       xor    %r9d,%r9d
+    0.00 :   c8a2:       add    $0x30,%rsp
+    0.00 :   c8a6:       xor    %ecx,%ecx
+    0.00 :   c8a8:       test   %rax,%rax
+    0.00 :   c8ab:       je     c8bd <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x182d>
+    0.00 :   c8ad:       mov    0x8(%rax),%r9
+    0.00 :   c8b1:       mov    0x68(%rsp),%rax
+    0.00 :   c8b6:       mov    0x350(%rax),%rcx
+    0.00 :   c8bd:       mov    $0x10,%r8d
+    0.00 :   c8c3:       mov    $0x10,%edx
+    0.00 :   c8c8:       lea    0x18e5a(%rip),%rsi        # 25729 <_dl_catch_error@@GLIBC_PRIVATE+0x79e9>
+    0.00 :   c8cf:       xor    %eax,%eax
+    0.00 :   c8d1:       mov    $0x1,%edi
+    0.00 :   c8d6:       callq  12af0 <_dl_debug_state@@GLIBC_PRIVATE+0x910>
+    0.00 :   c8db:       jmpq   c5c1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1531>
+    0.00 :   c8e0:       xor    %eax,%eax
+    0.00 :   c8e2:       lea    0x18a58(%rip),%rdi        # 25341 <_dl_catch_error@@GLIBC_PRIVATE+0x7601>
+    0.00 :   c8e9:       callq  12a40 <_dl_debug_state@@GLIBC_PRIVATE+0x860>
+    0.00 :   c8ee:       mov    0x20d2c(%rip),%eax        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   c8f4:       jmpq   c4cf <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x143f>
+    0.00 :   c8f9:       movq   $0x0,0x20(%rsp)
+    0.00 :   c902:       mov    0x18(%rsp),%rbp
+    0.00 :   c907:       jmpq   c196 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1106>
+    0.00 :   c90c:       test   %rbp,%rbp
+    0.00 :   c90f:       je     c975 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18e5>
+    0.00 :   c911:       mov    0x0(%rbp),%r9d
+    0.00 :   c915:       test   %r9d,%r9d
+    0.00 :   c918:       je     c978 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18e8>
+    0.00 :   c91a:       lea    -0x1(%r9),%edx
+    0.00 :   c91e:       lea    0x8(%rbp),%rax
+    0.00 :   c922:       lea    0x10(%rbp,%rdx,8),%rdx
+    0.00 :   c927:       jmp    c932 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18a2>
+    0.00 :   c929:       add    $0x8,%rax
+    0.00 :   c92d:       cmp    %rax,%rdx
+    0.00 :   c930:       je     c978 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18e8>
+    0.00 :   c932:       cmp    %r14,(%rax)
+    0.00 :   c935:       jne    c929 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1899>
+    0.00 :   c937:       jmpq   c698 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   c93c:       cmp    %rdx,0x10(%rsp)
+    0.00 :   c941:       sete   %cl
+    0.00 :   c944:       test   %rdx,%rdx
+    0.00 :   c947:       sete   %dl
+    0.00 :   c94a:       or     %dl,%cl
+    0.00 :   c94c:       jne    c959 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x18c9>
+    0.00 :   c94e:       cmpl   $0x3,0x38(%rsp)
+    0.00 :   c953:       jle    c5e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   c959:       mov    0x10(%rsp),%rax
+    0.00 :   c95e:       mov    (%r12),%rdx
+    0.00 :   c962:       xor    %ecx,%ecx
+    0.00 :   c964:       mov    0x350(%rax),%r8
+    0.00 :   c96b:       xor    %eax,%eax
+    0.00 :   c96d:       sub    %r8,%rdx
+    0.00 :   c970:       jmpq   c58d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14fd>
+    0.00 :   c975:       xor    %r9d,%r9d
+    0.00 :   c978:       mov    0x478(%r14),%rax
+    0.00 :   c97f:       mov    %rax,0x30(%rsp)
+    0.00 :   c984:       mov    0xd0(%rsp),%eax
+    0.00 :   c98b:       and    $0x4,%eax
+    0.00 :   c98e:       mov    %eax,0x20(%rsp)
+    0.00 :   c992:       jne    cc6a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1bda>
+    0.00 :   c998:       mov    %r9d,0x3c(%rsp)
+    0.00 :   c99d:       lea    0x21fc4(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   c9a4:       callq  *0x225be(%rip)        # 2ef68 <_rtld_global@@GLIBC_PRIVATE+0xf08>
+    0.00 :   c9aa:       mov    0x3c(%rsp),%r9d
+    0.00 :   c9af:       mov    0x10(%rsp),%rax
+    0.00 :   c9b4:       lea    0x216a5(%rip),%rdx        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   c9bb:       mov    0x30(%rax),%r8
+    0.00 :   c9bf:       lea    (%r8,%r8,8),%rax
+    0.00 :   c9c3:       shl    $0x4,%rax
+    0.00 :   c9c7:       mov    (%rdx,%rax,1),%rax
+    0.00 :   c9cb:       cmp    %r14,%rax
+    0.00 :   c9ce:       je     cad3 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1a43>
+    0.00 :   c9d4:       test   %rax,%rax
+    0.00 :   c9d7:       jne    c9e9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1959>
+    0.00 :   c9d9:       jmp    c9f2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1962>
+    0.00 :   c9db:       nopl   0x0(%rax,%rax,1)
+    0.00 :   c9e0:       cmp    %r14,%rax
+    0.00 :   c9e3:       je     cad3 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1a43>
+    0.00 :   c9e9:       mov    0x18(%rax),%rax
+    0.00 :   c9ed:       test   %rax,%rax
+    0.00 :   c9f0:       jne    c9e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1950>
+    0.00 :   c9f2:       lea    0x21f6f(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   c9f9:       callq  *0x22571(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   c9ff:       mov    0x20(%rsp),%r11d
+    0.00 :   ca04:       test   %r11d,%r11d
+    0.00 :   ca07:       jne    cd1b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c8b>
+    0.00 :   ca0d:       pushq  0xd8(%rsp)
+    0.00 :   ca14:       mov    %r13,%rdi
+    0.00 :   ca17:       mov    %r12,%rdx
+    0.00 :   ca1a:       mov    0xd8(%rsp),%eax
+    0.00 :   ca21:       push   %rax
+    0.00 :   ca22:       mov    0x48(%rsp),%r9d
+    0.00 :   ca27:       mov    0x18(%rsp),%r8
+    0.00 :   ca2c:       mov    0x28(%rsp),%rcx
+    0.00 :   ca31:       mov    0x20(%rsp),%rsi
+    0.00 :   ca36:       callq  c0d0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1040>
+    0.00 :   ca3b:       pop    %rsi
+    0.00 :   ca3c:       pop    %rdi
+    0.00 :   ca3d:       mov    %rax,%r14
+    0.00 :   ca40:       jmpq   c25c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11cc>
+    0.00 :   ca45:       lea    0x188f6(%rip),%r9        # 25342 <_dl_catch_error@@GLIBC_PRIVATE+0x7602>
+    0.00 :   ca4c:       jmpq   c39c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x130c>
+    0.00 :   ca51:       mov    0x10(%rsp),%rax
+    0.00 :   ca56:       mov    (%r12),%rdx
+    0.00 :   ca5a:       xor    %ecx,%ecx
+    0.00 :   ca5c:       mov    0x350(%rax),%r8
+    0.00 :   ca63:       xor    %eax,%eax
+    0.00 :   ca65:       sub    %r8,%rdx
+    0.00 :   ca68:       jmpq   c867 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x17d7>
+    0.00 :   ca6d:       mov    0x68(%rsp),%rdi
+    0.00 :   ca72:       cmp    0x58(%rsp),%rdi
+    0.00 :   ca77:       jne    c7c9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1739>
+    0.00 :   ca7d:       test   %rax,%rax
+    0.00 :   ca80:       je     ca94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1a04>
+    0.00 :   ca82:       mov    0x10(%rsp),%rbx
+    0.00 :   ca87:       cmpb   $0x0,0x31d(%rbx)
+    0.00 :   ca8e:       js     cf1b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e8b>
+    0.00 :   ca94:       mov    %r14,0x2160d(%rip)        # 2e0a8 <_rtld_global@@GLIBC_PRIVATE+0x48>
+    0.00 :   ca9b:       test   %rax,%rax
+    0.00 :   ca9e:       jne    c50f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147f>
+    0.00 :   caa4:       mov    0x20cf5(%rip),%rax        # 2d7a0 <_rtld_global_ro@@GLIBC_PRIVATE+0x180>
+    0.00 :   caab:       test   %rax,%rax
+    0.00 :   caae:       sete   %dl
+    0.00 :   cab1:       cmp    %rax,0x10(%rsp)
+    0.00 :   cab6:       sete   %al
+    0.00 :   cab9:       or     %al,%dl
+    0.00 :   cabb:       jne    cfea <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f5a>
+    0.00 :   cac1:       cmpl   $0x3,0x38(%rsp)
+    0.00 :   cac6:       jg     cfea <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f5a>
+    0.00 :   cacc:       xor    %eax,%eax
+    0.00 :   cace:       jmpq   c5e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   cad3:       test   %rax,%rax
+    0.00 :   cad6:       je     c9f2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1962>
+    0.00 :   cadc:       mov    0x30(%rsp),%rax
+    0.00 :   cae1:       cmp    0x478(%r14),%rax
+    0.00 :   cae8:       jne    c9f2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1962>
+    0.00 :   caee:       cmpb   $0x0,0x31f(%r14)
+    0.00 :   caf6:       jne    cc3a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1baa>
+    0.00 :   cafc:       mov    0x28(%rsp),%r10d
+    0.00 :   cb01:       test   %r10d,%r10d
+    0.00 :   cb04:       je     cb14 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1a84>
+    0.00 :   cb06:       cmpb   $0x0,0x320(%r14)
+    0.00 :   cb0e:       jne    cc3a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1baa>
+    0.00 :   cb14:       mov    0x10(%rsp),%rax
+    0.00 :   cb19:       movzbl 0x31c(%rax),%eax
+    0.00 :   cb20:       mov    %al,0x18(%rsp)
+    0.00 :   cb24:       and    $0x3,%eax
+    0.00 :   cb27:       cmp    $0x2,%al
+    0.00 :   cb29:       je     cba8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b18>
+    0.00 :   cb2b:       testb  $0x4,0x20aee(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   cb32:       jne    d020 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f90>
+    0.00 :   cb38:       cmpl   $0x0,0x28(%rsp)
+    0.00 :   cb3d:       jne    cd3d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cad>
+    0.00 :   cb43:       movb   $0x1,0x31f(%r14)
+    0.00 :   cb4b:       lea    0x21e16(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cb52:       callq  *0x22418(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   cb58:       cmpl   $0x0,0x20(%rsp)
+    0.00 :   cb5d:       je     c698 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   cb63:       movl   $0x1,%fs:0x1c
+    0.00 :   cb6f:       jmpq   c698 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   cb74:       nopl   0x0(%rax)
+    0.00 :   cb78:       mov    (%r12),%rdx
+    0.00 :   cb7c:       mov    0x10(%rsp),%rbx
+    0.00 :   cb81:       movl   $0x4,0x38(%rsp)
+    0.00 :   cb89:       mov    0x8(%rax),%rcx
+    0.00 :   cb8d:       mov    0x58(%rsp),%rax
+    0.00 :   cb92:       mov    0x350(%rbx),%r8
+    0.00 :   cb99:       mov    0x350(%rax),%rax
+    0.00 :   cba0:       sub    %r8,%rdx
+    0.00 :   cba3:       jmpq   c58d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14fd>
+    0.00 :   cba8:       mov    0x10(%rsp),%rax
+    0.00 :   cbad:       mov    0x3d8(%rax),%eax
+    0.00 :   cbb3:       cmp    %r9d,%eax
+    0.00 :   cbb6:       jbe    cdaf <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d1f>
+    0.00 :   cbbc:       mov    0x10(%rsp),%rdi
+    0.00 :   cbc1:       mov    %r9d,%edx
+    0.00 :   cbc4:       mov    0x3d0(%rdi),%rax
+    0.00 :   cbcb:       mov    %r14,0x8(%rax,%rdx,8)
+    0.00 :   cbd0:       mov    0x3d0(%rdi),%rax
+    0.00 :   cbd7:       add    $0x1,%r9d
+    0.00 :   cbdb:       mov    %r9d,(%rax)
+    0.00 :   cbde:       testb  $0x40,0x20a3b(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   cbe5:       je     cc3a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1baa>
+    0.00 :   cbe7:       mov    0x10(%rsp),%rax
+    0.00 :   cbec:       mov    0x8(%rax),%rcx
+    0.00 :   cbf0:       mov    0x30(%rax),%r8
+    0.00 :   cbf4:       cmpb   $0x0,(%rcx)
+    0.00 :   cbf7:       jne    cc0c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b7c>
+    0.00 :   cbf9:       mov    0x20a00(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   cc00:       mov    (%rax),%rcx
+    0.00 :   cc03:       test   %rcx,%rcx
+    0.00 :   cc06:       je     cf0f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e7f>
+    0.00 :   cc0c:       mov    0x8(%r14),%rsi
+    0.00 :   cc10:       mov    0x30(%r14),%rdx
+    0.00 :   cc14:       cmpb   $0x0,(%rsi)
+    0.00 :   cc17:       jne    cc2c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b9c>
+    0.00 :   cc19:       mov    0x209e0(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   cc20:       mov    (%rax),%rsi
+    0.00 :   cc23:       test   %rsi,%rsi
+    0.00 :   cc26:       je     ce20 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d90>
+    0.00 :   cc2c:       lea    0x1abb5(%rip),%rdi        # 277e8 <_dl_catch_error@@GLIBC_PRIVATE+0x9aa8>
+    0.00 :   cc33:       xor    %eax,%eax
+    0.00 :   cc35:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   cc3a:       lea    0x21d27(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cc41:       callq  *0x22329(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   cc47:       mov    0x20(%rsp),%r8d
+    0.00 :   cc4c:       test   %r8d,%r8d
+    0.00 :   cc4f:       je     c698 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   cc55:       jmpq   cb63 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ad3>
+    0.00 :   cc5a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   cc60:       mov    $0x1505,%esi
+    0.00 :   cc65:       jmpq   c74d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16bd>
+    0.00 :   cc6a:       xor    %eax,%eax
+    0.00 :   cc6c:       xchg   %eax,%fs:0x1c
+    0.00 :   cc74:       cmp    $0x2,%eax
+    0.00 :   cc77:       jne    cc9a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c0a>
+    0.00 :   cc79:       mov    %fs:0x10,%rdi
+    0.00 :   cc82:       xor    %r10d,%r10d
+    0.00 :   cc85:       add    $0x1c,%rdi
+    0.00 :   cc89:       mov    $0x1,%edx
+    0.00 :   cc8e:       mov    $0x81,%esi
+    0.00 :   cc93:       mov    $0xca,%eax
+    0.00 :   cc98:       syscall
+    0.00 :   cc9a:       mov    %r9d,0x3c(%rsp)
+    0.00 :   cc9f:       lea    0x21cc2(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cca6:       callq  *0x222bc(%rip)        # 2ef68 <_rtld_global@@GLIBC_PRIVATE+0xf08>
+    0.00 :   ccac:       mov    0x10(%rsp),%rdi
+    0.00 :   ccb1:       mov    %r14,%rax
+    0.00 :   ccb4:       mov    0x3c(%rsp),%r9d
+    0.00 :   ccb9:       mov    0x3c8(%rdi),%rdx
+    0.00 :   ccc0:       mov    %rax,%r14
+    0.00 :   ccc3:       test   %rdx,%rdx
+    0.00 :   ccc6:       je     cd62 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cd2>
+    0.00 :   cccc:       cmp    %r15,%rdx
+    0.00 :   cccf:       je     cd62 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cd2>
+    0.00 :   ccd5:       mov    (%rdx),%rcx
+    0.00 :   ccd8:       test   %rcx,%rcx
+    0.00 :   ccdb:       je     cd62 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cd2>
+    0.00 :   cce1:       xor    %esi,%esi
+    0.00 :   cce3:       jmp    ccf4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c64>
+    0.00 :   cce5:       lea    0x1(%rsi),%ecx
+    0.00 :   cce8:       mov    %rcx,%rsi
+    0.00 :   cceb:       mov    (%rdx,%rcx,8),%rcx
+    0.00 :   ccef:       test   %rcx,%rcx
+    0.00 :   ccf2:       je     cd62 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cd2>
+    0.00 :   ccf4:       cmp    %rcx,%rax
+    0.00 :   ccf7:       jne    cce5 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c55>
+    0.00 :   ccf9:       mov    0x22270(%rip),%rdx        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   cd00:       mov    0x30(%rsp),%rdi
+    0.00 :   cd05:       cmp    0x478(%rax),%rdi
+    0.00 :   cd0c:       je     cf01 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e71>
+    0.00 :   cd12:       lea    0x21c4f(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cd19:       callq  *%rdx
+    0.00 :   cd1b:       movl   $0x1,%fs:0x1c
+    0.00 :   cd27:       mov    0x10(%rsp),%rax
+    0.00 :   cd2c:       mov    0x390(%rax),%rax
+    0.00 :   cd33:       mov    %rax,0x18(%rsp)
+    0.00 :   cd38:       jmpq   ca0d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x197d>
+    0.00 :   cd3d:       movb   $0x1,0x320(%r14)
+    0.00 :   cd45:       lea    0x21c1c(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cd4c:       callq  *0x2221e(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   cd52:       cmpl   $0x0,0x20(%rsp)
+    0.00 :   cd57:       je     c698 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   cd5d:       jmpq   cb63 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ad3>
+    0.00 :   cd62:       mov    0x10(%rsp),%rdi
+    0.00 :   cd67:       mov    0x3d0(%rdi),%rcx
+    0.00 :   cd6e:       test   %rcx,%rcx
+    0.00 :   cd71:       je     c9af <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x191f>
+    0.00 :   cd77:       mov    (%rcx),%edx
+    0.00 :   cd79:       cmp    %rcx,%rbp
+    0.00 :   cd7c:       je     d05e <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1fce>
+    0.00 :   cd82:       test   %edx,%edx
+    0.00 :   cd84:       je     d0a3 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2013>
+    0.00 :   cd8a:       lea    -0x1(%rdx),%edi
+    0.00 :   cd8d:       lea    0x8(%rcx),%rsi
+    0.00 :   cd91:       lea    0x10(%rcx,%rdi,8),%rcx
+    0.00 :   cd96:       jmp    cda5 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d15>
+    0.00 :   cd98:       add    $0x8,%rsi
+    0.00 :   cd9c:       cmp    %rcx,%rsi
+    0.00 :   cd9f:       je     d088 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ff8>
+    0.00 :   cda5:       cmp    (%rsi),%rax
+    0.00 :   cda8:       jne    cd98 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d08>
+    0.00 :   cdaa:       jmpq   ccf9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c69>
+    0.00 :   cdaf:       mov    $0xa,%ebp
+    0.00 :   cdb4:       test   %eax,%eax
+    0.00 :   cdb6:       je     cdbb <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d2b>
+    0.00 :   cdb8:       lea    (%rax,%rax,1),%ebp
+    0.00 :   cdbb:       mov    %ebp,%eax
+    0.00 :   cdbd:       mov    %r9d,0x18(%rsp)
+    0.00 :   cdc2:       lea    0x8(,%rax,8),%rdi
+    0.00 :   cdca:       callq  10a0 <malloc@plt>
+    0.00 :   cdcf:       mov    0x18(%rsp),%r9d
+    0.00 :   cdd4:       test   %rax,%rax
+    0.00 :   cdd7:       mov    %rax,%rcx
+    0.00 :   cdda:       je     ce75 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1de5>
+    0.00 :   cde0:       mov    %r9d,%r8d
+    0.00 :   cde3:       test   %r9d,%r9d
+    0.00 :   cde6:       jne    ce2c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d9c>
+    0.00 :   cde8:       add    $0x1,%r9d
+    0.00 :   cdec:       mov    %r14,0x8(%rcx,%r8,8)
+    0.00 :   cdf1:       mov    %r9d,(%rcx)
+    0.00 :   cdf4:       mov    0x10(%rsp),%rax
+    0.00 :   cdf9:       mov    0x3d0(%rax),%rdi
+    0.00 :   ce00:       mov    %ebp,0x3d8(%rax)
+    0.00 :   ce06:       mov    %rcx,0x3d0(%rax)
+    0.00 :   ce0d:       test   %rdi,%rdi
+    0.00 :   ce10:       je     cbde <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b4e>
+    0.00 :   ce16:       callq  15060 <_dl_deallocate_tls@@GLIBC_PRIVATE+0x640>
+    0.00 :   ce1b:       jmpq   cbde <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b4e>
+    0.00 :   ce20:       lea    0x1826b(%rip),%rsi        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   ce27:       jmpq   cc2c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b9c>
+    0.00 :   ce2c:       mov    %rax,0x30(%rsp)
+    0.00 :   ce31:       lea    0x8(%rax),%rdi
+    0.00 :   ce35:       mov    0x10(%rsp),%rax
+    0.00 :   ce3a:       lea    0x0(,%r8,8),%rdx
+    0.00 :   ce42:       mov    %r9d,0x3c(%rsp)
+    0.00 :   ce47:       mov    0x3d0(%rax),%rax
+    0.00 :   ce4e:       mov    %r8,0x28(%rsp)
+    0.00 :   ce53:       lea    0x8(%rax),%rsi
+    0.00 :   ce57:       mov    %rax,0x18(%rsp)
+    0.00 :   ce5c:       callq  23390 <_dl_catch_error@@GLIBC_PRIVATE+0x5650>
+    0.00 :   ce61:       mov    0x3c(%rsp),%r9d
+    0.00 :   ce66:       mov    0x30(%rsp),%rcx
+    0.00 :   ce6b:       mov    0x28(%rsp),%r8
+    0.00 :   ce70:       jmpq   cde8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1d58>
+    0.00 :   ce75:       testb  $0x4,0x207a4(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   ce7c:       je     cb38 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1aa8>
+    0.00 :   ce82:       cmpl   $0x0,0x28(%rsp)
+    0.00 :   ce87:       je     ce97 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1e07>
+    0.00 :   ce89:       cmpb   $0x0,0x320(%r14)
+    0.00 :   ce91:       jne    cd3d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cad>
+    0.00 :   ce97:       mov    0x30(%r14),%rdx
+    0.00 :   ce9b:       mov    0x8(%r14),%rsi
+    0.00 :   ce9f:       lea    0x1a9e2(%rip),%rdi        # 27888 <_dl_catch_error@@GLIBC_PRIVATE+0x9b48>
+    0.00 :   cea6:       xor    %eax,%eax
+    0.00 :   cea8:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   cead:       jmpq   cb38 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1aa8>
+    0.00 :   ceb2:       lea    0x1bc07(%rip),%rcx        # 28ac0 <_dl_catch_error@@GLIBC_PRIVATE+0xad80>
+    0.00 :   ceb9:       mov    $0x353,%edx
+    0.00 :   cebe:       lea    0x18808(%rip),%rsi        # 256cd <_dl_catch_error@@GLIBC_PRIVATE+0x798d>
+    0.00 :   cec5:       lea    0x1a864(%rip),%rdi        # 27730 <_dl_catch_error@@GLIBC_PRIVATE+0x99f0>
+    0.00 :   cecc:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   ced1:       mov    (%r12),%rdx
+    0.00 :   ced5:       mov    0x10(%rsp),%rbx
+    0.00 :   ceda:       movl   $0x4,0x38(%rsp)
+    0.00 :   cee2:       mov    0x8(%rax),%rcx
+    0.00 :   cee6:       mov    0x58(%rsp),%rax
+    0.00 :   ceeb:       mov    0x350(%rbx),%r8
+    0.00 :   cef2:       mov    0x350(%rax),%rax
+    0.00 :   cef9:       sub    %r8,%rdx
+    0.00 :   cefc:       jmpq   c867 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x17d7>
+    0.00 :   cf01:       lea    0x21a60(%rip),%rdi        # 2e968 <_rtld_global@@GLIBC_PRIVATE+0x908>
+    0.00 :   cf08:       callq  *%rdx
+    0.00 :   cf0a:       jmpq   cb63 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ad3>
+    0.00 :   cf0f:       lea    0x1817c(%rip),%rcx        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   cf16:       jmpq   cc0c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1b7c>
+    0.00 :   cf1b:       movzbl 0x4(%rax),%ecx
+    0.00 :   cf1f:       shr    $0x4,%cl
+    0.00 :   cf22:       cmp    $0xa,%cl
+    0.00 :   cf25:       jne    ca94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1a04>
+    0.00 :   cf2b:       mov    0x10(%rsp),%rax
+    0.00 :   cf30:       pxor   %xmm0,%xmm0
+    0.00 :   cf34:       xor    %ebx,%ebx
+    0.00 :   cf36:       movaps %xmm0,0x70(%rsp)
+    0.00 :   cf3b:       mov    0x398(%rax),%rbp
+    0.00 :   cf42:       mov    0x8(%rbp),%eax
+    0.00 :   cf45:       jmp    cf51 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ec1>
+    0.00 :   cf47:       mov    0x0(%rbp),%r8
+    0.00 :   cf4b:       cmp    (%r8,%rcx,8),%rdi
+    0.00 :   cf4f:       je     cf5d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1ecd>
+    0.00 :   cf51:       mov    %rbx,%rcx
+    0.00 :   cf54:       add    $0x1,%rbx
+    0.00 :   cf58:       cmp    %rcx,%rax
+    0.00 :   cf5b:       ja     cf47 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1eb7>
+    0.00 :   cf5d:       mov    %r14,0x18(%rsp)
+    0.00 :   cf62:       lea    0x70(%rsp),%r8
+    0.00 :   cf67:       mov    %rsi,%r15
+    0.00 :   cf6a:       mov    %rdx,%r14
+    0.00 :   cf6d:       jmp    cfc6 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f36>
+    0.00 :   cf6f:       mov    0x0(%rbp),%rdx
+    0.00 :   cf73:       mov    (%rdx,%rbx,8),%rcx
+    0.00 :   cf77:       cmpq   $0x0,0xc0(%rcx)
+    0.00 :   cf7f:       je     cfc2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f32>
+    0.00 :   cf81:       pushq  0x10(%rsp)
+    0.00 :   cf85:       mov    0x40(%rsp),%eax
+    0.00 :   cf89:       mov    %r14,%rdx
+    0.00 :   cf8c:       mov    %r15,%rsi
+    0.00 :   cf8f:       lea    0x2d0(%rcx),%r9
+    0.00 :   cf96:       mov    (%r12),%rcx
+    0.00 :   cf9a:       mov    %r13,%rdi
+    0.00 :   cf9d:       push   %rax
+    0.00 :   cf9e:       pushq  $0x0
+    0.00 :   cfa0:       pushq  $0x0
+    0.00 :   cfa2:       pushq  0x28(%rsp)
+    0.00 :   cfa6:       pushq  $0x0
+    0.00 :   cfa8:       mov    %r8,0x50(%rsp)
+    0.00 :   cfad:       callq  b4c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x430>
+    0.00 :   cfb2:       add    $0x30,%rsp
+    0.00 :   cfb6:       test   %eax,%eax
+    0.00 :   cfb8:       jg     d006 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1f76>
+    0.00 :   cfba:       mov    0x8(%rbp),%eax
+    0.00 :   cfbd:       mov    0x20(%rsp),%r8
+    0.00 :   cfc2:       add    $0x1,%rbx
+    0.00 :   cfc6:       cmp    %rax,%rbx
+    0.00 :   cfc9:       jb     cf6f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1edf>
+    0.00 :   cfcb:       mov    0x18(%rsp),%r14
+    0.00 :   cfd0:       mov    0x50(%rsp),%rax
+    0.00 :   cfd5:       mov    %r14,0x210cc(%rip)        # 2e0a8 <_rtld_global@@GLIBC_PRIVATE+0x48>
+    0.00 :   cfdc:       test   %rax,%rax
+    0.00 :   cfdf:       jne    c50f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147f>
+    0.00 :   cfe5:       jmpq   c541 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14b1>
+    0.00 :   cfea:       mov    0x10(%rsp),%rax
+    0.00 :   cfef:       mov    (%r12),%rdx
+    0.00 :   cff3:       mov    0x350(%rax),%r8
+    0.00 :   cffa:       sub    %r8,%rdx
+    0.00 :   cffd:       xor    %ecx,%ecx
+    0.00 :   cfff:       xor    %eax,%eax
+    0.00 :   d001:       jmpq   c58d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14fd>
+    0.00 :   d006:       movdqa 0x70(%rsp),%xmm1
+    0.00 :   d00c:       mov    0x18(%rsp),%r14
+    0.00 :   d011:       mov    0x50(%rsp),%rax
+    0.00 :   d016:       movaps %xmm1,0x60(%rsp)
+    0.00 :   d01b:       jmpq   c7c9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1739>
+    0.00 :   d020:       cmpl   $0x0,0x28(%rsp)
+    0.00 :   d025:       je     d035 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1fa5>
+    0.00 :   d027:       cmpb   $0x0,0x320(%r14)
+    0.00 :   d02f:       jne    cd3d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1cad>
+    0.00 :   d035:       mov    0x10(%rsp),%rax
+    0.00 :   d03a:       mov    0x30(%r14),%rdx
+    0.00 :   d03e:       mov    0x8(%r14),%rsi
+    0.00 :   d042:       mov    0x8(%rax),%rcx
+    0.00 :   d046:       cmpb   $0x0,(%rcx)
+    0.00 :   d049:       jne    d090 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2000>
+    0.00 :   d04b:       lea    0x1a716(%rip),%rdi        # 27768 <_dl_catch_error@@GLIBC_PRIVATE+0x9a28>
+    0.00 :   d052:       xor    %eax,%eax
+    0.00 :   d054:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   d059:       jmpq   cb38 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1aa8>
+    0.00 :   d05e:       cmp    %edx,%r9d
+    0.00 :   d061:       jae    c9af <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x191f>
+    0.00 :   d067:       mov    %r9d,%ecx
+    0.00 :   d06a:       lea    0x0(%rbp,%rcx,8),%rsi
+    0.00 :   d06f:       xor    %ecx,%ecx
+    0.00 :   d071:       cmp    0x8(%rsi,%rcx,8),%rax
+    0.00 :   d076:       je     ccf9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c69>
+    0.00 :   d07c:       add    $0x1,%rcx
+    0.00 :   d080:       lea    (%r9,%rcx,1),%edi
+    0.00 :   d084:       cmp    %edx,%edi
+    0.00 :   d086:       jb     d071 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1fe1>
+    0.00 :   d088:       mov    %edx,%r9d
+    0.00 :   d08b:       jmpq   c9af <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x191f>
+    0.00 :   d090:       lea    0x1a711(%rip),%rdi        # 277a8 <_dl_catch_error@@GLIBC_PRIVATE+0x9a68>
+    0.00 :   d097:       xor    %eax,%eax
+    0.00 :   d099:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   d09e:       jmpq   cb38 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1aa8>
+    0.00 :   d0a3:       xor    %r9d,%r9d
+    0.00 :   d0a6:       jmpq   c9af <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x191f>
+    0.00 :   d0ab:       nopl   0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of libc-2.31.so for L1-dcache-load-misses (3 samples, percent: local period)
+----------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :           Disassembly of section .text:
+         :
+         :           0000000000047c70 <random_r@@GLIBC_2.2.5>:
+    0.00 :   47c70:       endbr64
+    0.00 :   47c74:       test   %rdi,%rdi
+    0.00 :   47c77:       je     47cf8 <random_r@@GLIBC_2.2.5+0x88>
+    0.00 :   47c79:       test   %rsi,%rsi
+    0.00 :   47c7c:       je     47cf8 <random_r@@GLIBC_2.2.5+0x88>
+    0.00 :   47c7e:       mov    0x18(%rdi),%r8d
+    0.00 :   47c82:       mov    0x10(%rdi),%rax
+   32.98 :   47c86:       test   %r8d,%r8d
+    0.00 :   47c89:       jne    47ca8 <random_r@@GLIBC_2.2.5+0x38>
+    0.00 :   47c8b:       imul   $0x41c64e6d,(%rax),%edx
+    0.00 :   47c91:       add    $0x3039,%edx
+    0.00 :   47c97:       and    $0x7fffffff,%edx
+    0.00 :   47c9d:       mov    %edx,(%rax)
+    0.00 :   47c9f:       mov    %edx,(%rsi)
+    0.00 :   47ca1:       mov    %r8d,%eax
+    0.00 :   47ca4:       retq
+    0.00 :   47ca5:       nopl   (%rax)
+    0.00 :   47ca8:       mov    (%rdi),%rcx
+    0.00 :   47cab:       mov    0x8(%rdi),%r8
+    0.00 :   47caf:       mov    0x28(%rdi),%r9
+   33.60 :   47cb3:       mov    (%r8),%edx
+    0.00 :   47cb6:       add    (%rcx),%edx
+    0.00 :   47cb8:       add    $0x4,%rcx
+    0.00 :   47cbc:       add    $0x4,%r8
+    0.00 :   47cc0:       mov    %edx,-0x4(%rcx)
+    0.00 :   47cc3:       shr    %edx
+    0.00 :   47cc5:       mov    %edx,(%rsi)
+    0.00 :   47cc7:       cmp    %rcx,%r9
+    0.00 :   47cca:       jbe    47cd7 <random_r@@GLIBC_2.2.5+0x67>
+    0.00 :   47ccc:       cmp    %r8,%r9
+    0.00 :   47ccf:       ja     47cf0 <random_r@@GLIBC_2.2.5+0x80>
+    0.00 :   47cd1:       mov    %rax,%r8
+    0.00 :   47cd4:       mov    %rcx,%rax
+    0.00 :   47cd7:       movq   %r8,%xmm1
+    0.00 :   47cdc:       movq   %rax,%xmm0
+    0.00 :   47ce1:       xor    %r8d,%r8d
+    0.00 :   47ce4:       punpcklqdq %xmm1,%xmm0
+   33.43 :   47ce8:       mov    %r8d,%eax
+    0.00 :   47ceb:       movups %xmm0,(%rdi)
+    0.00 :   47cee:       retq
+    0.00 :   47cef:       nop
+    0.00 :   47cf0:       mov    %rcx,%rax
+    0.00 :   47cf3:       jmp    47cd7 <random_r@@GLIBC_2.2.5+0x67>
+    0.00 :   47cf5:       nopl   (%rax)
+    0.00 :   47cf8:       mov    0x1a4171(%rip),%rax        # 1ebe70 <h_errlist@@GLIBC_2.2.5+0xd50>
+    0.00 :   47cff:       mov    $0xffffffff,%r8d
+    0.00 :   47d05:       movl   $0x16,%fs:(%rax)
+    0.00 :   47d0c:       jmp    47ca1 <random_r@@GLIBC_2.2.5+0x31>
+    0.00 :   47d0e:       xchg   %ax,%ax
+ Percent |	Source code & Disassembly of tests for L1-dcache-load-misses (2 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          0000000000002bf0 <randomizeMatrix(float*, Matrix_t)>:
+         :          _Z15randomizeMatrixPf8Matrix_t():
+         :          {
+         :          return (int *)calloc((dimensions.rows * dimensions.columns), sizeof(int));
+         :          }
+         :
+         :          void randomizeMatrix(float *matrix, Matrix_t dimensions)
+         :          {
+    0.00 :   2bf0:       endbr64
+    0.00 :   2bf4:       mov    %rsi,%rax
+    0.00 :   2bf7:       sar    $0x20,%rax
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2bfb:       test   %esi,%esi
+    0.00 :   2bfd:       jle    2c96 <randomizeMatrix(float*, Matrix_t)+0xa6>
+    0.00 :   2c03:       test   %eax,%eax
+    0.00 :   2c05:       jle    2c96 <randomizeMatrix(float*, Matrix_t)+0xa6>
+         :          {
+    0.00 :   2c0b:       push   %r15
+    0.00 :   2c0d:       push   %r14
+    0.00 :   2c0f:       lea    0x0(,%rax,4),%r14
+    0.00 :   2c17:       push   %r13
+    0.00 :   2c19:       mov    %esi,%r13d
+    0.00 :   2c1c:       push   %r12
+    0.00 :   2c1e:       lea    -0x1(%rax),%r12d
+    0.00 :   2c22:       push   %rbp
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2c23:       xor    %ebp,%ebp
+         :          {
+    0.00 :   2c25:       push   %rbx
+    0.00 :   2c26:       lea    0x4(%rdi,%r12,4),%rbx
+    0.00 :   2c2b:       not    %r12
+    0.00 :   2c2e:       shl    $0x2,%r12
+    0.00 :   2c32:       sub    $0x8,%rsp
+    0.00 :   2c36:       nopw   %cs:0x0(%rax,%rax,1)
+         :          {
+         :          for (int j = 0; j < dimensions.columns; j++)
+    0.00 :   2c40:       lea    (%r12,%rbx,1),%r15
+    0.00 :   2c44:       nopl   0x0(%rax)
+         :          {
+         :          matrix[j + (i * dimensions.columns)] = 2.0f*(float)2000.0f * ((float)rand() / (float)RAND_MAX) - (float)2000.0f;
+    0.00 :   2c48:       callq  22b0 <rand@plt>
+    0.00 :   2c4d:       vxorps %xmm1,%xmm1,%xmm1
+    0.00 :   2c51:       add    $0x4,%r15
+    0.00 :   2c55:       vmovss 0x10407(%rip),%xmm2        # 13064 <_IO_stdin_used+0x64>
+    0.00 :   2c5d:       vcvtsi2ss %eax,%xmm1,%xmm0
+   50.44 :   2c61:       vmulss 0x103f3(%rip),%xmm0,%xmm0        # 1305c <_IO_stdin_used+0x5c>
+    0.00 :   2c69:       vfmadd132ss 0x103ee(%rip),%xmm2,%xmm0        # 13060 <_IO_stdin_used+0x60>
+    0.00 :   2c72:       vmovss %xmm0,-0x4(%r15)
+         :          for (int j = 0; j < dimensions.columns; j++)
+   49.56 :   2c78:       cmp    %rbx,%r15
+    0.00 :   2c7b:       jne    2c48 <randomizeMatrix(float*, Matrix_t)+0x58>
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2c7d:       inc    %ebp
+    0.00 :   2c7f:       add    %r14,%rbx
+    0.00 :   2c82:       cmp    %r13d,%ebp
+    0.00 :   2c85:       jne    2c40 <randomizeMatrix(float*, Matrix_t)+0x50>
+         :          }
+         :          }
+         :          }
+    0.00 :   2c87:       add    $0x8,%rsp
+    0.00 :   2c8b:       pop    %rbx
+    0.00 :   2c8c:       pop    %rbp
+    0.00 :   2c8d:       pop    %r12
+    0.00 :   2c8f:       pop    %r13
+    0.00 :   2c91:       pop    %r14
+    0.00 :   2c93:       pop    %r15
+    0.00 :   2c95:       retq
+    0.00 :   2c96:       retq
+    0.00 :   2c97:       nopw   0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of libc-2.31.so for L1-dcache-load-misses (1 samples, percent: local period)
+----------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :           Disassembly of section .text:
+         :
+         :           0000000000047d10 <rand@@GLIBC_2.2.5>:
+  100.00 :   47d10:       endbr64
+    0.00 :   47d14:       sub    $0x8,%rsp
+    0.00 :   47d18:       callq  47800 <random@@GLIBC_2.2.5>
+    0.00 :   47d1d:       add    $0x8,%rsp
+    0.00 :   47d21:       retq
+    0.00 :   47d22:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :   47d2c:       nopl   0x0(%rax)
+ Percent |	Source code & Disassembly of libc-2.31.so for L1-dcache-loads (190 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :           Disassembly of section .text:
+         :
+         :           0000000000047800 <random@@GLIBC_2.2.5>:
+    7.88 :   47800:       endbr64
+    0.00 :   47804:       sub    $0x18,%rsp
+   11.35 :   47808:       mov    %fs:0x28,%rax
+    0.38 :   47811:       mov    %rax,0x8(%rsp)
+    0.00 :   47816:       xor    %eax,%eax
+    0.00 :   47818:       mov    %fs:0x18,%eax
+   16.71 :   47820:       test   %eax,%eax
+    0.00 :   47822:       jne    47870 <random@@GLIBC_2.2.5+0x70>
+    0.00 :   47824:       mov    $0x1,%edx
+    0.00 :   47829:       cmpxchg %edx,0x1a6cb0(%rip)        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+   11.70 :   47830:       lea    0x4(%rsp),%rsi
+    7.88 :   47835:       lea    0x1a4f04(%rip),%rdi        # 1ec740 <__ctype_b@GLIBC_2.2.5+0x38>
+    0.00 :   4783c:       callq  47c70 <random_r@@GLIBC_2.2.5>
+    0.00 :   47841:       mov    %fs:0x18,%eax
+   14.34 :   47849:       test   %eax,%eax
+    0.00 :   4784b:       jne    47890 <random@@GLIBC_2.2.5+0x90>
+    1.63 :   4784d:       subl   $0x1,0x1a6c8c(%rip)        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+   20.62 :   47854:       mov    0x8(%rsp),%rcx
+    0.00 :   47859:       xor    %fs:0x28,%rcx
+    0.00 :   47862:       movslq 0x4(%rsp),%rax
+    7.51 :   47867:       jne    478ba <random@@GLIBC_2.2.5+0xba>
+    0.00 :   47869:       add    $0x18,%rsp
+    0.00 :   4786d:       retq
+    0.00 :   4786e:       xchg   %ax,%ax
+    0.00 :   47870:       xor    %eax,%eax
+    0.00 :   47872:       mov    $0x1,%edx
+    0.00 :   47877:       lock cmpxchg %edx,0x1a6c61(%rip)        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :   4787f:       je     47830 <random@@GLIBC_2.2.5+0x30>
+    0.00 :   47881:       lea    0x1a6c58(%rip),%rdi        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :   47888:       callq  945a0 <pthread_setcanceltype@@GLIBC_2.2.5+0x30>
+    0.00 :   4788d:       jmp    47830 <random@@GLIBC_2.2.5+0x30>
+    0.00 :   4788f:       nop
+    0.00 :   47890:       xor    %eax,%eax
+    0.00 :   47892:       xchg   %eax,0x1a6c48(%rip)        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :   47898:       cmp    $0x1,%eax
+    0.00 :   4789b:       jle    47854 <random@@GLIBC_2.2.5+0x54>
+    0.00 :   4789d:       xor    %r10d,%r10d
+    0.00 :   478a0:       mov    $0x1,%edx
+    0.00 :   478a5:       mov    $0x81,%esi
+    0.00 :   478aa:       mov    $0xca,%eax
+    0.00 :   478af:       lea    0x1a6c2a(%rip),%rdi        # 1ee4e0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :   478b6:       syscall
+    0.00 :   478b8:       jmp    47854 <random@@GLIBC_2.2.5+0x54>
+    0.00 :   478ba:       callq  12fa70 <__stack_chk_fail@@GLIBC_2.4>
+    0.00 :   478bf:       nop
+ Percent |	Source code & Disassembly of tests for L1-dcache-loads (28 samples, percent: local period)
+----------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          0000000000002ca0 <randomizeMatrix(int*, Matrix_t)>:
+         :          _Z15randomizeMatrixPi8Matrix_t():
+         :          matrix[j + (i * dimensions.columns)] = 2.0f*(float)2000.0f * ((float)rand() / (float)RAND_MAX) - (float)2000.0f;
+         :          }
+         :          }
+         :          }
+         :          void randomizeMatrix(int *matrix, Matrix_t dimensions)
+         :          {
+    0.00 :   2ca0:       endbr64
+    0.00 :   2ca4:       mov    %rsi,%rax
+    0.00 :   2ca7:       sar    $0x20,%rax
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2cab:       test   %esi,%esi
+    0.00 :   2cad:       jle    2d44 <randomizeMatrix(int*, Matrix_t)+0xa4>
+    0.00 :   2cb3:       test   %eax,%eax
+    0.00 :   2cb5:       jle    2d44 <randomizeMatrix(int*, Matrix_t)+0xa4>
+         :          {
+    0.00 :   2cbb:       push   %r15
+    0.00 :   2cbd:       push   %r14
+    0.00 :   2cbf:       lea    0x0(,%rax,4),%r14
+    0.00 :   2cc7:       push   %r13
+    0.00 :   2cc9:       mov    %esi,%r13d
+    0.00 :   2ccc:       push   %r12
+    0.00 :   2cce:       lea    -0x1(%rax),%r12d
+    0.00 :   2cd2:       push   %rbp
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2cd3:       xor    %ebp,%ebp
+         :          {
+    0.00 :   2cd5:       push   %rbx
+    0.00 :   2cd6:       lea    0x4(%rdi,%r12,4),%rbx
+    0.00 :   2cdb:       not    %r12
+    0.00 :   2cde:       shl    $0x2,%r12
+    0.00 :   2ce2:       sub    $0x8,%rsp
+    0.00 :   2ce6:       nopw   %cs:0x0(%rax,%rax,1)
+         :          {
+         :          for (int j = 0; j < dimensions.columns; j++)
+    0.00 :   2cf0:       lea    (%r12,%rbx,1),%r15
+    0.00 :   2cf4:       nopl   0x0(%rax)
+         :          {
+         :          matrix[j + (i * dimensions.columns)] = (int)(2*2000 * ((float)rand() / (float)RAND_MAX)) - 2000;
+    0.00 :   2cf8:       callq  22b0 <rand@plt>
+    3.57 :   2cfd:       vxorps %xmm1,%xmm1,%xmm1
+    0.00 :   2d01:       add    $0x4,%r15
+    7.16 :   2d05:       vcvtsi2ss %eax,%xmm1,%xmm0
+    0.00 :   2d09:       vmulss 0x1034b(%rip),%xmm0,%xmm0        # 1305c <_IO_stdin_used+0x5c>
+    3.58 :   2d11:       vmulss 0x10347(%rip),%xmm0,%xmm0        # 13060 <_IO_stdin_used+0x60>
+   10.87 :   2d19:       vcvttss2si %xmm0,%eax
+   21.40 :   2d1d:       sub    $0x7d0,%eax
+   21.39 :   2d22:       mov    %eax,-0x4(%r15)
+         :          for (int j = 0; j < dimensions.columns; j++)
+   32.03 :   2d26:       cmp    %rbx,%r15
+    0.00 :   2d29:       jne    2cf8 <randomizeMatrix(int*, Matrix_t)+0x58>
+         :          for (int i = 0; i < dimensions.rows; i++)
+    0.00 :   2d2b:       inc    %ebp
+    0.00 :   2d2d:       add    %r14,%rbx
+    0.00 :   2d30:       cmp    %r13d,%ebp
+    0.00 :   2d33:       jne    2cf0 <randomizeMatrix(int*, Matrix_t)+0x50>
+         :          }
+         :          }
+         :          }
+    0.00 :   2d35:       add    $0x8,%rsp
+    0.00 :   2d39:       pop    %rbx
+    0.00 :   2d3a:       pop    %rbp
+    0.00 :   2d3b:       pop    %r12
+    0.00 :   2d3d:       pop    %r13
+    0.00 :   2d3f:       pop    %r14
+    0.00 :   2d41:       pop    %r15
+    0.00 :   2d43:       retq
+    0.00 :   2d44:       retq
+    0.00 :   2d45:       data16 nopw %cs:0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of ld-2.31.so for L1-dcache-loads (1 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          000000000000b4c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x430>:
+    0.00 :   b4c0:       push   %r15
+    0.00 :   b4c2:       push   %r14
+    0.00 :   b4c4:       mov    %rsi,%r14
+    0.00 :   b4c7:       push   %r13
+    0.00 :   b4c9:       push   %r12
+    0.00 :   b4cb:       push   %rbp
+    0.00 :   b4cc:       push   %rbx
+    0.00 :   b4cd:       sub    $0x98,%rsp
+    0.00 :   b4d4:       mov    0x8(%r9),%r12d
+    0.00 :   b4d8:       mov    %rdi,0x20(%rsp)
+    0.00 :   b4dd:       mov    0xd0(%rsp),%rbp
+    0.00 :   b4e5:       mov    %rdx,0x58(%rsp)
+    0.00 :   b4ea:       mov    0xe8(%rsp),%r15
+    0.00 :   b4f2:       mov    %rcx,0x50(%rsp)
+    0.00 :   b4f7:       mov    %r8,0x48(%rsp)
+    0.00 :   b4fc:       shr    $0x6,%rsi
+    0.00 :   b500:       mov    %r12,%r11
+    0.00 :   b503:       mov    %r14,0x28(%rsp)
+    0.00 :   b508:       mov    %r15,%r12
+    0.00 :   b50b:       mov    0xf0(%rsp),%eax
+    0.00 :   b512:       mov    (%r9),%r13
+    0.00 :   b515:       mov    %rsi,0x30(%rsp)
+    0.00 :   b51a:       and    $0x2,%eax
+    0.00 :   b51d:       mov    %eax,0x64(%rsp)
+    0.00 :   b521:       mov    %eax,%r15d
+    0.00 :   b524:       jmpq   b5bf <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x52f>
+    0.00 :   b529:       nopl   0x0(%rax)
+    0.00 :   b530:       mov    0x2f4(%rbx),%esi
+    0.00 :   b536:       test   %esi,%esi
+    0.00 :   b538:       je     b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b53a:       movl   $0x0,0x84(%rsp)
+    0.00 :   b545:       mov    0x70(%rbx),%rax
+    0.00 :   b549:       movq   $0x0,0x88(%rsp)
+    0.00 :   b555:       mov    0x8(%rax),%rax
+    0.00 :   b559:       mov    %rax,0x18(%rsp)
+    0.00 :   b55e:       mov    0x68(%rbx),%rax
+    0.00 :   b562:       mov    0x8(%rax),%rax
+    0.00 :   b566:       mov    %rax,(%rsp)
+    0.00 :   b56a:       mov    0x300(%rbx),%rax
+    0.00 :   b571:       test   %rax,%rax
+    0.00 :   b574:       je     b640 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x5b0>
+    0.00 :   b57a:       mov    0x28(%rsp),%rdi
+    0.00 :   b57f:       mov    0x2fc(%rbx),%ecx
+    0.00 :   b585:       mov    0x30(%rsp),%edx
+    0.00 :   b589:       and    0x2f8(%rbx),%edx
+    0.00 :   b58f:       mov    (%rax,%rdx,8),%rax
+    0.00 :   b593:       mov    %rdi,%rdx
+    0.00 :   b596:       shr    %cl,%rdx
+    0.00 :   b599:       mov    %rdx,%rcx
+    0.00 :   b59c:       mov    %rax,%rdx
+    0.00 :   b59f:       shr    %cl,%rdx
+    0.00 :   b5a2:       mov    %edi,%ecx
+    0.00 :   b5a4:       shr    %cl,%rax
+    0.00 :   b5a7:       and    %rdx,%rax
+    0.00 :   b5aa:       test   $0x1,%al
+    0.00 :   b5ac:       jne    b7b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x720>
+    0.00 :   b5b2:       add    $0x1,%rbp
+    0.00 :   b5b6:       cmp    %rbp,%r11
+    0.00 :   b5b9:       jbe    b8a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x810>
+    0.00 :   b5bf:       mov    0x0(%r13,%rbp,8),%rax
+    0.00 :   b5c4:       mov    0x28(%rax),%rbx
+    0.00 :   b5c8:       cmp    %r12,%rbx
+    0.00 :   b5cb:       je     b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b5cd:       test   %r15d,%r15d
+    0.00 :   b5d0:       je     b5db <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x54b>
+    0.00 :   b5d2:       testb  $0x3,0x31c(%rbx)
+    0.00 :   b5d9:       je     b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b5db:       testb  $0x20,0x31d(%rbx)
+    0.00 :   b5e2:       jne    b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b5e4:       testb  $0x8,0x22035(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   b5eb:       je     b530 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x4a0>
+    0.00 :   b5f1:       mov    0x8(%rbx),%rdx
+    0.00 :   b5f5:       mov    0x30(%rbx),%rcx
+    0.00 :   b5f9:       cmpb   $0x0,(%rdx)
+    0.00 :   b5fc:       je     b620 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x590>
+    0.00 :   b5fe:       mov    0x20(%rsp),%rsi
+    0.00 :   b603:       lea    0x1c09e(%rip),%rdi        # 276a8 <_dl_catch_error@@GLIBC_PRIVATE+0x9968>
+    0.00 :   b60a:       xor    %eax,%eax
+    0.00 :   b60c:       mov    %r11,(%rsp)
+    0.00 :   b610:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   b615:       mov    (%rsp),%r11
+    0.00 :   b619:       jmpq   b530 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x4a0>
+    0.00 :   b61e:       xchg   %ax,%ax
+    0.00 :   b620:       mov    0x21fd9(%rip),%rax        # 2d600 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :   b627:       mov    (%rax),%rdx
+    0.00 :   b62a:       lea    0x19a61(%rip),%rax        # 25092 <_dl_catch_error@@GLIBC_PRIVATE+0x7352>
+    0.00 :   b631:       test   %rdx,%rdx
+    0.00 :   b634:       cmove  %rax,%rdx
+    0.00 :   b638:       jmp    b5fe <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x56e>
+    0.00 :   b63a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   b640:       mov    0x58(%rsp),%rax
+    0.00 :   b645:       mov    $0xffffffff,%edi
+    0.00 :   b64a:       mov    (%rax),%rax
+    0.00 :   b64d:       cmp    %rdi,%rax
+    0.00 :   b650:       je     bcf0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xc60>
+    0.00 :   b656:       xor    %edx,%edx
+    0.00 :   b658:       div    %rsi
+    0.00 :   b65b:       shl    $0x2,%rdx
+    0.00 :   b65f:       mov    0x310(%rbx),%rax
+    0.00 :   b666:       mov    (%rax,%rdx,1),%eax
+    0.00 :   b669:       test   %eax,%eax
+    0.00 :   b66b:       je     b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b671:       lea    0x84(%rsp),%rsi
+    0.00 :   b679:       lea    0x88(%rsp),%rdi
+    0.00 :   b681:       mov    %r15d,0x68(%rsp)
+    0.00 :   b686:       mov    0xe0(%rsp),%r14d
+    0.00 :   b68e:       mov    %r13,0x70(%rsp)
+    0.00 :   b693:       mov    0xf0(%rsp),%r15d
+    0.00 :   b69b:       mov    %r12,0xe8(%rsp)
+    0.00 :   b6a3:       mov    0xd8(%rsp),%r13
+    0.00 :   b6ab:       mov    %rsi,0x38(%rsp)
+    0.00 :   b6b0:       mov    0x50(%rsp),%r12
+    0.00 :   b6b5:       mov    %rdi,0x40(%rsp)
+    0.00 :   b6ba:       mov    %rbp,0xd0(%rsp)
+    0.00 :   b6c2:       mov    %r11,0x78(%rsp)
+    0.00 :   b6c7:       jmp    b6e2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x652>
+    0.00 :   b6c9:       nopl   0x0(%rax)
+    0.00 :   b6d0:       mov    0x308(%rbx),%rax
+    0.00 :   b6d7:       mov    (%rax,%rbp,4),%eax
+    0.00 :   b6da:       test   %eax,%eax
+    0.00 :   b6dc:       je     bb18 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xa88>
+    0.00 :   b6e2:       sub    $0x8,%rsp
+    0.00 :   b6e6:       mov    %eax,%ebp
+    0.00 :   b6e8:       mov    %r15d,%r8d
+    0.00 :   b6eb:       mov    %r14d,%ecx
+    0.00 :   b6ee:       pushq  0x40(%rsp)
+    0.00 :   b6f2:       lea    0x0(%rbp,%rbp,2),%rdx
+    0.00 :   b6f7:       mov    %r12,%rsi
+    0.00 :   b6fa:       pushq  0x50(%rsp)
+    0.00 :   b6fe:       push   %rbx
+    0.00 :   b6ff:       pushq  0x20(%rsp)
+    0.00 :   b703:       push   %rax
+    0.00 :   b704:       mov    0x48(%rsp),%rax
+    0.00 :   b709:       mov    0x50(%rsp),%rdi
+    0.00 :   b70e:       lea    (%rax,%rdx,8),%r9
+    0.00 :   b712:       mov    %r13,%rdx
+    0.00 :   b715:       callq  b330 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2a0>
+    0.00 :   b71a:       add    $0x30,%rsp
+    0.00 :   b71e:       test   %rax,%rax
+    0.00 :   b721:       je     b6d0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x640>
+    0.00 :   b723:       mov    0x68(%rsp),%r15d
+    0.00 :   b728:       mov    0x70(%rsp),%r13
+    0.00 :   b72d:       mov    %rax,%r8
+    0.00 :   b730:       mov    0xd0(%rsp),%rbp
+    0.00 :   b738:       mov    0xe8(%rsp),%r12
+    0.00 :   b740:       mov    0x78(%rsp),%r11
+    0.00 :   b745:       nopl   (%rax)
+    0.00 :   b748:       cmpq   $0x0,0xf8(%rsp)
+    0.00 :   b751:       je     b8b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x828>
+    0.00 :   b757:       movzbl 0x5(%r8),%eax
+    0.00 :   b75c:       and    $0x3,%eax
+    0.00 :   b75f:       sub    $0x1,%eax
+    0.00 :   b762:       cmp    $0x1,%eax
+    0.00 :   b765:       jbe    b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b76b:       movzbl 0x4(%r8),%eax
+    0.00 :   b770:       shr    $0x4,%al
+    0.00 :   b773:       cmp    $0x2,%al
+    0.00 :   b775:       je     b9c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x930>
+    0.00 :   b77b:       cmp    $0xa,%al
+    0.00 :   b77d:       je     b9f8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x968>
+    0.00 :   b783:       cmp    $0x1,%al
+    0.00 :   b785:       jne    b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b78b:       mov    0x48(%rsp),%rax
+    0.00 :   b790:       movq   %r8,%xmm0
+    0.00 :   b795:       movq   %rbx,%xmm1
+    0.00 :   b79a:       punpcklqdq %xmm1,%xmm0
+    0.00 :   b79e:       movaps %xmm0,(%rax)
+  100.00 :   b7a1:       mov    $0x1,%eax
+    0.00 :   b7a6:       jmpq   b8a2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x812>
+    0.00 :   b7ab:       nopl   0x0(%rax,%rax,1)
+    0.00 :   b7b0:       mov    %rdi,%rax
+    0.00 :   b7b3:       xor    %edx,%edx
+    0.00 :   b7b5:       div    %rsi
+    0.00 :   b7b8:       mov    0x308(%rbx),%rax
+    0.00 :   b7bf:       mov    (%rax,%rdx,4),%eax
+    0.00 :   b7c2:       test   %eax,%eax
+    0.00 :   b7c4:       je     b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b7ca:       mov    0x310(%rbx),%rdx
+    0.00 :   b7d1:       mov    %r15d,0x40(%rsp)
+    0.00 :   b7d6:       mov    %r13,0x68(%rsp)
+    0.00 :   b7db:       mov    0xe0(%rsp),%r15d
+    0.00 :   b7e3:       lea    (%rdx,%rax,4),%r14
+    0.00 :   b7e7:       lea    0x84(%rsp),%rax
+    0.00 :   b7ef:       mov    %r11,0x70(%rsp)
+    0.00 :   b7f4:       mov    0xd8(%rsp),%r13
+    0.00 :   b7fc:       mov    %rbp,0xd0(%rsp)
+    0.00 :   b804:       mov    %rdi,%rbp
+    0.00 :   b807:       mov    %r12,0xe8(%rsp)
+    0.00 :   b80f:       mov    0x50(%rsp),%r12
+    0.00 :   b814:       mov    %rax,0x38(%rsp)
+    0.00 :   b819:       jmp    b82d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x79d>
+    0.00 :   b81b:       nopl   0x0(%rax,%rax,1)
+    0.00 :   b820:       add    $0x4,%r14
+    0.00 :   b824:       and    $0x1,%edx
+    0.00 :   b827:       jne    be5c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdcc>
+    0.00 :   b82d:       mov    (%r14),%eax
+    0.00 :   b830:       mov    %rax,%rdx
+    0.00 :   b833:       xor    %rbp,%rax
+    0.00 :   b836:       shr    %rax
+    0.00 :   b839:       jne    b820 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x790>
+    0.00 :   b83b:       sub    $0x8,%rsp
+    0.00 :   b83f:       mov    %r14,%rax
+    0.00 :   b842:       sub    0x310(%rbx),%rax
+    0.00 :   b849:       mov    %r12,%rsi
+    0.00 :   b84c:       pushq  0x40(%rsp)
+    0.00 :   b850:       sar    $0x2,%rax
+    0.00 :   b854:       mov    %eax,%edx
+    0.00 :   b856:       lea    (%rdx,%rdx,2),%rdx
+    0.00 :   b85a:       lea    0x98(%rsp),%rcx
+    0.00 :   b862:       push   %rcx
+    0.00 :   b863:       mov    %r15d,%ecx
+    0.00 :   b866:       push   %rbx
+    0.00 :   b867:       pushq  0x20(%rsp)
+    0.00 :   b86b:       push   %rax
+    0.00 :   b86c:       mov    0x48(%rsp),%rax
+    0.00 :   b871:       mov    0x120(%rsp),%r8d
+    0.00 :   b879:       mov    0x50(%rsp),%rdi
+    0.00 :   b87e:       lea    (%rax,%rdx,8),%r9
+    0.00 :   b882:       mov    %r13,%rdx
+    0.00 :   b885:       callq  b330 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2a0>
+    0.00 :   b88a:       add    $0x30,%rsp
+    0.00 :   b88e:       test   %rax,%rax
+    0.00 :   b891:       jne    bfd4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf44>
+    0.00 :   b897:       mov    (%r14),%edx
+    0.00 :   b89a:       jmp    b820 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x790>
+    0.00 :   b89c:       nopl   0x0(%rax)
+    0.00 :   b8a0:       xor    %eax,%eax
+    0.00 :   b8a2:       add    $0x98,%rsp
+    0.00 :   b8a9:       pop    %rbx
+    0.00 :   b8aa:       pop    %rbp
+    0.00 :   b8ab:       pop    %r12
+    0.00 :   b8ad:       pop    %r13
+    0.00 :   b8af:       pop    %r14
+    0.00 :   b8b1:       pop    %r15
+    0.00 :   b8b3:       retq
+    0.00 :   b8b4:       nopl   0x0(%rax)
+    0.00 :   b8b8:       testb  $0x3,0x31c(%rbx)
+    0.00 :   b8bf:       jne    b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b8c5:       cmpl   $0x4,0xf0(%rsp)
+    0.00 :   b8cd:       jne    b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b8d3:       mov    0x78(%rbx),%rdx
+    0.00 :   b8d7:       test   %rdx,%rdx
+    0.00 :   b8da:       je     b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b8e0:       mov    0x80(%rbx),%rax
+    0.00 :   b8e7:       test   %rax,%rax
+    0.00 :   b8ea:       je     b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b8f0:       mov    0x8(%rax),%rax
+    0.00 :   b8f4:       test   %rax,%rax
+    0.00 :   b8f7:       je     b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b8fd:       movabs $0xaaaaaaaaaaaaaaab,%rdi
+    0.00 :   b907:       mov    0x8(%rdx),%r9
+    0.00 :   b90b:       mul    %rdi
+    0.00 :   b90e:       mov    %rdx,%rax
+    0.00 :   b911:       shr    $0x4,%rax
+    0.00 :   b915:       test   %eax,%eax
+    0.00 :   b917:       je     b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   b91d:       sub    $0x1,%eax
+    0.00 :   b920:       mov    %rbx,0x38(%rsp)
+    0.00 :   b925:       mov    %r9,%rbx
+    0.00 :   b928:       lea    (%rax,%rax,2),%rax
+    0.00 :   b92c:       mov    %rbp,0xd0(%rsp)
+    0.00 :   b934:       lea    0x18(%r9,%rax,8),%r14
+    0.00 :   b939:       mov    %r8,0x40(%rsp)
+    0.00 :   b93e:       mov    %r14,%rbp
+    0.00 :   b941:       mov    %r11,%r14
+    0.00 :   b944:       jmp    b95d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x8cd>
+    0.00 :   b946:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :   b950:       add    $0x18,%rbx
+    0.00 :   b954:       cmp    %rbp,%rbx
+    0.00 :   b957:       je     c040 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfb0>
+    0.00 :   b95d:       mov    0x8(%rbx),%rcx
+    0.00 :   b961:       mov    %ecx,%esi
+    0.00 :   b963:       cmp    $0x24,%ecx
+    0.00 :   b966:       ja     b950 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x8c0>
+    0.00 :   b968:       movabs $0x1000070080,%rax
+    0.00 :   b972:       shr    %cl,%rax
+    0.00 :   b975:       not    %rax
+    0.00 :   b978:       and    $0x1,%eax
+    0.00 :   b97b:       cmp    $0x5,%rsi
+    0.00 :   b97f:       jne    b950 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x8c0>
+    0.00 :   b981:       test   %al,%al
+    0.00 :   b983:       je     b950 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x8c0>
+    0.00 :   b985:       shr    $0x20,%rcx
+    0.00 :   b989:       mov    0x18(%rsp),%rdi
+    0.00 :   b98e:       mov    0x20(%rsp),%rsi
+    0.00 :   b993:       lea    (%rcx,%rcx,2),%rax
+    0.00 :   b997:       mov    (%rdi,%rax,8),%edi
+    0.00 :   b99a:       add    (%rsp),%rdi
+    0.00 :   b99e:       callq  1f600 <_dl_catch_error@@GLIBC_PRIVATE+0x18c0>
+    0.00 :   b9a3:       test   %eax,%eax
+    0.00 :   b9a5:       jne    b950 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x8c0>
+    0.00 :   b9a7:       mov    0xd0(%rsp),%rbp
+    0.00 :   b9af:       mov    %r14,%r11
+    0.00 :   b9b2:       jmpq   b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b9b7:       nopw   0x0(%rax,%rax,1)
+    0.00 :   b9c0:       mov    0x21ca6(%rip),%ecx        # 2d66c <_rtld_global_ro@@GLIBC_PRIVATE+0x4c>
+    0.00 :   b9c6:       test   %ecx,%ecx
+    0.00 :   b9c8:       je     b78b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6fb>
+    0.00 :   b9ce:       mov    0x48(%rsp),%rax
+    0.00 :   b9d3:       cmpq   $0x0,(%rax)
+    0.00 :   b9d7:       jne    b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b9dd:       movq   %r8,%xmm0
+    0.00 :   b9e2:       movq   %rbx,%xmm5
+    0.00 :   b9e7:       punpcklqdq %xmm5,%xmm0
+    0.00 :   b9eb:       movaps %xmm0,(%rax)
+    0.00 :   b9ee:       jmpq   b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   b9f3:       nopl   0x0(%rax,%rax,1)
+    0.00 :   b9f8:       mov    0x30(%rbx),%rax
+    0.00 :   b9fc:       mov    0x28(%rsp),%r14
+    0.00 :   ba01:       mov    %r8,0x38(%rsp)
+    0.00 :   ba06:       lea    0x22653(%rip),%r15        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   ba0d:       lea    (%rax,%rax,8),%rbp
+    0.00 :   ba11:       mov    %rax,0x28(%rsp)
+    0.00 :   ba16:       shl    $0x4,%rbp
+    0.00 :   ba1a:       lea    0x20(%r15,%rbp,1),%rax
+    0.00 :   ba1f:       add    %r15,%rbp
+    0.00 :   ba22:       mov    %rax,0x30(%rsp)
+    0.00 :   ba27:       mov    %rax,%rdi
+    0.00 :   ba2a:       callq  *0x23538(%rip)        # 2ef68 <_rtld_global@@GLIBC_PRIVATE+0xf08>
+    0.00 :   ba30:       mov    0x48(%rbp),%rax
+    0.00 :   ba34:       mov    0x50(%rbp),%r9
+    0.00 :   ba38:       mov    0x38(%rsp),%r8
+    0.00 :   ba3d:       test   %rax,%rax
+    0.00 :   ba40:       mov    %rax,0x18(%rsp)
+    0.00 :   ba45:       je     bda0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd10>
+    0.00 :   ba4b:       mov    %r14,%rax
+    0.00 :   ba4e:       xor    %edx,%edx
+    0.00 :   ba50:       lea    -0x2(%r9),%rcx
+    0.00 :   ba54:       mov    %r8,0x40(%rsp)
+    0.00 :   ba59:       div    %r9
+    0.00 :   ba5c:       mov    %rbx,0x38(%rsp)
+    0.00 :   ba61:       mov    %r14,%rax
+    0.00 :   ba64:       mov    %rdx,%r12
+    0.00 :   ba67:       xor    %edx,%edx
+    0.00 :   ba69:       div    %rcx
+    0.00 :   ba6c:       mov    %r12,0x58(%rsp)
+    0.00 :   ba71:       mov    %r12,%r13
+    0.00 :   ba74:       mov    %r14,%r12
+    0.00 :   ba77:       lea    0x1(%rdx),%r15
+    0.00 :   ba7b:       mov    %r15,%rdx
+    0.00 :   ba7e:       mov    %r15,%rbx
+    0.00 :   ba81:       mov    %r9,%r15
+    0.00 :   ba84:       shl    $0x5,%rdx
+    0.00 :   ba88:       mov    %rdx,%r14
+    0.00 :   ba8b:       mov    %r13,%rbp
+    0.00 :   ba8e:       shl    $0x5,%rbp
+    0.00 :   ba92:       add    0x18(%rsp),%rbp
+    0.00 :   ba97:       jmp    bab8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xa28>
+    0.00 :   ba99:       nopl   0x0(%rax)
+    0.00 :   baa0:       test   %rdi,%rdi
+    0.00 :   baa3:       je     bb60 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xad0>
+    0.00 :   baa9:       add    %rbx,%r13
+    0.00 :   baac:       add    %r14,%rbp
+    0.00 :   baaf:       cmp    %r13,%r15
+    0.00 :   bab2:       jbe    bce0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xc50>
+    0.00 :   bab8:       mov    0x0(%rbp),%eax
+    0.00 :   babb:       mov    0x8(%rbp),%rdi
+    0.00 :   babf:       cmp    %rax,%r12
+    0.00 :   bac2:       jne    baa0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xa10>
+    0.00 :   bac4:       mov    0x20(%rsp),%rsi
+    0.00 :   bac9:       callq  1f600 <_dl_catch_error@@GLIBC_PRIVATE+0x18c0>
+    0.00 :   bace:       test   %eax,%eax
+    0.00 :   bad0:       jne    baa9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xa19>
+    0.00 :   bad2:       mov    0x64(%rsp),%edx
+    0.00 :   bad6:       mov    0x38(%rsp),%rbx
+    0.00 :   badb:       mov    0x40(%rsp),%r8
+    0.00 :   bae0:       test   %edx,%edx
+    0.00 :   bae2:       jne    baec <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xa5c>
+    0.00 :   bae4:       mov    0x10(%rbp),%r8
+    0.00 :   bae8:       mov    0x18(%rbp),%rbx
+    0.00 :   baec:       mov    0x48(%rsp),%rax
+    0.00 :   baf1:       movq   %r8,%xmm0
+    0.00 :   baf6:       movq   %rbx,%xmm4
+    0.00 :   bafb:       mov    0x30(%rsp),%rdi
+    0.00 :   bb00:       punpcklqdq %xmm4,%xmm0
+    0.00 :   bb04:       movaps %xmm0,(%rax)
+    0.00 :   bb07:       callq  *0x23463(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   bb0d:       jmpq   b7a1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x711>
+    0.00 :   bb12:       nopw   0x0(%rax,%rax,1)
+    0.00 :   bb18:       mov    0x68(%rsp),%r15d
+    0.00 :   bb1d:       mov    0x70(%rsp),%r13
+    0.00 :   bb22:       mov    0xd0(%rsp),%rbp
+    0.00 :   bb2a:       mov    0xe8(%rsp),%r12
+    0.00 :   bb32:       mov    0x78(%rsp),%r11
+    0.00 :   bb37:       cmpl   $0x1,0x84(%rsp)
+    0.00 :   bb3f:       jne    b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   bb45:       mov    0x88(%rsp),%r8
+    0.00 :   bb4d:       test   %r8,%r8
+    0.00 :   bb50:       jne    b748 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6b8>
+    0.00 :   bb56:       jmpq   b5b2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x522>
+    0.00 :   bb5b:       nopl   0x0(%rax,%rax,1)
+    0.00 :   bb60:       mov    0x28(%rsp),%rax
+    0.00 :   bb65:       mov    %r15,%r9
+    0.00 :   bb68:       mov    %r12,%r14
+    0.00 :   bb6b:       mov    %rbx,%r15
+    0.00 :   bb6e:       lea    0x224eb(%rip),%rdi        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   bb75:       lea    (%r9,%r9,2),%rdx
+    0.00 :   bb79:       mov    0x40(%rsp),%r8
+    0.00 :   bb7e:       mov    0x38(%rsp),%rbx
+    0.00 :   bb83:       lea    (%rax,%rax,8),%rax
+    0.00 :   bb87:       mov    0x58(%rsp),%r12
+    0.00 :   bb8c:       shl    $0x4,%rax
+    0.00 :   bb90:       mov    0x58(%rdi,%rax,1),%rax
+    0.00 :   bb95:       shl    $0x2,%rax
+    0.00 :   bb99:       cmp    %rax,%rdx
+    0.00 :   bb9c:       jbe    be80 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdf0>
+    0.00 :   bba2:       mov    0x64(%rsp),%eax
+    0.00 :   bba6:       mov    %r15,%rdx
+    0.00 :   bba9:       mov    (%r8),%ecx
+    0.00 :   bbac:       mov    0x18(%rsp),%rsi
+    0.00 :   bbb1:       add    (%rsp),%rcx
+    0.00 :   bbb5:       shl    $0x5,%rdx
+    0.00 :   bbb9:       test   %eax,%eax
+    0.00 :   bbbb:       je     bc4f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xbbf>
+    0.00 :   bbc1:       mov    %r12,%rax
+    0.00 :   bbc4:       shl    $0x5,%rax
+    0.00 :   bbc8:       add    %rsi,%rax
+    0.00 :   bbcb:       jmp    bbdf <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb4f>
+    0.00 :   bbcd:       nopl   (%rax)
+    0.00 :   bbd0:       add    %r15,%r12
+    0.00 :   bbd3:       add    %rdx,%rax
+    0.00 :   bbd6:       cmp    %r12,%r9
+    0.00 :   bbd9:       jbe    bce8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xc58>
+    0.00 :   bbdf:       cmpq   $0x0,0x8(%rax)
+    0.00 :   bbe4:       jne    bbd0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb40>
+    0.00 :   bbe6:       mov    0xf8(%rsp),%rsi
+    0.00 :   bbee:       movq   %rcx,%xmm0
+    0.00 :   bbf3:       mov    %r14d,(%rax)
+    0.00 :   bbf6:       movhps 0x50(%rsp),%xmm0
+    0.00 :   bbfb:       mov    %rsi,0x18(%rax)
+    0.00 :   bbff:       movups %xmm0,0x8(%rax)
+    0.00 :   bc03:       mov    0x28(%rsp),%rax
+    0.00 :   bc08:       lea    0x22451(%rip),%rsi        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   bc0f:       lea    (%rax,%rax,8),%rax
+    0.00 :   bc13:       shl    $0x4,%rax
+    0.00 :   bc17:       addq   $0x1,0x58(%rsi,%rax,1)
+    0.00 :   bc1d:       movq   %r8,%xmm0
+    0.00 :   bc22:       movq   %rbx,%xmm2
+    0.00 :   bc27:       mov    0x30(%rsp),%rdi
+    0.00 :   bc2c:       punpcklqdq %xmm2,%xmm0
+    0.00 :   bc30:       movaps %xmm0,(%rsp)
+    0.00 :   bc34:       callq  *0x23336(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   bc3a:       mov    0x48(%rsp),%rax
+    0.00 :   bc3f:       movdqa (%rsp),%xmm0
+    0.00 :   bc44:       movaps %xmm0,(%rax)
+    0.00 :   bc47:       jmpq   b7a1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x711>
+    0.00 :   bc4c:       sub    %r9,%r12
+    0.00 :   bc4f:       mov    %r12,%rax
+    0.00 :   bc52:       shl    $0x5,%rax
+    0.00 :   bc56:       add    %rsi,%rax
+    0.00 :   bc59:       jmp    bc6b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xbdb>
+    0.00 :   bc5b:       nopl   0x0(%rax,%rax,1)
+    0.00 :   bc60:       add    %r15,%r12
+    0.00 :   bc63:       add    %rdx,%rax
+    0.00 :   bc66:       cmp    %r12,%r9
+    0.00 :   bc69:       jbe    bc4c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xbbc>
+    0.00 :   bc6b:       cmpq   $0x0,0x8(%rax)
+    0.00 :   bc70:       jne    bc60 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xbd0>
+    0.00 :   bc72:       movq   %rcx,%xmm0
+    0.00 :   bc77:       movq   %r8,%xmm3
+    0.00 :   bc7c:       mov    %r14d,(%rax)
+    0.00 :   bc7f:       punpcklqdq %xmm3,%xmm0
+    0.00 :   bc83:       mov    %rbx,0x18(%rax)
+    0.00 :   bc87:       movups %xmm0,0x8(%rax)
+    0.00 :   bc8b:       movzbl 0x31c(%rbx),%eax
+    0.00 :   bc92:       and    $0x3,%eax
+    0.00 :   bc95:       cmp    $0x2,%al
+    0.00 :   bc97:       jne    bc03 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb73>
+    0.00 :   bc9d:       cmpb   $0x0,0x31f(%rbx)
+    0.00 :   bca4:       jne    bc03 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb73>
+    0.00 :   bcaa:       testb  $0x8,0xe0(%rsp)
+    0.00 :   bcb2:       je     bffb <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf6b>
+    0.00 :   bcb8:       cmpb   $0x0,0x320(%rbx)
+    0.00 :   bcbf:       jne    bc03 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb73>
+    0.00 :   bcc5:       testb  $0x4,0x21954(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   bccc:       jne    c0a2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1012>
+    0.00 :   bcd2:       movb   $0x1,0x320(%rbx)
+    0.00 :   bcd9:       jmpq   bc03 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb73>
+    0.00 :   bcde:       xchg   %ax,%ax
+    0.00 :   bce0:       sub    %r15,%r13
+    0.00 :   bce3:       jmpq   ba8b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x9fb>
+    0.00 :   bce8:       sub    %r9,%r12
+    0.00 :   bceb:       jmpq   bbc1 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb31>
+    0.00 :   bcf0:       mov    0x20(%rsp),%rax
+    0.00 :   bcf5:       xor    %edx,%edx
+    0.00 :   bcf7:       movzbl (%rax),%ecx
+    0.00 :   bcfa:       test   %rcx,%rcx
+    0.00 :   bcfd:       je     bd93 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd03>
+    0.00 :   bd03:       movzbl 0x1(%rax),%eax
+    0.00 :   bd07:       test   %al,%al
+    0.00 :   bd09:       je     bd87 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xcf7>
+    0.00 :   bd0b:       shl    $0x4,%rcx
+    0.00 :   bd0f:       add    %rax,%rcx
+    0.00 :   bd12:       mov    0x20(%rsp),%rax
+    0.00 :   bd17:       movzbl 0x2(%rax),%eax
+    0.00 :   bd1b:       test   %al,%al
+    0.00 :   bd1d:       je     bd87 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xcf7>
+    0.00 :   bd1f:       shl    $0x4,%rcx
+    0.00 :   bd23:       add    %rax,%rcx
+    0.00 :   bd26:       mov    0x20(%rsp),%rax
+    0.00 :   bd2b:       movzbl 0x3(%rax),%eax
+    0.00 :   bd2f:       test   %al,%al
+    0.00 :   bd31:       je     bd87 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xcf7>
+    0.00 :   bd33:       shl    $0x4,%rcx
+    0.00 :   bd37:       add    %rax,%rcx
+    0.00 :   bd3a:       mov    0x20(%rsp),%rax
+    0.00 :   bd3f:       movzbl 0x4(%rax),%eax
+    0.00 :   bd43:       test   %al,%al
+    0.00 :   bd45:       je     bd87 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xcf7>
+    0.00 :   bd47:       shl    $0x4,%rcx
+    0.00 :   bd4b:       add    %rax,%rcx
+    0.00 :   bd4e:       mov    0x20(%rsp),%rax
+    0.00 :   bd53:       lea    0x5(%rax),%rdx
+    0.00 :   bd57:       movzbl 0x5(%rax),%eax
+    0.00 :   bd5b:       test   %al,%al
+    0.00 :   bd5d:       je     bd81 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xcf1>
+    0.00 :   bd5f:       shl    $0x4,%rcx
+    0.00 :   bd63:       add    $0x1,%rdx
+    0.00 :   bd67:       add    %rcx,%rax
+    0.00 :   bd6a:       mov    %rax,%rcx
+    0.00 :   bd6d:       shr    $0x18,%rcx
+    0.00 :   bd71:       and    $0xf0,%ecx
+    0.00 :   bd77:       xor    %rax,%rcx
+    0.00 :   bd7a:       movzbl (%rdx),%eax
+    0.00 :   bd7d:       test   %al,%al
+    0.00 :   bd7f:       jne    bd5f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xccf>
+    0.00 :   bd81:       and    $0xfffffff,%ecx
+    0.00 :   bd87:       mov    %rcx,%rax
+    0.00 :   bd8a:       xor    %edx,%edx
+    0.00 :   bd8c:       div    %rsi
+    0.00 :   bd8f:       shl    $0x2,%rdx
+    0.00 :   bd93:       mov    0x58(%rsp),%rax
+    0.00 :   bd98:       mov    %rcx,(%rax)
+    0.00 :   bd9b:       jmpq   b65f <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x5cf>
+    0.00 :   bda0:       test   %r9,%r9
+    0.00 :   bda3:       jne    c010 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf80>
+    0.00 :   bda9:       mov    $0x1f,%esi
+    0.00 :   bdae:       mov    $0x20,%edi
+    0.00 :   bdb3:       mov    %r8,0x20(%rsp)
+    0.00 :   bdb8:       callq  10c0 <calloc@plt>
+    0.00 :   bdbd:       mov    %rax,0x18(%rsp)
+    0.00 :   bdc2:       test   %rax,%rax
+    0.00 :   bdc5:       je     c07a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfea>
+    0.00 :   bdcb:       mov    %rax,0x48(%rbp)
+    0.00 :   bdcf:       mov    %r14,%r12
+    0.00 :   bdd2:       mov    %r14,%r15
+    0.00 :   bdd5:       mov    0x20(%rsp),%r8
+    0.00 :   bdda:       mov    0x221ff(%rip),%rax        # 2dfe0 <free@@GLIBC_2.2.5+0x109e0>
+    0.00 :   bde1:       movq   $0x1f,0x50(%rbp)
+    0.00 :   bde9:       movabs $0x842108421084211,%rdx
+    0.00 :   bdf3:       mov    $0x1f,%r9d
+    0.00 :   bdf9:       mov    %rax,0x60(%rbp)
+    0.00 :   bdfd:       mov    %r14,%rax
+    0.00 :   be00:       mul    %rdx
+    0.00 :   be03:       sub    %rdx,%r12
+    0.00 :   be06:       shr    %r12
+    0.00 :   be09:       add    %rdx,%r12
+    0.00 :   be0c:       movabs $0x469ee58469ee5847,%rdx
+    0.00 :   be16:       shr    $0x4,%r12
+    0.00 :   be1a:       mov    %r12,%rax
+    0.00 :   be1d:       shl    $0x5,%rax
+    0.00 :   be21:       sub    %r12,%rax
+    0.00 :   be24:       mov    %r14,%r12
+    0.00 :   be27:       sub    %rax,%r12
+    0.00 :   be2a:       mov    %r14,%rax
+    0.00 :   be2d:       imul   %rdx
+    0.00 :   be30:       mov    %rdx,%rax
+    0.00 :   be33:       mov    %r14,%rdx
+    0.00 :   be36:       sar    $0x3f,%rdx
+    0.00 :   be3a:       sar    $0x3,%rax
+    0.00 :   be3e:       sub    %rdx,%rax
+    0.00 :   be41:       lea    0x0(,%rax,8),%rdx
+    0.00 :   be49:       sub    %rax,%rdx
+    0.00 :   be4c:       lea    (%rax,%rdx,4),%rax
+    0.00 :   be50:       sub    %rax,%r15
+    0.00 :   be53:       add    $0x1,%r15
+    0.00 :   be57:       jmpq   bba2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb12>
+    0.00 :   be5c:       mov    0x40(%rsp),%r15d
+    0.00 :   be61:       mov    0x68(%rsp),%r13
+    0.00 :   be66:       mov    0xd0(%rsp),%rbp
+    0.00 :   be6e:       mov    0xe8(%rsp),%r12
+    0.00 :   be76:       mov    0x70(%rsp),%r11
+    0.00 :   be7b:       jmpq   bb37 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xaa7>
+    0.00 :   be80:       lea    0x1(%r9),%rdi
+    0.00 :   be84:       mov    %r8,0x38(%rsp)
+    0.00 :   be89:       mov    %r9,0x20(%rsp)
+    0.00 :   be8e:       callq  12c00 <_dl_debug_state@@GLIBC_PRIVATE+0xa20>
+    0.00 :   be93:       mov    $0x20,%edi
+    0.00 :   be98:       mov    %rax,%rsi
+    0.00 :   be9b:       mov    %rax,%rbp
+    0.00 :   be9e:       callq  10c0 <calloc@plt>
+    0.00 :   bea3:       mov    %rax,%r11
+    0.00 :   bea6:       test   %rax,%rax
+    0.00 :   bea9:       je     c07a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfea>
+    0.00 :   beaf:       mov    0x20(%rsp),%r9
+    0.00 :   beb4:       mov    0x18(%rsp),%rax
+    0.00 :   beb9:       lea    -0x2(%rbp),%r15
+    0.00 :   bebd:       mov    0x38(%rsp),%r8
+    0.00 :   bec2:       mov    %r9,%r13
+    0.00 :   bec5:       mov    %rax,%rsi
+    0.00 :   bec8:       shl    $0x5,%r13
+    0.00 :   becc:       add    %rax,%r13
+    0.00 :   becf:       test   %r9,%r9
+    0.00 :   bed2:       jne    bee9 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe59>
+    0.00 :   bed4:       jmpq   bf65 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xed5>
+    0.00 :   bed9:       nopl   0x0(%rax)
+    0.00 :   bee0:       add    $0x20,%rsi
+    0.00 :   bee4:       cmp    %rsi,%r13
+    0.00 :   bee7:       je     bf65 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xed5>
+    0.00 :   bee9:       mov    0x8(%rsi),%rdi
+    0.00 :   beed:       test   %rdi,%rdi
+    0.00 :   bef0:       je     bee0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe50>
+    0.00 :   bef2:       mov    (%rsi),%r12d
+    0.00 :   bef5:       mov    0x10(%rsi),%rax
+    0.00 :   bef9:       xor    %edx,%edx
+    0.00 :   befb:       mov    0x18(%rsi),%r10
+    0.00 :   beff:       mov    %rax,0x20(%rsp)
+    0.00 :   bf04:       mov    %r12,%rax
+    0.00 :   bf07:       mov    %r12,%r9
+    0.00 :   bf0a:       div    %rbp
+    0.00 :   bf0d:       mov    %r12,%rax
+    0.00 :   bf10:       mov    %rdx,%rcx
+    0.00 :   bf13:       xor    %edx,%edx
+    0.00 :   bf15:       div    %r15
+    0.00 :   bf18:       add    $0x1,%rdx
+    0.00 :   bf1c:       mov    %rdx,%r12
+    0.00 :   bf1f:       shl    $0x5,%r12
+    0.00 :   bf23:       mov    %rcx,%rax
+    0.00 :   bf26:       shl    $0x5,%rax
+    0.00 :   bf2a:       add    %r11,%rax
+    0.00 :   bf2d:       jmp    bf3b <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeab>
+    0.00 :   bf2f:       nop
+    0.00 :   bf30:       add    %rdx,%rcx
+    0.00 :   bf33:       add    %r12,%rax
+    0.00 :   bf36:       cmp    %rcx,%rbp
+    0.00 :   bf39:       jbe    bf60 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xed0>
+    0.00 :   bf3b:       cmpq   $0x0,0x8(%rax)
+    0.00 :   bf40:       jne    bf30 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xea0>
+    0.00 :   bf42:       movq   %rdi,%xmm0
+    0.00 :   bf47:       mov    %r9d,(%rax)
+    0.00 :   bf4a:       movhps 0x20(%rsp),%xmm0
+    0.00 :   bf4f:       mov    %r10,0x18(%rax)
+    0.00 :   bf53:       movups %xmm0,0x8(%rax)
+    0.00 :   bf57:       jmp    bee0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe50>
+    0.00 :   bf59:       nopl   0x0(%rax)
+    0.00 :   bf60:       sub    %rbp,%rcx
+    0.00 :   bf63:       jmp    bf23 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe93>
+    0.00 :   bf65:       mov    0x28(%rsp),%rax
+    0.00 :   bf6a:       mov    0x18(%rsp),%rdi
+    0.00 :   bf6f:       mov    %r11,0x38(%rsp)
+    0.00 :   bf74:       mov    %r8,0x20(%rsp)
+    0.00 :   bf79:       lea    (%rax,%rax,8),%r12
+    0.00 :   bf7d:       lea    0x220dc(%rip),%rax        # 2e060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   bf84:       shl    $0x4,%r12
+    0.00 :   bf88:       add    %rax,%r12
+    0.00 :   bf8b:       callq  *0x60(%r12)
+    0.00 :   bf90:       xor    %edx,%edx
+    0.00 :   bf92:       mov    0x38(%rsp),%r11
+    0.00 :   bf97:       mov    %rbp,%r9
+    0.00 :   bf9a:       mov    0x2203f(%rip),%rax        # 2dfe0 <free@@GLIBC_2.2.5+0x109e0>
+    0.00 :   bfa1:       mov    0x20(%rsp),%r8
+    0.00 :   bfa6:       mov    %rbp,0x50(%r12)
+    0.00 :   bfab:       mov    %r11,0x48(%r12)
+    0.00 :   bfb0:       mov    %rax,0x60(%r12)
+    0.00 :   bfb5:       mov    %r14,%rax
+    0.00 :   bfb8:       div    %rbp
+    0.00 :   bfbb:       mov    %r11,0x18(%rsp)
+    0.00 :   bfc0:       mov    %r14,%rax
+    0.00 :   bfc3:       mov    %rdx,%r12
+    0.00 :   bfc6:       xor    %edx,%edx
+    0.00 :   bfc8:       div    %r15
+    0.00 :   bfcb:       lea    0x1(%rdx),%r15
+    0.00 :   bfcf:       jmpq   bba2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb12>
+    0.00 :   bfd4:       mov    0x40(%rsp),%r15d
+    0.00 :   bfd9:       mov    0x68(%rsp),%r13
+    0.00 :   bfde:       mov    %rax,%r8
+    0.00 :   bfe1:       mov    0xd0(%rsp),%rbp
+    0.00 :   bfe9:       mov    0xe8(%rsp),%r12
+    0.00 :   bff1:       mov    0x70(%rsp),%r11
+    0.00 :   bff6:       jmpq   b748 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6b8>
+    0.00 :   bffb:       testb  $0x4,0x2161e(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   c002:       jne    c05a <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfca>
+    0.00 :   c004:       movb   $0x1,0x31f(%rbx)
+    0.00 :   c00b:       jmpq   bc03 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb73>
+    0.00 :   c010:       testb  $0x8,0x2160a(%rip)        # 2d621 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :   c017:       jne    bc1d <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xb8d>
+    0.00 :   c01d:       lea    0x1ca7c(%rip),%rcx        # 28aa0 <_dl_catch_error@@GLIBC_PRIVATE+0xad60>
+    0.00 :   c024:       mov    $0x138,%edx
+    0.00 :   c029:       lea    0x1969d(%rip),%rsi        # 256cd <_dl_catch_error@@GLIBC_PRIVATE+0x798d>
+    0.00 :   c030:       lea    0x1b699(%rip),%rdi        # 276d0 <_dl_catch_error@@GLIBC_PRIVATE+0x9990>
+    0.00 :   c037:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   c03c:       nopl   0x0(%rax)
+    0.00 :   c040:       mov    0x38(%rsp),%rbx
+    0.00 :   c045:       mov    0x40(%rsp),%r8
+    0.00 :   c04a:       mov    %r14,%r11
+    0.00 :   c04d:       mov    0xd0(%rsp),%rbp
+    0.00 :   c055:       jmpq   b757 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x6c7>
+    0.00 :   c05a:       mov    0x30(%rbx),%rdx
+    0.00 :   c05e:       mov    0x8(%rbx),%rsi
+    0.00 :   c062:       xor    %eax,%eax
+    0.00 :   c064:       mov    %r8,(%rsp)
+    0.00 :   c068:       lea    0x1b689(%rip),%rdi        # 276f8 <_dl_catch_error@@GLIBC_PRIVATE+0x99b8>
+    0.00 :   c06f:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   c074:       mov    (%rsp),%r8
+    0.00 :   c078:       jmp    c004 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf74>
+    0.00 :   c07a:       mov    0x30(%rsp),%rdi
+    0.00 :   c07f:       callq  *0x22eeb(%rip)        # 2ef70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :   c085:       mov    $0x2,%edi
+    0.00 :   c08a:       lea    0x191aa(%rip),%rsi        # 2523b <_dl_catch_error@@GLIBC_PRIVATE+0x74fb>
+    0.00 :   c091:       xor    %eax,%eax
+    0.00 :   c093:       callq  12af0 <_dl_debug_state@@GLIBC_PRIVATE+0x910>
+    0.00 :   c098:       mov    $0x7f,%edi
+    0.00 :   c09d:       callq  1f290 <_dl_catch_error@@GLIBC_PRIVATE+0x1550>
+    0.00 :   c0a2:       mov    0x30(%rbx),%rdx
+    0.00 :   c0a6:       mov    0x8(%rbx),%rsi
+    0.00 :   c0aa:       xor    %eax,%eax
+    0.00 :   c0ac:       mov    %r8,(%rsp)
+    0.00 :   c0b0:       lea    0x1b641(%rip),%rdi        # 276f8 <_dl_catch_error@@GLIBC_PRIVATE+0x99b8>
+    0.00 :   c0b7:       callq  12990 <_dl_debug_state@@GLIBC_PRIVATE+0x7b0>
+    0.00 :   c0bc:       mov    (%rsp),%r8
+    0.00 :   c0c0:       jmpq   bcd2 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xc42>
+    0.00 :   c0c5:       data16 nopw %cs:0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of ld-2.31.so for LLC-load-misses (1 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :          Disassembly of section .text:
+         :
+         :          0000000000001df0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE-0x92a0>:
+    0.00 :   1df0:       endbr64
+    0.00 :   1df4:       push   %rbp
+    0.00 :   1df5:       mov    %rsp,%rbp
+    0.00 :   1df8:       push   %r15
+    0.00 :   1dfa:       mov    %rdi,%r15
+    0.00 :   1dfd:       push   %r14
+    0.00 :   1dff:       push   %r13
+    0.00 :   1e01:       push   %r12
+    0.00 :   1e03:       push   %rbx
+    0.00 :   1e04:       sub    $0x38,%rsp
+    0.00 :   1e08:       rdtsc
+    0.00 :   1e0a:       shl    $0x20,%rdx
+    0.00 :   1e0e:       or     %rdx,%rax
+    0.00 :   1e11:       lea    0x2c050(%rip),%rdx        # 2de68 <__libc_enable_secure@@GLIBC_PRIVATE+0x8>
+    0.00 :   1e18:       mov    %rax,0x2b7c1(%rip)        # 2d5e0 <_dl_catch_error@@GLIBC_PRIVATE+0xf8a0>
+    0.00 :   1e1f:       mov    0x2c042(%rip),%rax        # 2de68 <__libc_enable_secure@@GLIBC_PRIVATE+0x8>
+    0.00 :   1e26:       mov    %rdx,%r12
+    0.00 :   1e29:       sub    0x2c1d0(%rip),%r12        # 2e000 <__libc_enable_secure@@GLIBC_PRIVATE+0x1a0>
+    0.00 :   1e30:       mov    %rdx,0x2cbc1(%rip)        # 2e9f8 <_rtld_global@@GLIBC_PRIVATE+0x998>
+    0.00 :   1e37:       mov    %r12,0x2cbaa(%rip)        # 2e9e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :   1e3e:       test   %rax,%rax
+    0.00 :   1e41:       je     1eb6 <_dl_catch_error@plt+0xdc6>
+    0.00 :   1e43:       mov    $0x6fffffff,%edi
+    0.00 :   1e48:       mov    $0x6ffffdff,%r10d
+    0.00 :   1e4e:       mov    $0x6ffffeff,%ebx
+    0.00 :   1e53:       mov    $0x6fffff41,%r13d
+    0.00 :   1e59:       lea    0x2cbc8(%rip),%rcx        # 2ea28 <_rtld_global@@GLIBC_PRIVATE+0x9c8>
+    0.00 :   1e60:       mov    $0x6ffffe35,%r11d
+    0.00 :   1e66:       mov    $0x32,%r9d
+    0.00 :   1e6c:       mov    $0x70000022,%r8d
+    0.00 :   1e72:       jmp    1e9f <_dl_catch_error@plt+0xdaf>
+    0.00 :   1e74:       nopl   0x0(%rax)
+    0.00 :   1e78:       mov    %rdi,%rsi
+    0.00 :   1e7b:       sub    %rax,%rsi
+    0.00 :   1e7e:       cmp    $0xf,%rsi
+    0.00 :   1e82:       ja     2070 <_dl_catch_error@plt+0xf80>
+    0.00 :   1e88:       mov    %r8,%rsi
+    0.00 :   1e8b:       sub    %rax,%rsi
+    0.00 :   1e8e:       mov    %rdx,(%rcx,%rsi,8)
+    0.00 :   1e92:       mov    0x10(%rdx),%rax
+    0.00 :   1e96:       add    $0x10,%rdx
+    0.00 :   1e9a:       test   %rax,%rax
+    0.00 :   1e9d:       je     1eb6 <_dl_catch_error@plt+0xdc6>
+    0.00 :   1e9f:       cmp    $0x22,%rax
+    0.00 :   1ea3:       ja     1e78 <_dl_catch_error@plt+0xd88>
+    0.00 :   1ea5:       mov    %rdx,(%rcx,%rax,8)
+    0.00 :   1ea9:       mov    0x10(%rdx),%rax
+    0.00 :   1ead:       add    $0x10,%rdx
+    0.00 :   1eb1:       test   %rax,%rax
+    0.00 :   1eb4:       jne    1e9f <_dl_catch_error@plt+0xdaf>
+    0.00 :   1eb6:       test   %r12,%r12
+    0.00 :   1eb9:       je     1f3f <_dl_catch_error@plt+0xe4f>
+    0.00 :   1ebf:       mov    0x2cb82(%rip),%rax        # 2ea48 <_rtld_global@@GLIBC_PRIVATE+0x9e8>
+    0.00 :   1ec6:       test   %rax,%rax
+    0.00 :   1ec9:       je     1ecf <_dl_catch_error@plt+0xddf>
+    0.00 :   1ecb:       add    %r12,0x8(%rax)
+    0.00 :   1ecf:       mov    0x2cb6a(%rip),%rax        # 2ea40 <_rtld_global@@GLIBC_PRIVATE+0x9e0>
+    0.00 :   1ed6:       test   %rax,%rax
+    0.00 :   1ed9:       je     1edf <_dl_catch_error@plt+0xdef>
+    0.00 :   1edb:       add    %r12,0x8(%rax)
+    0.00 :   1edf:       mov    0x2cb6a(%rip),%rax        # 2ea50 <_rtld_global@@GLIBC_PRIVATE+0x9f0>
+    0.00 :   1ee6:       test   %rax,%rax
+    0.00 :   1ee9:       je     1eef <_dl_catch_error@plt+0xdff>
+    0.00 :   1eeb:       add    %r12,0x8(%rax)
+    0.00 :   1eef:       mov    0x2cb62(%rip),%rax        # 2ea58 <_rtld_global@@GLIBC_PRIVATE+0x9f8>
+    0.00 :   1ef6:       test   %rax,%rax
+    0.00 :   1ef9:       je     1eff <_dl_catch_error@plt+0xe0f>
+    0.00 :   1efb:       add    %r12,0x8(%rax)
+    0.00 :   1eff:       mov    0x2cb5a(%rip),%rax        # 2ea60 <_rtld_global@@GLIBC_PRIVATE+0xa00>
+    0.00 :   1f06:       test   %rax,%rax
+    0.00 :   1f09:       je     1f0f <_dl_catch_error@plt+0xe1f>
+    0.00 :   1f0b:       add    %r12,0x8(%rax)
+    0.00 :   1f0f:       mov    0x2cbca(%rip),%rax        # 2eae0 <_rtld_global@@GLIBC_PRIVATE+0xa80>
+    0.00 :   1f16:       test   %rax,%rax
+    0.00 :   1f19:       je     1f1f <_dl_catch_error@plt+0xe2f>
+    0.00 :   1f1b:       add    %r12,0x8(%rax)
+    0.00 :   1f1f:       mov    0x2cc92(%rip),%rax        # 2ebb8 <_rtld_global@@GLIBC_PRIVATE+0xb58>
+    0.00 :   1f26:       test   %rax,%rax
+    0.00 :   1f29:       je     1f2f <_dl_catch_error@plt+0xe3f>
+    0.00 :   1f2b:       add    %r12,0x8(%rax)
+    0.00 :   1f2f:       mov    0x2cd52(%rip),%rax        # 2ec88 <_rtld_global@@GLIBC_PRIVATE+0xc28>
+    0.00 :   1f36:       test   %rax,%rax
+    0.00 :   1f39:       je     1f3f <_dl_catch_error@plt+0xe4f>
+    0.00 :   1f3b:       add    %r12,0x8(%rax)
+    0.00 :   1f3f:       mov    0x2cb82(%rip),%rdx        # 2eac8 <_rtld_global@@GLIBC_PRIVATE+0xa68>
+    0.00 :   1f46:       test   %rdx,%rdx
+    0.00 :   1f49:       je     1f56 <_dl_catch_error@plt+0xe66>
+    0.00 :   1f4b:       cmpq   $0x7,0x8(%rdx)
+    0.00 :   1f50:       jne    232e <_dl_catch_error@plt+0x123e>
+    0.00 :   1f56:       mov    0x2cb03(%rip),%rax        # 2ea60 <_rtld_global@@GLIBC_PRIVATE+0xa00>
+    0.00 :   1f5d:       test   %rax,%rax
+    0.00 :   1f60:       je     1f74 <_dl_catch_error@plt+0xe84>
+    0.00 :   1f62:       mov    0x2cb07(%rip),%rcx        # 2ea70 <_rtld_global@@GLIBC_PRIVATE+0xa10>
+    0.00 :   1f69:       cmpq   $0x18,0x8(%rcx)
+    0.00 :   1f6e:       jne    23c9 <_dl_catch_error@plt+0x12d9>
+    0.00 :   1f74:       mov    0x2cbe5(%rip),%rcx        # 2eb60 <_rtld_global@@GLIBC_PRIVATE+0xb00>
+    0.00 :   1f7b:       test   %rcx,%rcx
+    0.00 :   1f7e:       je     1f8e <_dl_catch_error@plt+0xe9e>
+    0.00 :   1f80:       testq  $0xfffffffffffffffe,0x8(%rcx)
+    0.00 :   1f88:       jne    23aa <_dl_catch_error@plt+0x12ba>
+    0.00 :   1f8e:       mov    0x2cb83(%rip),%rcx        # 2eb18 <_rtld_global@@GLIBC_PRIVATE+0xab8>
+    0.00 :   1f95:       test   %rcx,%rcx
+    0.00 :   1f98:       je     1fa8 <_dl_catch_error@plt+0xeb8>
+    0.00 :   1f9a:       testq  $0xfffffffffffffff7,0x8(%rcx)
+    0.00 :   1fa2:       jne    238b <_dl_catch_error@plt+0x129b>
+    0.00 :   1fa8:       cmpq   $0x0,0x2cb60(%rip)        # 2eb10 <_rtld_global@@GLIBC_PRIVATE+0xab0>
+    0.00 :   1fb0:       jne    236c <_dl_catch_error@plt+0x127c>
+    0.00 :   1fb6:       cmpq   $0x0,0x2cae2(%rip)        # 2eaa0 <_rtld_global@@GLIBC_PRIVATE+0xa40>
+    0.00 :   1fbe:       jne    234d <_dl_catch_error@plt+0x125d>
+    0.00 :   1fc4:       test   %r12,%r12
+    0.00 :   1fc7:       jne    20b0 <_dl_catch_error@plt+0xfc0>
+    0.00 :   1fcd:       cmpq   $0x0,0x2cc53(%rip)        # 2ec28 <_rtld_global@@GLIBC_PRIVATE+0xbc8>
+    0.00 :   1fd5:       je     20b0 <_dl_catch_error@plt+0xfc0>
+    0.00 :   1fdb:       orb    $0x4,0x2cd22(%rip)        # 2ed04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :   1fe2:       rdtsc
+    0.00 :   1fe4:       lea    0x2c9fd(%rip),%rdi        # 2e9e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :   1feb:       shl    $0x20,%rdx
+    0.00 :   1fef:       or     %rdx,%rax
+    0.00 :   1ff2:       mov    %rax,0x2b5e7(%rip)        # 2d5e0 <_dl_catch_error@@GLIBC_PRIVATE+0xf8a0>
+    0.00 :   1ff9:       callq  d0b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2020>
+    0.00 :   1ffe:       lea    0x2c9e3(%rip),%rax        # 2e9e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :   2005:       mov    %r15,%rdi
+    0.00 :   2008:       lea    0x5d1(%rip),%rsi        # 25e0 <_dl_catch_error@plt+0x14f0>
+    0.00 :   200f:       mov    %rax,0x2c9fa(%rip)        # 2ea10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :   2016:       lea    -0x201d(%rip),%rax        # 0 <GLIBC_2.2.5@@GLIBC_2.2.5>
+    0.00 :   201d:       mov    %rax,0x2cd14(%rip)        # 2ed38 <_rtld_global@@GLIBC_PRIVATE+0xcd8>
+    0.00 :   2024:       lea    0x2d165(%rip),%rax        # 2f190 <_r_debug@@GLIBC_2.2.5+0x30>
+    0.00 :   202b:       mov    %rax,0x2cd0e(%rip)        # 2ed40 <_rtld_global@@GLIBC_PRIVATE+0xce0>
+    0.00 :   2032:       lea    0x2164b(%rip),%rax        # 23684 <_dl_catch_error@@GLIBC_PRIVATE+0x5944>
+    0.00 :   2039:       mov    %rax,0x2cd08(%rip)        # 2ed48 <_rtld_global@@GLIBC_PRIVATE+0xce8>
+    0.00 :   2040:       mov    %rbp,0x2be11(%rip)        # 2de58 <__libc_stack_end@@GLIBC_2.2.5>
+    0.00 :   2047:       callq  1c700 <__get_cpu_features@@GLIBC_PRIVATE+0x1900>
+    0.00 :   204c:       mov    %rax,%r12
+    0.00 :   204f:       testb  $0x80,0x2b5ca(%rip)        # 2d620 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :   2056:       jne    22ed <_dl_catch_error@plt+0x11fd>
+    0.00 :   205c:       add    $0x38,%rsp
+    0.00 :   2060:       mov    %r12,%rax
+    0.00 :   2063:       pop    %rbx
+    0.00 :   2064:       pop    %r12
+    0.00 :   2066:       pop    %r13
+    0.00 :   2068:       pop    %r14
+    0.00 :   206a:       pop    %r15
+    0.00 :   206c:       pop    %rbp
+    0.00 :   206d:       retq
+    0.00 :   206e:       xchg   %ax,%ax
+    0.00 :   2070:       lea    (%rax,%rax,1),%esi
+    0.00 :   2073:       mov    %esi,%r14d
+    0.00 :   2076:       sar    %r14d
+    0.00 :   2079:       cmp    $0xfffffff8,%esi
+    0.00 :   207c:       jbe    2090 <_dl_catch_error@plt+0xfa0>
+    0.00 :   207e:       mov    %r9d,%eax
+    0.00 :   2081:       sub    %r14d,%eax
+    0.00 :   2084:       mov    %rdx,(%rcx,%rax,8)
+    0.00 :   2088:       jmpq   1e92 <_dl_catch_error@plt+0xda2>
+    0.00 :   208d:       nopl   (%rax)
+    0.00 :   2090:       mov    %r10,%rsi
+    0.00 :   2093:       sub    %rax,%rsi
+    0.00 :   2096:       cmp    $0xb,%rsi
+    0.00 :   209a:       ja     2210 <_dl_catch_error@plt+0x1120>
+    0.00 :   20a0:       mov    %r11,%rsi
+    0.00 :   20a3:       sub    %rax,%rsi
+    0.00 :   20a6:       mov    %rdx,(%rcx,%rsi,8)
+    0.00 :   20aa:       jmpq   1e92 <_dl_catch_error@plt+0xda2>
+    0.00 :   20af:       nop
+    0.00 :   20b0:       test   %rax,%rax
+    0.00 :   20b3:       je     22e0 <_dl_catch_error@plt+0x11f0>
+    0.00 :   20b9:       mov    0x8(%rax),%rdi
+    0.00 :   20bd:       mov    0x2c9a4(%rip),%rax        # 2ea68 <_rtld_global@@GLIBC_PRIVATE+0xa08>
+    0.00 :   20c4:       mov    0x2caa5(%rip),%r8        # 2eb70 <_rtld_global@@GLIBC_PRIVATE+0xb10>
+    0.00 :   20cb:       mov    0x8(%rax),%rcx
+    0.00 :   20cf:       mov    %rdi,%rbx
+    0.00 :   20d2:       mov    %rdi,%rax
+    0.00 :   20d5:       lea    (%rdi,%rcx,1),%rsi
+    0.00 :   20d9:       test   %r8,%r8
+    0.00 :   20dc:       je     20ea <_dl_catch_error@plt+0xffa>
+    0.00 :   20de:       mov    0x8(%r8),%r8
+    0.00 :   20e2:       lea    (%r8,%r8,2),%r8
+    0.00 :   20e6:       lea    (%rdi,%r8,8),%rbx
+    0.00 :   20ea:       test   %rdx,%rdx
+    0.00 :   20ed:       je     2115 <_dl_catch_error@plt+0x1025>
+    0.00 :   20ef:       mov    0x2c942(%rip),%rdx        # 2ea38 <_rtld_global@@GLIBC_PRIVATE+0x9d8>
+    0.00 :   20f6:       mov    0x2c9e3(%rip),%r8        # 2eae0 <_rtld_global@@GLIBC_PRIVATE+0xa80>
+    0.00 :   20fd:       add    %rdi,%rcx
+    0.00 :   2100:       mov    0x8(%rdx),%rdx
+    0.00 :   2104:       mov    0x8(%r8),%r11
+    0.00 :   2108:       add    %rdx,%r11
+    0.00 :   210b:       add    %rdx,%rcx
+    0.00 :   210e:       cmp    %rsi,%r11
+    0.00 :   2111:       cmovne %rcx,%rsi
+    0.00 :   2115:       mov    0x2c93c(%rip),%rdx        # 2ea58 <_rtld_global@@GLIBC_PRIVATE+0x9f8>
+    0.00 :   211c:       mov    0x8(%rdx),%rdi
+    0.00 :   2120:       cmp    %rbx,%rax
+    0.00 :   2123:       jae    214b <_dl_catch_error@plt+0x105b>
+    0.00 :   2125:       nopl   (%rax)
+    0.00 :   2128:       mov    (%rax),%rdx
+    0.00 :   212b:       add    %r12,%rdx
+    0.00 :   212e:       cmpl   $0x8,0x8(%rax)
+    0.00 :   2132:       jne    230f <_dl_catch_error@plt+0x121f>
+    0.00 :   2138:       mov    0x10(%rax),%rcx
+    0.00 :   213c:       add    $0x18,%rax
+    0.00 :   2140:       add    %r12,%rcx
+    0.00 :   2143:       mov    %rcx,(%rdx)
+    0.00 :   2146:       cmp    %rbx,%rax
+    0.00 :   2149:       jb     2128 <_dl_catch_error@plt+0x1038>
+    0.00 :   214b:       cmpq   $0x0,0x2ca65(%rip)        # 2ebb8 <_rtld_global@@GLIBC_PRIVATE+0xb58>
+    0.00 :   2153:       je     23e8 <_dl_catch_error@plt+0x12f8>
+    0.00 :   2159:       lea    0x18a80(%rip),%r8        # 1abe0 <__tunable_get_val@@GLIBC_PRIVATE+0x600>
+    0.00 :   2160:       cmp    %rbx,%rsi
+    0.00 :   2163:       ja     2187 <_dl_catch_error@plt+0x1097>
+    0.00 :   2165:       jmpq   1fdb <_dl_catch_error@plt+0xeeb>
+    0.00 :   216a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   2170:       cmp    $0x5,%r14
+    0.00 :   2174:       ja     2260 <_dl_catch_error@plt+0x1170>
+    0.00 :   217a:       add    $0x18,%rbx
+    0.00 :   217e:       cmp    %rbx,%rsi
+    0.00 :   2181:       jbe    1fdb <_dl_catch_error@plt+0xeeb>
+    0.00 :   2187:       mov    0x8(%rbx),%r13
+    0.00 :   218b:       mov    (%rbx),%rcx
+    0.00 :   218e:       mov    %r13,%rax
+    0.00 :   2191:       mov    %r13,%r14
+    0.00 :   2194:       add    %r12,%rcx
+    0.00 :   2197:       shr    $0x20,%rax
+    0.00 :   219b:       lea    (%rax,%rax,2),%rax
+    0.00 :   219f:       lea    (%rdi,%rax,8),%rdx
+    0.00 :   21a3:       and    $0xffffffff,%r14d
+    0.00 :   21a7:       je     217a <_dl_catch_error@plt+0x108a>
+    0.00 :   21a9:       xor    %eax,%eax
+    0.00 :   21ab:       test   %rdx,%rdx
+    0.00 :   21ae:       je     21de <_dl_catch_error@plt+0x10ee>
+    0.00 :   21b0:       movzbl 0x4(%rdx),%r9d
+  100.00 :   21b5:       movzwl 0x6(%rdx),%r10d
+    0.00 :   21ba:       mov    0x8(%rdx),%rax
+    0.00 :   21be:       and    $0xf,%r9d
+    0.00 :   21c2:       cmp    $0xfff1,%r10w
+    0.00 :   21c7:       je     2290 <_dl_catch_error@plt+0x11a0>
+    0.00 :   21cd:       add    0x2c814(%rip),%rax        # 2e9e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :   21d4:       cmp    $0xa,%r9b
+    0.00 :   21d8:       je     22d0 <_dl_catch_error@plt+0x11e0>
+    0.00 :   21de:       cmp    $0x12,%r14
+    0.00 :   21e2:       je     2270 <_dl_catch_error@plt+0x1180>
+    0.00 :   21e8:       ja     2238 <_dl_catch_error@plt+0x1148>
+    0.00 :   21ea:       test   $0xfffffff8,%r13d
+    0.00 :   21f1:       je     2170 <_dl_catch_error@plt+0x1080>
+    0.00 :   21f7:       cmp    $0x10,%r14
+    0.00 :   21fb:       jne    217a <_dl_catch_error@plt+0x108a>
+    0.00 :   2201:       movq   $0x1,(%rcx)
+    0.00 :   2208:       jmpq   217a <_dl_catch_error@plt+0x108a>
+    0.00 :   220d:       nopl   (%rax)
+    0.00 :   2210:       mov    %rbx,%rsi
+    0.00 :   2213:       sub    %rax,%rsi
+    0.00 :   2216:       cmp    $0xa,%rsi
+    0.00 :   221a:       ja     1e92 <_dl_catch_error@plt+0xda2>
+    0.00 :   2220:       mov    %r13,%rsi
+    0.00 :   2223:       sub    %rax,%rsi
+    0.00 :   2226:       mov    %rsi,%rax
+    0.00 :   2229:       mov    %rdx,(%rcx,%rax,8)
+    0.00 :   222d:       jmpq   1ea9 <_dl_catch_error@plt+0xdb9>
+    0.00 :   2232:       nopw   0x0(%rax,%rax,1)
+    0.00 :   2238:       cmp    $0x24,%r14
+    0.00 :   223c:       jne    217a <_dl_catch_error@plt+0x108a>
+    0.00 :   2242:       mov    0x10(%rbx),%rax
+    0.00 :   2246:       sub    0x2cbeb(%rip),%rax        # 2ee38 <_rtld_global@@GLIBC_PRIVATE+0xdd8>
+    0.00 :   224d:       add    0x8(%rdx),%rax
+    0.00 :   2251:       mov    %rax,0x8(%rcx)
+    0.00 :   2255:       mov    %r8,(%rcx)
+    0.00 :   2258:       jmpq   217a <_dl_catch_error@plt+0x108a>
+    0.00 :   225d:       nopl   (%rax)
+    0.00 :   2260:       add    0x10(%rbx),%rax
+    0.00 :   2264:       mov    %rax,(%rcx)
+    0.00 :   2267:       jmpq   217a <_dl_catch_error@plt+0x108a>
+    0.00 :   226c:       nopl   0x0(%rax)
+    0.00 :   2270:       mov    0x10(%rbx),%rax
+    0.00 :   2274:       sub    0x2cbbd(%rip),%rax        # 2ee38 <_rtld_global@@GLIBC_PRIVATE+0xdd8>
+    0.00 :   227b:       add    0x8(%rdx),%rax
+    0.00 :   227f:       mov    %rax,(%rcx)
+    0.00 :   2282:       jmpq   217a <_dl_catch_error@plt+0x108a>
+    0.00 :   2287:       nopw   0x0(%rax,%rax,1)
+    0.00 :   2290:       cmp    $0xa,%r9b
+    0.00 :   2294:       jne    21de <_dl_catch_error@plt+0x10ee>
+    0.00 :   229a:       nopw   0x0(%rax,%rax,1)
+    0.00 :   22a0:       mov    %rsi,-0x60(%rbp)
+    0.00 :   22a4:       mov    %rdx,-0x58(%rbp)
+    0.00 :   22a8:       mov    %rcx,-0x50(%rbp)
+    0.00 :   22ac:       mov    %rdi,-0x48(%rbp)
+    0.00 :   22b0:       callq  *%rax
+    0.00 :   22b2:       mov    -0x60(%rbp),%rsi
+    0.00 :   22b6:       mov    -0x58(%rbp),%rdx
+    0.00 :   22ba:       lea    0x1891f(%rip),%r8        # 1abe0 <__tunable_get_val@@GLIBC_PRIVATE+0x600>
+    0.00 :   22c1:       mov    -0x50(%rbp),%rcx
+    0.00 :   22c5:       mov    -0x48(%rbp),%rdi
+    0.00 :   22c9:       jmpq   21de <_dl_catch_error@plt+0x10ee>
+    0.00 :   22ce:       xchg   %ax,%ax
+    0.00 :   22d0:       test   %r10w,%r10w
+    0.00 :   22d4:       jne    22a0 <_dl_catch_error@plt+0x11b0>
+    0.00 :   22d6:       jmpq   21de <_dl_catch_error@plt+0x10ee>
+    0.00 :   22db:       nopl   0x0(%rax,%rax,1)
+    0.00 :   22e0:       xor    %ebx,%ebx
+    0.00 :   22e2:       xor    %esi,%esi
+    0.00 :   22e4:       xor    %ecx,%ecx
+    0.00 :   22e6:       xor    %edi,%edi
+    0.00 :   22e8:       jmpq   20ea <_dl_catch_error@plt+0xffa>
+    0.00 :   22ed:       rdtsc
+    0.00 :   22ef:       shl    $0x20,%rdx
+    0.00 :   22f3:       lea    -0x38(%rbp),%rdi
+    0.00 :   22f7:       or     %rdx,%rax
+    0.00 :   22fa:       sub    0x2b2df(%rip),%rax        # 2d5e0 <_dl_catch_error@@GLIBC_PRIVATE+0xf8a0>
+    0.00 :   2301:       mov    %rax,-0x38(%rbp)
+    0.00 :   2305:       callq  1500 <_dl_catch_error@plt+0x410>
+    0.00 :   230a:       jmpq   205c <_dl_catch_error@plt+0xf6c>
+    0.00 :   230f:       lea    0x266ea(%rip),%rcx        # 28a00 <_dl_catch_error@@GLIBC_PRIVATE+0xacc0>
+    0.00 :   2316:       mov    $0x21d,%edx
+    0.00 :   231b:       lea    0x24346(%rip),%rsi        # 26668 <_dl_catch_error@@GLIBC_PRIVATE+0x8928>
+    0.00 :   2322:       lea    0x2435f(%rip),%rdi        # 26688 <_dl_catch_error@@GLIBC_PRIVATE+0x8948>
+    0.00 :   2329:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   232e:       lea    0x2668b(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   2335:       mov    $0x7b,%edx
+    0.00 :   233a:       lea    0x22d02(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   2341:       lea    0x24208(%rip),%rdi        # 26550 <_dl_catch_error@@GLIBC_PRIVATE+0x8810>
+    0.00 :   2348:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   234d:       lea    0x2666c(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   2354:       mov    $0x93,%edx
+    0.00 :   2359:       lea    0x22ce3(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   2360:       lea    0x22d08(%rip),%rdi        # 2506f <_dl_catch_error@@GLIBC_PRIVATE+0x732f>
+    0.00 :   2367:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   236c:       lea    0x2664d(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   2373:       mov    $0x92,%edx
+    0.00 :   2378:       lea    0x22cc4(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   237f:       lea    0x22cd0(%rip),%rdi        # 25056 <_dl_catch_error@@GLIBC_PRIVATE+0x7316>
+    0.00 :   2386:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   238b:       lea    0x2662e(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   2392:       mov    $0x8e,%edx
+    0.00 :   2397:       lea    0x22ca5(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   239e:       lea    0x24273(%rip),%rdi        # 26618 <_dl_catch_error@@GLIBC_PRIVATE+0x88d8>
+    0.00 :   23a5:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   23aa:       lea    0x2660f(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   23b1:       mov    $0x8b,%edx
+    0.00 :   23b6:       lea    0x22c86(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   23bd:       lea    0x241ec(%rip),%rdi        # 265b0 <_dl_catch_error@@GLIBC_PRIVATE+0x8870>
+    0.00 :   23c4:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   23c9:       lea    0x265f0(%rip),%rcx        # 289c0 <_dl_catch_error@@GLIBC_PRIVATE+0xac80>
+    0.00 :   23d0:       mov    $0x83,%edx
+    0.00 :   23d5:       lea    0x22c67(%rip),%rsi        # 25043 <_dl_catch_error@@GLIBC_PRIVATE+0x7303>
+    0.00 :   23dc:       lea    0x24195(%rip),%rdi        # 26578 <_dl_catch_error@@GLIBC_PRIVATE+0x8838>
+    0.00 :   23e3:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   23e8:       lea    0x26631(%rip),%rcx        # 28a20 <_dl_catch_error@@GLIBC_PRIVATE+0xace0>
+    0.00 :   23ef:       mov    $0x74,%edx
+    0.00 :   23f4:       lea    0x22c8b(%rip),%rsi        # 25086 <_dl_catch_error@@GLIBC_PRIVATE+0x7346>
+    0.00 :   23fb:       lea    0x242be(%rip),%rdi        # 266c0 <_dl_catch_error@@GLIBC_PRIVATE+0x8980>
+    0.00 :   2402:       callq  1d790 <free@@GLIBC_2.2.5+0x190>
+    0.00 :   2407:       nopw   0x0(%rax,%rax,1)
+ Percent |	Source code & Disassembly of libstdc++.so.6.0.28 for LLC-load-misses (1 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :           Disassembly of section .text:
+         :
+         :           00000000000d2660 <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11>:
+    0.00 :   d2660:       endbr64
+    0.00 :   d2664:       push   %r12
+    0.00 :   d2666:       push   %rbp
+    0.00 :   d2667:       push   %rbx
+    0.00 :   d2668:       mov    %rdi,%rbx
+    0.00 :   d266b:       sub    $0x110,%rsp
+    0.00 :   d2672:       mov    %fs:0x28,%rax
+    0.00 :   d267b:       mov    %rax,0x108(%rsp)
+    0.00 :   d2683:       xor    %eax,%eax
+    0.00 :   d2685:       mov    %rsp,%rbp
+    0.00 :   d2688:       nopl   0x0(%rax,%rax,1)
+    0.00 :   d2690:       mov    %al,0x0(%rbp,%rax,1)
+    0.00 :   d2694:       add    $0x1,%rax
+    0.00 :   d2698:       cmp    $0x100,%rax
+    0.00 :   d269e:       jne    d2690 <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11+0x30>
+    0.00 :   d26a0:       mov    (%rbx),%rax
+    0.00 :   d26a3:       lea    0x39(%rbx),%r12
+    0.00 :   d26a7:       mov    0x38(%rax),%rax
+  100.00 :   d26ab:       cmp    0x109836(%rip),%rax        # 1dbee8 <std::ctype<char>::do_widen(char const*, char const*, char*) const@@GLIBCXX_3.4+0x109a88>
+    0.00 :   d26b2:       jne    d27cb <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11+0x16b>
+    0.00 :   d26b8:       movdqu (%rsp),%xmm0
+    0.00 :   d26bd:       movdqu 0x10(%rsp),%xmm1
+    0.00 :   d26c3:       movdqu 0x20(%rsp),%xmm2
+    0.00 :   d26c9:       movdqu 0x30(%rsp),%xmm3
+    0.00 :   d26cf:       movdqu 0x40(%rsp),%xmm4
+    0.00 :   d26d5:       movdqu 0x50(%rsp),%xmm5
+    0.00 :   d26db:       movups %xmm0,0x39(%rbx)
+    0.00 :   d26df:       movdqu 0x60(%rsp),%xmm6
+    0.00 :   d26e5:       movdqu 0x70(%rsp),%xmm7
+    0.00 :   d26eb:       movups %xmm1,0x49(%rbx)
+    0.00 :   d26ef:       movdqu 0x80(%rsp),%xmm0
+    0.00 :   d26f8:       movups %xmm2,0x59(%rbx)
+    0.00 :   d26fc:       movdqu 0x90(%rsp),%xmm1
+    0.00 :   d2705:       movdqu 0xa0(%rsp),%xmm2
+    0.00 :   d270e:       movups %xmm3,0x69(%rbx)
+    0.00 :   d2712:       movdqu 0xb0(%rsp),%xmm3
+    0.00 :   d271b:       movups %xmm4,0x79(%rbx)
+    0.00 :   d271f:       movdqu 0xc0(%rsp),%xmm4
+    0.00 :   d2728:       movups %xmm5,0x89(%rbx)
+    0.00 :   d272f:       movdqu 0xd0(%rsp),%xmm5
+    0.00 :   d2738:       movups %xmm6,0x99(%rbx)
+    0.00 :   d273f:       movdqu 0xe0(%rsp),%xmm6
+    0.00 :   d2748:       movups %xmm7,0xa9(%rbx)
+    0.00 :   d274f:       movdqu 0xf0(%rsp),%xmm7
+    0.00 :   d2758:       movups %xmm0,0xb9(%rbx)
+    0.00 :   d275f:       movups %xmm1,0xc9(%rbx)
+    0.00 :   d2766:       movups %xmm2,0xd9(%rbx)
+    0.00 :   d276d:       movups %xmm3,0xe9(%rbx)
+    0.00 :   d2774:       movups %xmm4,0xf9(%rbx)
+    0.00 :   d277b:       movups %xmm5,0x109(%rbx)
+    0.00 :   d2782:       movups %xmm6,0x119(%rbx)
+    0.00 :   d2789:       movups %xmm7,0x129(%rbx)
+    0.00 :   d2790:       movb   $0x1,0x38(%rbx)
+    0.00 :   d2794:       mov    $0x100,%edx
+    0.00 :   d2799:       mov    %r12,%rsi
+    0.00 :   d279c:       mov    %rbp,%rdi
+    0.00 :   d279f:       callq  9d1b0 <memcmp@plt>
+    0.00 :   d27a4:       test   %eax,%eax
+    0.00 :   d27a6:       je     d27ac <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11+0x14c>
+    0.00 :   d27a8:       movb   $0x2,0x38(%rbx)
+    0.00 :   d27ac:       mov    0x108(%rsp),%rax
+    0.00 :   d27b4:       sub    %fs:0x28,%rax
+    0.00 :   d27bd:       jne    d27e0 <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11+0x180>
+    0.00 :   d27bf:       add    $0x110,%rsp
+    0.00 :   d27c6:       pop    %rbx
+    0.00 :   d27c7:       pop    %rbp
+    0.00 :   d27c8:       pop    %r12
+    0.00 :   d27ca:       retq
+    0.00 :   d27cb:       lea    0x100(%rsp),%rdx
+    0.00 :   d27d3:       mov    %r12,%rcx
+    0.00 :   d27d6:       mov    %rbp,%rsi
+    0.00 :   d27d9:       mov    %rbx,%rdi
+    0.00 :   d27dc:       callq  *%rax
+    0.00 :   d27de:       jmp    d2790 <std::ctype<char>::_M_widen_init() const@@GLIBCXX_3.4.11+0x130>
+    0.00 :   d27e0:       callq  9cbf0 <__stack_chk_fail@plt>
+    0.00 :   d27e5:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :   d27ef:       nop
+ Percent |	Source code & Disassembly of libc-2.31.so for LLC-load-misses (1 samples, percent: local period)
+----------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :           Disassembly of section .text:
+         :
+         :           000000000008f5d0 <_IO_file_xsputn@@GLIBC_2.2.5>:
+    0.00 :   8f5d0:       endbr64
+    0.00 :   8f5d4:       push   %r15
+    0.00 :   8f5d6:       push   %r14
+    0.00 :   8f5d8:       push   %r13
+    0.00 :   8f5da:       xor    %r13d,%r13d
+    0.00 :   8f5dd:       push   %r12
+    0.00 :   8f5df:       push   %rbp
+    0.00 :   8f5e0:       push   %rbx
+    0.00 :   8f5e1:       sub    $0x18,%rsp
+    0.00 :   8f5e5:       test   %rdx,%rdx
+    0.00 :   8f5e8:       je     8f647 <_IO_file_xsputn@@GLIBC_2.2.5+0x77>
+    0.00 :   8f5ea:       mov    %rdi,%rbp
+    0.00 :   8f5ed:       mov    %rsi,%r12
+    0.00 :   8f5f0:       mov    0x28(%rdi),%rdi
+    0.00 :   8f5f4:       mov    %rdx,%rbx
+    0.00 :   8f5f7:       mov    0x0(%rbp),%eax
+    0.00 :   8f5fa:       and    $0xa00,%eax
+    0.00 :   8f5ff:       cmp    $0xa00,%eax
+    0.00 :   8f604:       je     8f660 <_IO_file_xsputn@@GLIBC_2.2.5+0x90>
+    0.00 :   8f606:       mov    0x30(%rbp),%rax
+    0.00 :   8f60a:       cmp    %rdi,%rax
+    0.00 :   8f60d:       jbe    8f680 <_IO_file_xsputn@@GLIBC_2.2.5+0xb0>
+    0.00 :   8f60f:       sub    %rdi,%rax
+    0.00 :   8f612:       xor    %r15d,%r15d
+    0.00 :   8f615:       mov    %rax,%rdx
+    0.00 :   8f618:       test   %rdx,%rdx
+    0.00 :   8f61b:       je     8f680 <_IO_file_xsputn@@GLIBC_2.2.5+0xb0>
+    0.00 :   8f61d:       cmp    %rdx,%rbx
+    0.00 :   8f620:       mov    %r12,%rsi
+    0.00 :   8f623:       mov    %rbx,%r14
+    0.00 :   8f626:       cmovbe %rbx,%rdx
+    0.00 :   8f62a:       mov    %rdx,%r13
+    0.00 :   8f62d:       callq  225a0 <*ABS*+0xa05e0@plt>
+    0.00 :   8f632:       add    %r13,%r12
+    0.00 :   8f635:       sub    %r13,%r14
+    0.00 :   8f638:       mov    %rax,0x28(%rbp)
+    0.00 :   8f63c:       add    %r14,%r15
+    0.00 :   8f63f:       jne    8f683 <_IO_file_xsputn@@GLIBC_2.2.5+0xb3>
+    0.00 :   8f641:       sub    %r14,%rbx
+    0.00 :   8f644:       mov    %rbx,%r13
+    0.00 :   8f647:       add    $0x18,%rsp
+    0.00 :   8f64b:       mov    %r13,%rax
+    0.00 :   8f64e:       pop    %rbx
+    0.00 :   8f64f:       pop    %rbp
+    0.00 :   8f650:       pop    %r12
+    0.00 :   8f652:       pop    %r13
+    0.00 :   8f654:       pop    %r14
+    0.00 :   8f656:       pop    %r15
+    0.00 :   8f658:       retq
+    0.00 :   8f659:       nopl   0x0(%rax)
+    0.00 :   8f660:       mov    0x40(%rbp),%rdx
+    0.00 :   8f664:       lea    (%rsi,%rbx,1),%rax
+    0.00 :   8f668:       sub    %rdi,%rdx
+    0.00 :   8f66b:       cmp    %rdx,%rbx
+    0.00 :   8f66e:       jbe    8f715 <_IO_file_xsputn@@GLIBC_2.2.5+0x145>
+    0.00 :   8f674:       xor    %r15d,%r15d
+    0.00 :   8f677:       test   %rdx,%rdx
+    0.00 :   8f67a:       jne    8f61d <_IO_file_xsputn@@GLIBC_2.2.5+0x4d>
+    0.00 :   8f67c:       nopl   0x0(%rax)
+    0.00 :   8f680:       mov    %rbx,%r14
+    0.00 :   8f683:       mov    0xd8(%rbp),%rax
+    0.00 :   8f68a:       lea    0x15920f(%rip),%r15        # 1e88a0 <h_nerr@@GLIBC_2.2.5+0x2b4cc>
+    0.00 :   8f691:       lea    0x159f70(%rip),%r13        # 1e9608 <_IO_file_jumps@@GLIBC_2.2.5+0x168>
+    0.00 :   8f698:       sub    %r15,%r13
+    0.00 :   8f69b:       mov    %rax,%rdx
+    0.00 :   8f69e:       sub    %r15,%rdx
+    0.00 :   8f6a1:       cmp    %rdx,%r13
+    0.00 :   8f6a4:       jbe    8f850 <_IO_file_xsputn@@GLIBC_2.2.5+0x280>
+    0.00 :   8f6aa:       mov    $0xffffffff,%esi
+    0.00 :   8f6af:       mov    %rbp,%rdi
+    0.00 :   8f6b2:       callq  *0x18(%rax)
+    0.00 :   8f6b5:       cmp    $0xffffffff,%eax
+    0.00 :   8f6b8:       je     8f808 <_IO_file_xsputn@@GLIBC_2.2.5+0x238>
+    0.00 :   8f6be:       mov    0x40(%rbp),%rcx
+    0.00 :   8f6c2:       sub    0x38(%rbp),%rcx
+    0.00 :   8f6c6:       mov    %r14,%r8
+    0.00 :   8f6c9:       cmp    $0x7f,%rcx
+    0.00 :   8f6cd:       jbe    8f6da <_IO_file_xsputn@@GLIBC_2.2.5+0x10a>
+    0.00 :   8f6cf:       mov    %r14,%rax
+    0.00 :   8f6d2:       xor    %edx,%edx
+    0.00 :   8f6d4:       div    %rcx
+    0.00 :   8f6d7:       sub    %rdx,%r8
+    0.00 :   8f6da:       test   %r8,%r8
+    0.00 :   8f6dd:       jne    8f728 <_IO_file_xsputn@@GLIBC_2.2.5+0x158>
+    0.00 :   8f6df:       mov    %rbx,%r13
+    0.00 :   8f6e2:       test   %r14,%r14
+    0.00 :   8f6e5:       je     8f647 <_IO_file_xsputn@@GLIBC_2.2.5+0x77>
+    0.00 :   8f6eb:       lea    (%r12,%r8,1),%rsi
+    0.00 :   8f6ef:       mov    %r14,%rdx
+    0.00 :   8f6f2:       mov    %rbp,%rdi
+    0.00 :   8f6f5:       callq  91fb0 <_IO_default_xsputn@@GLIBC_2.2.5>
+    0.00 :   8f6fa:       sub    %r14,%rax
+    0.00 :   8f6fd:       add    %rax,%r13
+    0.00 :   8f700:       jmpq   8f647 <_IO_file_xsputn@@GLIBC_2.2.5+0x77>
+    0.00 :   8f705:       nopl   (%rax)
+    0.00 :   8f708:       sub    $0x1,%rax
+    0.00 :   8f70c:       cmpb   $0xa,(%rax)
+    0.00 :   8f70f:       je     8f820 <_IO_file_xsputn@@GLIBC_2.2.5+0x250>
+  100.00 :   8f715:       cmp    %rax,%r12
+    0.00 :   8f718:       jb     8f708 <_IO_file_xsputn@@GLIBC_2.2.5+0x138>
+    0.00 :   8f71a:       xor    %r15d,%r15d
+    0.00 :   8f71d:       jmpq   8f61d <_IO_file_xsputn@@GLIBC_2.2.5+0x4d>
+    0.00 :   8f722:       nopw   0x0(%rax,%rax,1)
+    0.00 :   8f728:       mov    0xd8(%rbp),%rax
+    0.00 :   8f72f:       mov    %rax,%rdx
+    0.00 :   8f732:       sub    %r15,%rdx
+    0.00 :   8f735:       testl  $0x1000,0x0(%rbp)
+    0.00 :   8f73c:       jne    8f840 <_IO_file_xsputn@@GLIBC_2.2.5+0x270>
+    0.00 :   8f742:       mov    0x10(%rbp),%rcx
+    0.00 :   8f746:       mov    0x20(%rbp),%rsi
+    0.00 :   8f74a:       cmp    %rsi,%rcx
+    0.00 :   8f74d:       je     8f78f <_IO_file_xsputn@@GLIBC_2.2.5+0x1bf>
+    0.00 :   8f74f:       cmp    %rdx,%r13
+    0.00 :   8f752:       jbe    8f8cd <_IO_file_xsputn@@GLIBC_2.2.5+0x2fd>
+    0.00 :   8f758:       sub    %rcx,%rsi
+    0.00 :   8f75b:       mov    %r8,(%rsp)
+    0.00 :   8f75f:       mov    $0x1,%edx
+    0.00 :   8f764:       mov    %rbp,%rdi
+    0.00 :   8f767:       callq  *0x80(%rax)
+    0.00 :   8f76d:       cmp    $0xffffffffffffffff,%rax
+    0.00 :   8f771:       je     8f87a <_IO_file_xsputn@@GLIBC_2.2.5+0x2aa>
+    0.00 :   8f777:       mov    %rax,0x90(%rbp)
+    0.00 :   8f77e:       mov    0xd8(%rbp),%rax
+    0.00 :   8f785:       mov    (%rsp),%r8
+    0.00 :   8f789:       mov    %rax,%rdx
+    0.00 :   8f78c:       sub    %r15,%rdx
+    0.00 :   8f78f:       cmp    %rdx,%r13
+    0.00 :   8f792:       jbe    8f8b1 <_IO_file_xsputn@@GLIBC_2.2.5+0x2e1>
+    0.00 :   8f798:       mov    %r8,(%rsp)
+    0.00 :   8f79c:       mov    %r8,%rdx
+    0.00 :   8f79f:       mov    %r12,%rsi
+    0.00 :   8f7a2:       mov    %rbp,%rdi
+    0.00 :   8f7a5:       callq  *0x78(%rax)
+    0.00 :   8f7a8:       mov    (%rsp),%r8
+    0.00 :   8f7ac:       mov    %rax,%r13
+    0.00 :   8f7af:       movzwl 0x80(%rbp),%eax
+    0.00 :   8f7b6:       test   %r13,%r13
+    0.00 :   8f7b9:       je     8f7c4 <_IO_file_xsputn@@GLIBC_2.2.5+0x1f4>
+    0.00 :   8f7bb:       test   %ax,%ax
+    0.00 :   8f7be:       jne    8f890 <_IO_file_xsputn@@GLIBC_2.2.5+0x2c0>
+    0.00 :   8f7c4:       mov    0x38(%rbp),%rax
+    0.00 :   8f7c8:       mov    0xc0(%rbp),%edx
+    0.00 :   8f7ce:       mov    %rax,0x18(%rbp)
+    0.00 :   8f7d2:       mov    %rax,0x8(%rbp)
+    0.00 :   8f7d6:       mov    %rax,0x10(%rbp)
+    0.00 :   8f7da:       mov    %rax,0x28(%rbp)
+    0.00 :   8f7de:       mov    %rax,0x20(%rbp)
+    0.00 :   8f7e2:       test   %edx,%edx
+    0.00 :   8f7e4:       jle    8f868 <_IO_file_xsputn@@GLIBC_2.2.5+0x298>
+    0.00 :   8f7ea:       mov    0x40(%rbp),%rax
+    0.00 :   8f7ee:       mov    %rax,0x30(%rbp)
+    0.00 :   8f7f2:       cmp    %r13,%r8
+    0.00 :   8f7f5:       ja     8f87d <_IO_file_xsputn@@GLIBC_2.2.5+0x2ad>
+    0.00 :   8f7fb:       sub    %r13,%r14
+    0.00 :   8f7fe:       jmpq   8f6df <_IO_file_xsputn@@GLIBC_2.2.5+0x10f>
+    0.00 :   8f803:       nopl   0x0(%rax,%rax,1)
+    0.00 :   8f808:       sub    %r14,%rbx
+    0.00 :   8f80b:       mov    $0xffffffffffffffff,%r13
+    0.00 :   8f812:       test   %r14,%r14
+    0.00 :   8f815:       cmovne %rbx,%r13
+    0.00 :   8f819:       jmpq   8f647 <_IO_file_xsputn@@GLIBC_2.2.5+0x77>
+    0.00 :   8f81e:       xchg   %ax,%ax
+    0.00 :   8f820:       sub    %r12,%rax
+    0.00 :   8f823:       add    $0x1,%rax
+    0.00 :   8f827:       mov    %rax,%rdx
+    0.00 :   8f82a:       jne    8f8f1 <_IO_file_xsputn@@GLIBC_2.2.5+0x321>
+    0.00 :   8f830:       mov    %rbx,%r14
+    0.00 :   8f833:       mov    $0x1,%r15d
+    0.00 :   8f839:       jmpq   8f63c <_IO_file_xsputn@@GLIBC_2.2.5+0x6c>
+    0.00 :   8f83e:       xchg   %ax,%ax
+    0.00 :   8f840:       movq   $0xffffffffffffffff,0x90(%rbp)
+    0.00 :   8f84b:       jmpq   8f78f <_IO_file_xsputn@@GLIBC_2.2.5+0x1bf>
+    0.00 :   8f850:       mov    %rax,(%rsp)
+    0.00 :   8f854:       callq  8db60 <fmemopen@GLIBC_2.2.5+0x200>
+    0.00 :   8f859:       mov    (%rsp),%rax
+    0.00 :   8f85d:       jmpq   8f6aa <_IO_file_xsputn@@GLIBC_2.2.5+0xda>
+    0.00 :   8f862:       nopw   0x0(%rax,%rax,1)
+    0.00 :   8f868:       testl  $0x202,0x0(%rbp)
+    0.00 :   8f86f:       jne    8f7ee <_IO_file_xsputn@@GLIBC_2.2.5+0x21e>
+    0.00 :   8f875:       jmpq   8f7ea <_IO_file_xsputn@@GLIBC_2.2.5+0x21a>
+    0.00 :   8f87a:       xor    %r13d,%r13d
+    0.00 :   8f87d:       sub    %r14,%rbx
+    0.00 :   8f880:       add    %rbx,%r13
+    0.00 :   8f883:       jmpq   8f647 <_IO_file_xsputn@@GLIBC_2.2.5+0x77>
+    0.00 :   8f888:       nopl   0x0(%rax,%rax,1)
+    0.00 :   8f890:       lea    -0x1(%rax),%edi
+    0.00 :   8f893:       mov    %r13d,%edx
+    0.00 :   8f896:       mov    %r12,%rsi
+    0.00 :   8f899:       callq  92a00 <_IO_adjust_column@@GLIBC_2.2.5>
+    0.00 :   8f89e:       mov    (%rsp),%r8
+    0.00 :   8f8a2:       add    $0x1,%eax
+    0.00 :   8f8a5:       mov    %ax,0x80(%rbp)
+    0.00 :   8f8ac:       jmpq   8f7c4 <_IO_file_xsputn@@GLIBC_2.2.5+0x1f4>
+    0.00 :   8f8b1:       mov    %rax,0x8(%rsp)
+    0.00 :   8f8b6:       mov    %r8,(%rsp)
+    0.00 :   8f8ba:       callq  8db60 <fmemopen@GLIBC_2.2.5+0x200>
+    0.00 :   8f8bf:       mov    0x8(%rsp),%rax
+    0.00 :   8f8c4:       mov    (%rsp),%r8
+    0.00 :   8f8c8:       jmpq   8f798 <_IO_file_xsputn@@GLIBC_2.2.5+0x1c8>
+    0.00 :   8f8cd:       mov    %rax,0x8(%rsp)
+    0.00 :   8f8d2:       mov    %r8,(%rsp)
+    0.00 :   8f8d6:       callq  8db60 <fmemopen@GLIBC_2.2.5+0x200>
+    0.00 :   8f8db:       mov    0x20(%rbp),%rsi
+    0.00 :   8f8df:       mov    0x10(%rbp),%rcx
+    0.00 :   8f8e3:       mov    0x8(%rsp),%rax
+    0.00 :   8f8e8:       mov    (%rsp),%r8
+    0.00 :   8f8ec:       jmpq   8f758 <_IO_file_xsputn@@GLIBC_2.2.5+0x188>
+    0.00 :   8f8f1:       mov    $0x1,%r15d
+    0.00 :   8f8f7:       jmpq   8f61d <_IO_file_xsputn@@GLIBC_2.2.5+0x4d>
+    0.00 :   8f8fc:       nopl   0x0(%rax)

@@ -1,0 +1,102 @@
+Running Matrix Multiplication tests
+Matrix 1 size: 1024x512
+Matrix 2 size: 512x1536
+
+ Performance counter stats for './tests 1024x512 512x1536 -tm ed':
+
+            41,625      L1-dcache-load-misses     #    4.84% of all L1-dcache hits  
+           860,833      L1-dcache-loads                                             
+             2,279      LLC-load-misses           #   17.59% of all LL-cache hits   
+            12,959      LLC-loads                                                   
+
+       0.000992704 seconds time elapsed
+
+       0.000992000 seconds user
+       0.000000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: 2048x1024
+Matrix 2 size: 1024x3072
+
+ Performance counter stats for './tests 2048x1024 1024x3072 -tm ed':
+
+            48,577      L1-dcache-load-misses     #    5.62% of all L1-dcache hits  
+           864,926      L1-dcache-loads                                             
+             1,285      LLC-load-misses           #   10.87% of all LL-cache hits   
+            11,818      LLC-loads                                                   
+
+       0.000993972 seconds time elapsed
+
+       0.000994000 seconds user
+       0.000000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: 4096x2048
+Matrix 2 size: 2048x2048
+
+ Performance counter stats for './tests 4096x2048 2048x2048 -tm ed':
+
+            45,919      L1-dcache-load-misses     #    5.39% of all L1-dcache hits  
+           851,143      L1-dcache-loads                                             
+             2,359      LLC-load-misses           #   19.15% of all LL-cache hits   
+            12,317      LLC-loads                                                   
+
+       0.000961019 seconds time elapsed
+
+       0.000966000 seconds user
+       0.000000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 1024x512
+Matrix 2 size: -m2 512x1536
+
+ Performance counter stats for './tests -m1 1024x512 -m2 512x1536 -tm ed':
+
+        19,126,860      L1-dcache-load-misses     #    1.86% of all L1-dcache hits  
+     1,025,730,000      L1-dcache-loads                                             
+           141,648      LLC-load-misses           #   19.41% of all LL-cache hits   
+           729,658      LLC-loads                                                   
+
+       0.237472581 seconds time elapsed
+
+       0.229382000 seconds user
+       0.008048000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 2048x1024
+Matrix 2 size: -m2 1024x3072
+
+ Performance counter stats for './tests -m1 2048x1024 -m2 1024x3072 -tm ed':
+
+       254,756,456      L1-dcache-load-misses     #    3.22% of all L1-dcache hits  
+     7,907,786,587      L1-dcache-loads                                             
+           785,365      LLC-load-misses           #   16.28% of all LL-cache hits   
+         4,822,858      LLC-loads                                                   
+
+       1.770630399 seconds time elapsed
+
+       1.742519000 seconds user
+       0.028040000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 4096x2048
+Matrix 2 size: -m2 2048x2048
+
+ Performance counter stats for './tests -m1 4096x2048 -m2 2048x2048 -tm ed':
+
+       664,089,183      L1-dcache-load-misses     #    3.16% of all L1-dcache hits  
+    21,008,493,468      L1-dcache-loads                                             
+         1,683,865      LLC-load-misses           #   16.22% of all LL-cache hits   
+        10,380,608      LLC-loads                                                   
+
+       5.068566486 seconds time elapsed
+
+       4.930838000 seconds user
+       0.063984000 seconds sys
+
+

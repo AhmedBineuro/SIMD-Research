@@ -1,0 +1,120 @@
+Running Matrix Multiplication tests
+Matrix 1 size: 1024x512
+Matrix 2 size: 512x1536
+
+ Performance counter stats for './tests 1024x512 512x1536 -tm vc':
+
+            50,602      L1-dcache-load-misses     #    5.90% of all L1-dcache hits  
+           858,166      L1-dcache-loads                                             
+             1,731      LLC-load-misses           #   15.89% of all LL-cache hits   
+            10,892      LLC-loads                                                   
+
+       0.001323226 seconds time elapsed
+
+       0.001334000 seconds user
+       0.000000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: 2048x1024
+Matrix 2 size: 1024x3072
+
+ Performance counter stats for './tests 2048x1024 1024x3072 -tm vc':
+
+            43,057      L1-dcache-load-misses     #    4.98% of all L1-dcache hits  
+           864,722      L1-dcache-loads                                             
+             2,006      LLC-load-misses           #   14.96% of all LL-cache hits   
+            13,411      LLC-loads                                                   
+
+       0.001004836 seconds time elapsed
+
+       0.000168000 seconds user
+       0.000863000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: 4096x2048
+Matrix 2 size: 2048x2048
+
+ Performance counter stats for './tests 4096x2048 2048x2048 -tm vc':
+
+            48,774      L1-dcache-load-misses     #    5.69% of all L1-dcache hits  
+           856,517      L1-dcache-loads                                             
+             1,809      LLC-load-misses           #   15.96% of all LL-cache hits   
+            11,335      LLC-loads                                                   
+
+       0.000929244 seconds time elapsed
+
+       0.000953000 seconds user
+       0.000000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 1024x512
+Matrix 2 size: -m2 512x1536
+./tests: Interrupt
+
+ Performance counter stats for './tests -m1 1024x512 -m2 512x1536 -tm vc':
+
+       308,728,248      L1-dcache-load-misses     #   11.33% of all L1-dcache hits  
+     2,725,516,882      L1-dcache-loads                                             
+            55,150      LLC-load-misses           #    0.40% of all LL-cache hits   
+        13,692,632      LLC-loads                                                   
+
+       4.198732986 seconds time elapsed
+
+       4.193603000 seconds user
+       0.003997000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 1024x512
+Matrix 2 size: -m2 512x1536
+
+ Performance counter stats for './tests -m1 1024x512 -m2 512x1536 -tm vc':
+
+       384,970,326      L1-dcache-load-misses     #   11.19% of all L1-dcache hits  
+     3,439,485,443      L1-dcache-loads                                             
+            69,429      LLC-load-misses           #    0.47% of all LL-cache hits   
+        14,818,120      LLC-loads                                                   
+
+       6.209048919 seconds time elapsed
+
+       6.200615000 seconds user
+       0.008000000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 2048x1024
+Matrix 2 size: -m2 1024x3072
+
+ Performance counter stats for './tests -m1 2048x1024 -m2 1024x3072 -tm vc':
+
+     3,094,231,532      L1-dcache-load-misses     #   11.35% of all L1-dcache hits  
+    27,252,541,894      L1-dcache-loads                                             
+           487,548      LLC-load-misses           #    0.11% of all LL-cache hits   
+       445,893,648      LLC-loads                                                   
+
+      49.983377845 seconds time elapsed
+
+      49.938755000 seconds user
+       0.039999000 seconds sys
+
+
+Running Matrix Multiplication tests
+Matrix 1 size: -m1 4096x2048
+Matrix 2 size: -m2 2048x2048
+
+ Performance counter stats for './tests -m1 4096x2048 -m2 2048x2048 -tm vc':
+
+     8,239,156,054      L1-dcache-load-misses     #   11.35% of all L1-dcache hits  
+    72,588,161,331      L1-dcache-loads                                             
+         1,466,182      LLC-load-misses           #    0.06% of all LL-cache hits   
+     2,301,151,973      LLC-loads                                                   
+
+     132.929702834 seconds time elapsed
+
+     132.725105000 seconds user
+       0.055990000 seconds sys
+
+
