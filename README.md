@@ -14,3 +14,5 @@
     - `vc` : Vector class test mode
 - Instruction to make quick tests
   - `make quick_tests`
+
+- Results and analysis can be found in the [analysis report](https://docs.google.com/document/d/1a1cGWeiZAQtfgtDpgFkZcBzAL8iJbTnO0pT3b5fXxTY/pub)
